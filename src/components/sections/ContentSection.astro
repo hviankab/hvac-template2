@@ -1,0 +1,352 @@
+---
+import { Image } from "astro:assets";
+import { getLocationText } from "@/config/site"
+
+interface Props {
+  badge?: string;
+  title: string;
+  description: string;
+  features?: string[];
+  buttonText?: string;
+  buttonHref?: string;
+  imagePosition?: "left" | "right";
+  images?: string[];
+  imageAlts?: string[];
+}
+
+const {
+  badge,
+  title: rawTitle,
+  description: rawDescription,
+  features: rawFeatures = [],
+  buttonText,
+  buttonHref,
+  imagePosition = "left",
+  images = [],
+  imageAlts = [],
+} = Astro.props;
+
+const title = getLocationText(rawTitle);
+const description = getLocationText(rawDescription);
+const features = rawFeatures.map(getLocationText);
+
+const mainImage = images[0] || "";
+const isRight = imagePosition === "right";
+---
+
+<section class="cs-section py-20 md:py-28">
+  <div class="container mx-auto px-4">
+    <div class={`cs-grid ${isRight ? "cs-grid--reversed" : ""}`}>
+
+      <!-- Image column -->
+      <div class="cs-image-col" data-animate={isRight ? "fade-left" : "fade-right"}>
+        <div class="cs-image-frame">
+          {mainImage ? (
+            <Image
+              src={mainImage}
+              alt={imageAlts[0] || title}
+              class="cs-image"
+              loading="lazy"
+              width={665}
+              height={499}
+              format="webp"
+              quality={75}
+              decoding="async"
+            />
+          ) : (
+            <div class="cs-image-placeholder">
+              <span>Image</span>
+            </div>
+          )}
+
+          <!-- Floating stat badge -->
+          <div class="cs-stat-badge">
+            <span class="cs-stat-number">24/7</span>
+            <span class="cs-stat-label">Service</span>
+          </div>
+        </div>
+
+        <!-- Accent shape behind image -->
+        <div class="cs-accent-shape" aria-hidden="true"></div>
+      </div>
+
+      <!-- Text column -->
+      <div class="cs-text-col" data-animate={isRight ? "fade-right" : "fade-left"} data-animate-delay="200">
+        {badge && (
+          <div class="cs-badge-row">
+            <span class="cs-accent-line"></span>
+            <span class="cs-badge">{badge}</span>
+          </div>
+        )}
+
+        <h2 class="cs-title">{title}</h2>
+        <p class="cs-desc" set:html={description} />
+
+        {features.length > 0 && (
+          <div class="cs-features" data-animate-stagger>
+            {features.map((feature) => (
+              <div class="cs-feature">
+                <div class="cs-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <span class="cs-feature-text" set:html={feature} />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {buttonText && buttonHref && (
+          <div class="cs-actions">
+            <a href={buttonHref} class="cs-btn">
+              {buttonText}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cs-section {
+    background: var(--background);
+    overflow: hidden;
+  }
+
+  /* Grid layout */
+  .cs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .cs-grid--reversed .cs-image-col {
+    order: 2;
+  }
+  .cs-grid--reversed .cs-text-col {
+    order: 1;
+  }
+
+  /* ---- Image column ---- */
+  .cs-image-col {
+    position: relative;
+  }
+
+  .cs-image-frame {
+    position: relative;
+    z-index: 2;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .cs-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+
+  .cs-image-placeholder {
+    aspect-ratio: 4 / 3;
+    background: var(--brand-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+  }
+
+  /* Accent shape behind image */
+  .cs-accent-shape {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 60%;
+    height: 60%;
+    border-radius: 1.25rem;
+    background: var(--brand-secondary);
+    opacity: 0.08;
+    z-index: 1;
+  }
+  .cs-grid--reversed .cs-accent-shape {
+    right: auto;
+    left: -1.5rem;
+  }
+
+  /* Floating badge */
+  .cs-stat-badge {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 3;
+    background: var(--brand-secondary);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-secondary) 30%, transparent);
+    border: 2px solid var(--brand-highlight);
+  }
+  .cs-grid--reversed .cs-stat-badge {
+    right: auto;
+    left: 1.25rem;
+  }
+  .cs-stat-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  .cs-stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+    margin-top: 0.15rem;
+  }
+
+  /* ---- Text column ---- */
+  .cs-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cs-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .cs-accent-line {
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--brand-highlight);
+    display: block;
+  }
+  .cs-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-secondary);
+  }
+
+  .cs-title {
+    margin-bottom: 1.25rem;
+    color: var(--foreground);
+    line-height: 1.15;
+  }
+
+  .cs-desc {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--muted-foreground);
+    margin-bottom: 2rem;
+  }
+
+  /* Features — 2-col grid */
+  .cs-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .cs-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--brand-tertiary);
+    border: 2px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .cs-feature:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-highlight);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-secondary) 10%, transparent);
+  }
+
+  .cs-feature-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--brand-secondary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--brand-highlight);
+  }
+
+  .cs-feature-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  /* CTA button */
+  .cs-actions {
+    margin-top: 0.5rem;
+  }
+
+  .cs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    background: var(--brand-secondary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+  }
+  .cs-btn:hover {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-highlight) 30%, transparent);
+  }
+  .cs-btn svg {
+    transition: transform 0.3s ease;
+  }
+  .cs-btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .cs-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .cs-grid--reversed .cs-image-col {
+      order: 0;
+    }
+    .cs-grid--reversed .cs-text-col {
+      order: 0;
+    }
+    .cs-features {
+      grid-template-columns: 1fr;
+    }
+    .cs-accent-shape {
+      display: none;
+    }
+  }
+</style>

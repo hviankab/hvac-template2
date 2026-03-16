@@ -1,0 +1,255 @@
+---
+import { Image } from "astro:assets";
+import bgImg from "/public/images/bg.jpg";
+
+interface IncludedItem {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  includedItems: IncludedItem[];
+  benefits: string[];
+  buttonText?: string;
+  buttonHref?: string;
+  eyebrow?: string;
+}
+
+const { title, description, includedItems, benefits, buttonText = "VIEW PLANS", buttonHref = "/maintenance-plans", eyebrow } = Astro.props;
+---
+
+<section class="maintenance-section relative py-16 md:py-24 overflow-hidden">
+  <!-- Background images as gradient layers -->
+  <div class="absolute inset-0 z-0">
+    <Image src={bgImg} alt="" widths={[480, 768, 1280]} sizes="100vw" format="webp" quality={60} class="absolute inset-0 w-full h-full object-cover opacity-30" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-brand-tertiary/60 to-white/80"></div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-12 max-w-4xl mx-auto" data-animate="fade-scale">
+      {eyebrow && (
+        <div class="eyebrow-badge-row">
+          <span class="eyebrow-accent-line"></span>
+          <span class="eyebrow-text">{eyebrow}</span>
+          <span class="eyebrow-accent-line"></span>
+        </div>
+      )}
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">{title}</h2>
+      <p class="text-gray-600 text-xl" set:html={description} />
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto" data-animate-stagger>
+      {includedItems.map((item, index) => {
+        // Define different icons for each benefit
+        const icons = [
+          // Icon 1: Clock/Timer for "Extend system lifespan"
+          `<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+           <circle cx="12" cy="12" r="3"/>`,
+          // Icon 2: Zap/Lightning for "Reduce energy bills"
+          `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`,
+          // Icon 3: Wind/Air for "Improve air quality"
+          `<path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>`,
+          // Icon 4: Star/Priority for "Priority service scheduling"
+          `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>`
+        ];
+        
+        return (
+          <div class="benefit-card group">
+            <div class="benefit-card-inner">
+              <!-- Icon -->
+              <div class="benefit-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <Fragment set:html={icons[index]} />
+                </svg>
+              </div>
+
+              <!-- Title -->
+              <h3 class="benefit-title">{item.title}</h3>
+
+              <!-- Description -->
+              <p class="benefit-description" set:html={item.description} />
+
+              <!-- Button -->
+              <a 
+                href={buttonHref}
+                class="benefit-button"
+                aria-label={`View details about ${item.title}`}
+              >
+                <span>View Details</span>
+                <span class="benefit-button-arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7"/>
+                    <path d="M7 7h10v10"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+    
+    <div class="text-center mt-12" data-animate="fade-up">
+      <a 
+        href={buttonHref} 
+        class="maintenance-cta-btn inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-colors shadow-lg hover:shadow-xl border-2 border-white"
+      >
+        {buttonText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .maintenance-section {
+    background: linear-gradient(135deg, var(--brand-quaternary) 0%, color-mix(in srgb, var(--brand-tertiary) 50%, white) 100%);
+  }
+
+  .eyebrow-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .eyebrow-accent-line {
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--brand-secondary);
+  }
+  .eyebrow-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-secondary);
+  }
+
+  .benefit-card {
+    position: relative;
+    border-radius: 1.5rem;
+    border: 2px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--brand-secondary) 20%, transparent), 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .benefit-card-inner {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.75) 40%,
+      rgba(236, 233, 249, 0.5) 100%
+    );
+    backdrop-filter: blur(12px);
+    border-radius: 1.35rem;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 280px;
+  }
+
+  .benefit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    background: url('/images/bg.jpg') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .benefit-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--brand-secondary) 70%, transparent);
+    border-radius: inherit;
+  }
+
+  .benefit-icon svg {
+    position: relative;
+    z-index: 1;
+  }
+
+  .benefit-title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    color: var(--brand-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .benefit-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    margin-bottom: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .benefit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.65rem 0.65rem 0.65rem 1.25rem;
+    border-radius: 9999px;
+    background: var(--brand-tertiary);
+    color: var(--brand-primary);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  }
+
+  .benefit-button:hover {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--brand-highlight) 25%, transparent);
+  }
+
+  .benefit-button-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+
+  .benefit-button:hover .benefit-button-arrow {
+    background: var(--brand-primary);
+  }
+
+  .maintenance-cta-btn {
+    background: var(--brand-primary);
+    color: white;
+  }
+
+  .maintenance-cta-btn:hover {
+    background: var(--brand-highlight);
+    color: var(--brand-primary);
+  }
+</style>

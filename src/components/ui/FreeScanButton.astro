@@ -1,0 +1,116 @@
+---
+// Floating offer button that triggers the popup modal
+// Only visible on desktop (md and up)
+---
+
+<div id="free-scan-wrapper" class="hidden md:block fixed bottom-8 right-8 z-40">
+  <button
+    id="free-scan-trigger"
+    class="fab-btn group"
+    aria-label="Get $50 off your next service"
+  >
+    <!-- Pulsing ring -->
+    <span class="fab-pulse"></span>
+
+    <!-- Icon circle -->
+    <span class="fab-icon">
+      <svg class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+          d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+      </svg>
+    </span>
+
+    <!-- Text -->
+    <span class="fab-text">
+      <span class="fab-label">Limited Offer</span>
+      <span class="fab-value">$50 OFF</span>
+    </span>
+  </button>
+</div>
+
+<style>
+  #free-scan-wrapper {
+    animation: fab-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.5s both;
+  }
+
+  .fab-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1.5rem 0.65rem 0.65rem;
+    background: linear-gradient(135deg, var(--brand-highlight) 0%, color-mix(in srgb, var(--brand-highlight) 80%, #d97706) 100%);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--brand-highlight) 40%, transparent);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  }
+  .fab-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 44px color-mix(in srgb, var(--brand-highlight) 60%, transparent);
+  }
+  .fab-btn:active {
+    transform: scale(0.97);
+  }
+
+  .fab-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid var(--brand-highlight);
+    opacity: 0;
+    animation: pulse-ring 2.5s ease-out infinite;
+  }
+
+  .fab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .fab-btn:hover .fab-icon {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .fab-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .fab-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.75;
+  }
+  .fab-value {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+
+  @keyframes fab-enter {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.15); }
+  }
+</style>

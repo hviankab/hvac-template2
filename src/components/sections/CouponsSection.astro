@@ -1,0 +1,237 @@
+---
+import { getLocationText } from "@/config/site"
+
+interface Coupon {
+  icon?: string;
+  label: string;
+  discount: string;
+  description: string;
+  buttonText?: string;
+  buttonHref?: string;
+  backgroundImage?: string;
+}
+
+interface Props {
+  title?: string;
+  coupons: Coupon[];
+  backgroundImage?: string;
+}
+
+const {
+  title: rawTitle = "Specials and Offers",
+  coupons,
+  backgroundImage,
+} = Astro.props;
+
+const title = getLocationText(rawTitle);
+
+const centerIndex = Math.floor(coupons.length / 2);
+
+// Default background images if not provided
+const defaultBackgrounds = [
+  'https://johnh967.sg-host.com/wp-content/uploads/2024/12/AC-Repair-Services.webp',
+  'https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp',
+  'https://johnh967.sg-host.com/wp-content/uploads/slider/cache/3208844a78ae424ec0bfef8623738be2/HVAC-Repair-Banner.webp'
+];
+---
+
+<section class="cpn-section py-20 md:py-28">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-14" data-animate="fade-scale">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="block w-10 h-1 rounded-full bg-brand-secondary"></span>
+        <span class="text-sm font-semibold uppercase tracking-widest text-brand-secondary">Limited Time</span>
+        <span class="block w-10 h-1 rounded-full bg-brand-secondary"></span>
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold">{title}</h2>
+    </div>
+
+    <div class="cpn-grid" data-animate-stagger>
+      {coupons.map((coupon, i) => {
+        const cardBg = coupon.backgroundImage || (i === centerIndex && backgroundImage) || defaultBackgrounds[i % defaultBackgrounds.length];
+        return (
+          <div
+            class:list={["cpn-card", { "cpn-card--featured": i === centerIndex }]}
+            style={`--cpn-bg: url('${cardBg}');`}
+            {...(i === centerIndex ? { "data-animate": "zoom-in" } : {})}
+          >
+            <div class="cpn-ribbon">
+              <span class="cpn-ribbon-text">NEW OFFER</span>
+            </div>
+
+            <div class="cpn-card-content">
+              <span class="cpn-label">{coupon.label}</span>
+              <div class="cpn-discount">{coupon.discount}</div>
+              <p class="cpn-desc">{coupon.description}</p>
+              <a
+                href={coupon.buttonHref || "/contact"}
+                class="cpn-btn"
+              >
+                {coupon.buttonText || "GET OFFER"}
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cpn-section {
+    background: var(--background);
+  }
+
+  .cpn-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .cpn-card {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--brand-secondary) 50%, transparent), color-mix(in srgb, var(--brand-secondary) 40%, black)),
+      var(--cpn-bg, none) center / cover no-repeat;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+  }
+  .cpn-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  }
+
+  .cpn-card--featured {
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--brand-secondary) 40%, transparent), color-mix(in srgb, var(--brand-secondary) 30%, black)),
+      var(--cpn-bg, none) center / cover no-repeat;
+    transform: scale(1.04);
+    z-index: 2;
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--brand-secondary) 35%, transparent);
+  }
+  .cpn-card--featured:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: 0 24px 60px color-mix(in srgb, var(--brand-secondary) 40%, transparent);
+  }
+
+  .cpn-ribbon {
+    position: absolute;
+    top: 22px;
+    left: -35px;
+    background: linear-gradient(135deg, #3b82f6 0%, var(--brand-accent-secondary, #2264ac) 100%);
+    color: #fff;
+    padding: 8px 45px;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 14px rgba(34, 100, 172, 0.5);
+    z-index: 10;
+    border-top: 2px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  }
+
+  .cpn-ribbon-text {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .cpn-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    flex: 1;
+  }
+
+  .cpn-label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    padding: 0.4rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cpn-discount {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .cpn-desc {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .cpn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: var(--brand-secondary);
+    padding: 0.8rem 2.25rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    margin-top: auto;
+  }
+  .cpn-btn:hover {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px color-mix(in srgb, var(--brand-highlight) 30%, transparent);
+  }
+
+  @media (max-width: 1024px) {
+    .cpn-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cpn-card--featured {
+      transform: scale(1);
+    }
+    .cpn-card--featured:hover {
+      transform: translateY(-6px);
+    }
+  }
+  @media (max-width: 640px) {
+    .cpn-grid {
+      grid-template-columns: 1fr;
+    }
+    .cpn-discount {
+      font-size: 2.75rem;
+    }
+  }
+</style>

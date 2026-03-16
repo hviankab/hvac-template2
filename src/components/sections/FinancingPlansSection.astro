@@ -1,0 +1,359 @@
+---
+interface Item {
+  title: string;
+  text?: string;
+  href?: string;
+  icon?: string;
+  image?: string;
+}
+
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  items: Item[];
+  variant?: "plans" | "services" | "features";
+}
+
+const { badge, title, subtitle, items, variant = "plans" } = Astro.props;
+
+const iconSvgs: Record<string, string> = {
+  percent: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+  zero: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`,
+  calendar: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
+  check: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  home: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  building: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>`,
+  wrench: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  settings: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`,
+  map: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  clock: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+};
+
+const defaultIconKey = variant === "services" ? "wrench" : "check";
+function getIcon(key?: string): string {
+  return iconSvgs[key || ""] || iconSvgs[defaultIconKey];
+}
+---
+
+<!-- ============ FEATURES VARIANT ============ -->
+{variant === "features" && (
+  <section class="fps-feat py-20 md:py-28">
+    <div class="container mx-auto px-4">
+      {/* Header */}
+      <div class="text-center mb-16" data-animate="fade-up">
+        {badge && (
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="w-10 h-[3px] rounded-full bg-brand-secondary"></span>
+            <span class="text-sm font-bold uppercase tracking-widest text-brand-secondary">{badge}</span>
+            <span class="w-10 h-[3px] rounded-full bg-brand-secondary"></span>
+          </div>
+        )}
+        <h2>{title}</h2>
+        {subtitle && <p class="text-lg text-muted-foreground mt-3 max-w-2xl mx-auto">{subtitle}</p>}
+      </div>
+
+      {/* Cards with connecting line */}
+      <div class="fps-feat-grid max-w-[1100px] mx-auto" data-animate-stagger>
+        {/* Horizontal connector line (desktop only) */}
+        <div class="fps-feat-connector" aria-hidden="true"></div>
+
+        {items.map((item, i) => (
+          <div class="fps-feat-card group">
+            {/* Top accent + step indicator */}
+            <div class="fps-feat-step-wrap">
+              <div class="fps-feat-step">
+                <span>{String(i + 1).padStart(2, '0')}</span>
+              </div>
+            </div>
+
+            {/* Card body */}
+            <div class="fps-feat-body">
+              <div class="fps-feat-icon-ring">
+                <div class="fps-feat-icon">
+                  <Fragment set:html={getIcon(item.icon)} />
+                </div>
+              </div>
+              <h3 class="text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-brand-highlight">{item.title}</h3>
+              {item.text && <p class="text-base text-muted-foreground leading-relaxed">{item.text}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- ============ SERVICES VARIANT ============ -->
+{variant === "services" && (
+  <section class="fps-section py-20 md:py-28">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-14" data-animate="fade-up">
+        <h2>{title}</h2>
+        {subtitle && <p class="text-lg text-muted-foreground mt-3 max-w-2xl mx-auto">{subtitle}</p>}
+      </div>
+
+      <div class:list={[
+        "grid gap-5",
+        items.length <= 3 ? "sm:grid-cols-2 lg:grid-cols-3 max-w-[1000px] mx-auto" : "sm:grid-cols-2 lg:grid-cols-4"
+      ]} data-animate-stagger>
+        {items.map((item) => {
+          const isLink = !!item.href;
+          const Tag = isLink ? "a" : "div";
+          return (
+            <Tag
+              href={isLink ? item.href : undefined}
+              class:list={[
+                "fps-svc-card group rounded-2xl overflow-hidden bg-card border-2 border-#d4d2d2"
+              ]}
+            >
+              {/* Image */}
+              {item.image ? (
+                <div class="relative h-48 overflow-hidden">
+                  <img src={item.image} alt={item.title} class="w-full h-full object-cover" width="740" height="494" loading="lazy" decoding="async" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  {isLink && (
+                    <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-brand-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div class="relative h-32 bg-brand-tertiary flex items-center justify-center">
+                  <div class="w-12 h-12 rounded-xl bg-brand-secondary/10 text-brand-secondary flex items-center justify-center">
+                    <Fragment set:html={getIcon(item.icon)} />
+                  </div>
+                  {isLink && (
+                    <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-brand-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Body */}
+              <div class="p-6">
+                <h3 class="text-lg font-bold mb-2">{item.title}</h3>
+                {item.text && <p class="text-base text-muted-foreground leading-relaxed">{item.text}</p>}
+              </div>
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- ============ PLANS VARIANT (default) ============ -->
+{variant === "plans" && (
+  <section class="fps-section py-20 md:py-28">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-14" data-animate="fade-up">
+        <h2>{title}</h2>
+        {subtitle && <p class="text-lg text-muted-foreground mt-3 max-w-2xl mx-auto">{subtitle}</p>}
+      </div>
+
+      <div class:list={[
+        "grid gap-5 mx-auto",
+        items.length <= 3 ? "sm:grid-cols-2 lg:grid-cols-3 max-w-[1000px]" : "sm:grid-cols-2 lg:grid-cols-4 max-w-[1200px]"
+      ]} data-animate-stagger>
+        {items.map((item, i) => (
+          <div class="fps-plan-card group rounded-2xl bg-card border-2 border-white p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_40px_color-mix(in_srgb,var(--brand-highlight)_20%,transparent)] hover:border-brand-highlight">
+            {/* Decorative bg number */}
+            <div class="absolute -bottom-2 -right-1 text-7xl font-bold-extended text-brand-secondary/[0.04] leading-none select-none pointer-events-none">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+
+            {/* Icon */}
+            <div class="w-14 h-14 rounded-2xl bg-brand-tertiary text-brand-secondary flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-brand-highlight group-hover:text-gray-900">
+              <Fragment set:html={getIcon(item.icon)} />
+            </div>
+
+            <h3 class="text-lg font-bold mb-2">{item.title}</h3>
+            {item.text && <p class="text-base text-muted-foreground leading-relaxed">{item.text}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .fps-section {
+    background: var(--background);
+  }
+
+  .fps-svc-card {
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+  
+  .fps-svc-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--brand-secondary);
+  }
+  
+  .fps-svc-card img {
+    transition: transform 0.4s ease;
+  }
+  
+  .fps-svc-card:hover img {
+    transform: scale(1.08);
+  }
+  
+  .fps-svc-card h3 {
+    transition: color 0.3s ease;
+  }
+  
+  .fps-svc-card:hover h3 {
+    color: var(--brand-secondary);
+  }
+  
+  .fps-svc-card .absolute.top-4.right-4 {
+    transition: all 0.3s ease;
+  }
+  
+  .fps-svc-card:hover .absolute.top-4.right-4 {
+    transform: scale(1.15) rotate(5deg);
+    background: var(--brand-secondary);
+  }
+  
+  .fps-svc-card:hover .absolute.top-4.right-4 svg {
+    stroke: white;
+  }
+
+  .fps-plan-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  /* ── Features variant ── */
+  .fps-feat {
+    background: linear-gradient(160deg, var(--brand-tertiary) 0%, var(--background) 100%);
+  }
+
+  .fps-feat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  /* Horizontal connector line between step circles */
+  .fps-feat-connector {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .fps-feat-connector {
+      display: block;
+      position: absolute;
+      top: 22px;
+      left: calc(16.66% + 22px);
+      right: calc(16.66% + 22px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand-secondary), var(--brand-secondary) 40%, var(--brand-secondary));
+      opacity: 0.2;
+      z-index: 0;
+    }
+  }
+
+  .fps-feat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Step circle at top */
+  .fps-feat-step-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  .fps-feat-step {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--brand-secondary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 0 6px var(--brand-tertiary), 0 0 0 8px color-mix(in srgb, var(--brand-secondary) 15%, transparent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .fps-feat-card:hover .fps-feat-step {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px var(--brand-tertiary), 0 0 0 10px color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+  }
+
+  /* Card body */
+  .fps-feat-body {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .fps-feat-card:hover .fps-feat-body {
+    border-color: var(--brand-secondary);
+    box-shadow: 0 16px 48px color-mix(in srgb, var(--brand-secondary) 12%, transparent);
+    transform: translateY(-4px);
+  }
+
+  /* Icon ring */
+  .fps-feat-icon-ring {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, var(--brand-secondary), color-mix(in srgb, var(--brand-secondary) 80%, #000));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .fps-feat-card:hover .fps-feat-icon-ring {
+    transform: scale(1.08) rotate(-3deg);
+  }
+
+  .fps-feat-icon {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 767px) {
+    .fps-feat-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .fps-feat-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .fps-svc-card .relative.h-48 {
+      height: 12rem;
+    }
+  }
+</style>

@@ -1,0 +1,267 @@
+---
+import { siteConfig, getLocationText } from "@/config/site"
+
+interface Props {
+  title: string;
+  description: string;
+  areas?: string[];
+  mapImage?: string;
+  mapEmbed?: string;
+  mapAddress?: string;
+  variant?: "full" | "compact";
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  title: rawTitle,
+  description: rawDescription,
+  areas: rawAreas,
+  mapImage,
+  mapEmbed,
+  mapAddress = `${siteConfig.location.city}, ${siteConfig.location.state}`,
+  variant = "full",
+  buttonText = "SERVICE AREAS",
+  buttonHref = "/service-areas"
+} = Astro.props;
+
+const title = getLocationText(rawTitle);
+const description = getLocationText(rawDescription);
+const areas = rawAreas ? rawAreas.map(getLocationText) : undefined;
+
+const getMapEmbedUrl = (address: string) => {
+  const encodedAddress = encodeURIComponent(address);
+  return `https://www.google.com/maps?q=${encodedAddress}&output=embed`;
+};
+
+const embedUrl = mapEmbed || (mapAddress ? getMapEmbedUrl(mapAddress) : null);
+---
+
+{variant === "compact" ? (
+  <!-- ============ COMPACT ============ -->
+  <section class="sa-section py-16 md:py-24">
+    <div class="container mx-auto px-4">
+      <div class="sa-compact-wrap rounded-3xl border-2 border-white overflow-hidden max-w-[1100px] mx-auto" data-animate="fade-up">
+        <div class="grid md:grid-cols-2">
+          
+          <!-- Map side -->
+          <div class="sa-map-side relative min-h-[280px] md:min-h-[360px]">
+            {embedUrl ? (
+              <iframe
+                src={embedUrl}
+                width="100%"
+                height="100%"
+                style="border:0; position:absolute; inset:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Service Area Map"
+              ></iframe>
+            ) : mapImage ? (
+              <img src={mapImage} alt="Service Area Map" class="absolute inset-0 w-full h-full object-cover" />
+            ) : (
+              <div class="absolute inset-0 bg-brand-tertiary flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-brand-secondary/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+            )}
+          </div>
+
+          <!-- Content side -->
+          <div class="p-8 md:p-10 flex flex-col justify-center bg-card">
+            <div class="sa-pin-badge inline-flex items-center gap-2 self-start mb-5 px-4 py-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="text-sm font-semibold uppercase tracking-wider">Service Area</span>
+            </div>
+
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">{title}</h2>
+            <p class="text-base text-muted-foreground leading-relaxed mb-6" set:html={description} />
+
+            <a
+              href={buttonHref}
+              class="sa-btn inline-flex items-center gap-3 self-start rounded-full px-6 py-3 font-semibold text-base transition-all"
+            >
+              {buttonText}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <!-- ============ FULL ============ -->
+  <section class="sa-section sa-full py-20 md:py-28">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+
+        <!-- Left: content + areas -->
+        <div data-animate="fade-right">
+          <div class="sa-pin-badge inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-sm font-semibold uppercase tracking-wider">Service Area</span>
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-bold mb-5">{title}</h2>
+          <p class="text-base text-muted-foreground leading-relaxed mb-8 max-w-xl" set:html={description} />
+
+          {areas && areas.length > 0 && (
+            <details class="sa-areas-dropdown mb-8 rounded-2xl border-2 border-white overflow-hidden">
+              <summary class="sa-areas-summary flex items-center justify-between gap-3 px-6 py-4 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
+                <h3 class="text-xl font-bold m-0">Areas We Serve</h3>
+                <div class="flex items-center gap-3">
+                  <span class="sa-areas-count text-sm font-semibold px-3 py-1 rounded-full">{areas.length} areas</span>
+                  <span class="sa-chevron"></span>
+                </div>
+              </summary>
+              <div class="sa-areas-grid grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 px-6 pb-6 pt-2">
+                {areas.map((area) => (
+                  <span class="sa-area-item flex items-center gap-2.5 text-base text-muted-foreground">
+                    <span class="sa-area-dot w-2 h-2 rounded-full flex-shrink-0"></span>
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </details>
+          )}
+
+          <a
+            href={buttonHref}
+            class="sa-btn inline-flex items-center gap-3 rounded-full px-7 py-3.5 font-semibold text-base transition-all"
+            data-animate="fade-up"
+          >
+            {buttonText}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Right: map -->
+        <div class="sa-map-card rounded-3xl border-2 border-white overflow-hidden" data-animate="fade-left">
+          {embedUrl ? (
+            <div class="sa-map-frame">
+              <iframe
+                src={embedUrl}
+                width="100%"
+                height="100%"
+                style="border:0; position:absolute; inset:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Service Area Map"
+              ></iframe>
+            </div>
+          ) : mapImage ? (
+            <div class="sa-map-frame">
+              <img src={mapImage} alt="Service Area Map" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          ) : (
+            <div class="sa-map-frame bg-brand-tertiary flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-brand-secondary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .sa-section {
+    background: var(--background);
+  }
+
+  .sa-full {
+    background: var(--brand-tertiary);
+  }
+
+  /* Pin badge */
+  .sa-pin-badge {
+    background: var(--brand-secondary);
+    color: #fff;
+  }
+
+  /* Area dots */
+  .sa-area-dot {
+    background: var(--brand-secondary);
+  }
+
+  .sa-area-item {
+    transition: color 0.2s ease;
+  }
+  .sa-area-item:hover {
+    color: var(--brand-highlight);
+  }
+
+  /* Button */
+  .sa-btn {
+    background: var(--brand-primary);
+    color: #fff;
+  }
+  .sa-btn:hover {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--brand-highlight) 30%, transparent);
+  }
+
+  /* Areas dropdown */
+  .sa-areas-dropdown {
+    background: var(--card);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .sa-areas-summary {
+    transition: background 0.2s ease;
+  }
+  .sa-areas-summary:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .sa-areas-summary::after {
+    display: none;
+  }
+
+  .sa-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2.5px solid var(--brand-secondary);
+    border-bottom: 2.5px solid var(--brand-secondary);
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] > .sa-areas-summary .sa-chevron {
+    transform: rotate(-135deg);
+  }
+
+  .sa-areas-count {
+    background: var(--brand-secondary);
+    color: #fff;
+  }
+
+  /* Map card */
+  .sa-map-card {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .sa-map-frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Compact wrap */
+  .sa-compact-wrap {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .sa-map-side {
+    background: var(--brand-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    .sa-map-frame {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

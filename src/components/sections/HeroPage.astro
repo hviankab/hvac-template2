@@ -1,0 +1,201 @@
+---
+import { siteConfig, getLocationText } from "@/config/site"
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  image?: string;
+  imageAlt?: string;
+  backgroundImage?: string;
+  trustIndicators?: string[];
+}
+
+const {
+  title: rawTitle,
+  subtitle: rawSubtitle,
+  buttonText = "Schedule Service",
+  buttonHref = "/contact",
+  image = "/images/bg2.jpg",
+  imageAlt = "Service background",
+  backgroundImage,
+  trustIndicators: rawTrustIndicators = [],
+} = Astro.props;
+
+const title = getLocationText(rawTitle);
+const subtitle = rawSubtitle ? getLocationText(rawSubtitle) : undefined;
+const trustIndicators = rawTrustIndicators.map(getLocationText);
+---
+
+<section class="hero-page py-10 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="hero-page-wrapper max-w-[1400px] mx-auto rounded-3xl overflow-hidden relative">
+      
+      <!-- Background layers -->
+      <div class="absolute inset-0">
+        <!-- Primary background image (service-relevant) -->
+        {backgroundImage && (
+          <img
+            src={backgroundImage}
+            alt=""
+            aria-hidden="true"
+            class="absolute inset-0 w-full h-full object-cover hidden md:block"
+            loading="lazy"
+          />
+        )}
+        <!-- Secondary overlay image (brand texture) at lower opacity -->
+        <img
+          src={image}
+          alt={imageAlt}
+          class="absolute inset-0 w-full h-full object-cover"
+          style={backgroundImage ? "opacity: 0.35;" : ""}
+          loading="lazy"
+        />
+        <div class="hero-page-overlay absolute inset-0"></div>
+      </div>
+
+      <div class="relative z-10 grid lg:grid-cols-5 gap-6 p-8 md:p-12 lg:p-16 min-h-[360px] md:min-h-[420px]">
+        
+        <!-- Left content area (3 cols) -->
+        <div class="lg:col-span-3 flex flex-col justify-center">
+          
+          {subtitle && (
+            <p class="hero-page-eyebrow text-sm md:text-base font-medium tracking-wide uppercase mb-3">
+              {subtitle}
+            </p>
+          )}
+
+          <h1 class="hero-page-title text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-8">
+            {title}
+          </h1>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a
+              href={buttonHref}
+              class="hero-page-btn inline-flex items-center gap-2 md:gap-3 bg-white text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-medium hover:shadow-lg transition-all"
+            >
+              {buttonText}
+              <span class="hero-page-btn-icon w-8 h-8 bg-brand-secondary rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </a>
+
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              class="hero-page-phone w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-brand-highlight transition-all"
+              aria-label="Call us"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right info card (2 cols) -->
+        <div class="lg:col-span-2 flex items-end lg:justify-end">
+          <div class="hero-page-card bg-white/95 backdrop-blur-sm rounded-2xl p-6 w-full max-w-sm">
+            
+            {trustIndicators.length > 0 && (
+              <ul class="space-y-3">
+                {trustIndicators.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <span class="hero-page-check w-6 h-6 bg-brand-secondary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-brand-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span class="text-sm text-gray-700 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {trustIndicators.length === 0 && (
+              <div class="flex items-center gap-4">
+                <div class="hero-page-badge w-12 h-12 bg-brand-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Trusted Service</div>
+                  <p class="text-xs text-gray-500 mt-0.5">Licensed, insured & certified professionals</p>
+                </div>
+              </div>
+            )}
+
+            <a
+              href={buttonHref}
+              class="hero-page-card-link flex items-center justify-between mt-5 pt-4 border-t border-gray-100 group"
+            >
+              <span class="text-sm font-medium text-brand-secondary">Get a free estimate</span>
+              <span class="w-8 h-8 bg-brand-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-page {
+    background: linear-gradient(135deg, var(--brand-quaternary) 0%, color-mix(in srgb, var(--brand-tertiary) 50%, white) 100%);
+  }
+
+  .hero-page-wrapper {
+    border: 2px solid white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+
+  .hero-page-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 1, 0.7) 0%,
+      color-mix(in srgb, var(--brand-secondary) 40%, transparent) 60%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  .hero-page-eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.08em;
+  }
+
+  .hero-page-title {
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .hero-page-btn-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .hero-page-btn:hover .hero-page-btn-icon {
+    transform: translateX(4px);
+  }
+
+  .hero-page-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero-page-card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-page-card {
+      max-width: 100%;
+    }
+  }
+</style>

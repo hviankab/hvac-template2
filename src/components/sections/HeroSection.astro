@@ -1,0 +1,250 @@
+---
+import { Image } from "astro:assets";
+import bg2Img from "/public/images/bg2.jpg";
+import hvacManImg from "/public/images/hvac-man.png";
+import { getLocationText, siteConfig } from "@/config/site"
+
+interface Props {
+  variant?: "main" | "subpage";
+  buttonHref?: string;
+  buttonText?: string;
+  eyebrow?: string;
+  title?: string;
+  titleEmphasis?: string;
+  subtitle?: string;
+  showArrow?: boolean;
+  // Subpage-specific props
+  badge?: string;
+  image?: string;
+  imageAlt?: string;
+  trustIndicators?: string[];
+}
+
+const {
+  variant = "main",
+  buttonHref = "/contact",
+  buttonText = "Get a Free Quote",
+  eyebrow = "Professional HVAC Services",
+  title = "Where Comfort Meets",
+  titleEmphasis = "Reliability",
+  subtitle = "Fast, affordable heating and cooling solutions for your home and business. Available 24/7.",
+  showArrow = true,
+  badge,
+  image: subpageImage,
+  imageAlt = "HVAC service",
+  trustIndicators,
+} = Astro.props;
+---
+
+{variant === "main" ? (
+<!-- MAIN HERO: full-width background image, left-aligned content -->
+<section class="hero-main relative w-full min-h-[90vh] flex items-center overflow-hidden">
+
+  <!-- Background image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/images/japanese-culture-house-entrance-with-plants.jpg"
+      alt="HVAC background"
+      class="w-full h-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <!-- Dark gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/20"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 w-full py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-4xl">
+
+    <!-- Eyebrow -->
+    <div class="hero-eyebrow flex items-center gap-2 mb-4">
+      <img src="/images/fan.png" alt="" class="w-5 h-5 object-contain" aria-hidden="true" />
+      <p class="text-sm md:text-base font-semibold tracking-widest uppercase text-brand-secondary">
+        {eyebrow}
+      </p>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="hero-h1 text-4xl md:text-6xl font-bold leading-tight text-white mb-6">
+      {title}&nbsp;<span class="hero-emphasis text-brand-secondary">{titleEmphasis}</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-sub text-base md:text-lg text-white/80 mb-8 max-w-xl leading-relaxed">
+      {subtitle}
+    </p>
+
+    <!-- Small label -->
+    <p class="text-xs font-semibold uppercase tracking-widest text-white/60 mb-4">
+      Let's Talk About Your Project
+    </p>
+
+    <!-- CTA row -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <a
+        href={buttonHref}
+        class="hero-cta-btn inline-flex items-center gap-2 bg-brand-secondary text-gray-900 px-7 py-3.5 rounded-full font-semibold text-sm transition-all shadow-lg"
+      >
+        {buttonText}
+      </a>
+
+      <a
+        href={`tel:${siteConfig.contact.phone}`}
+        class="inline-flex items-center gap-3 text-white hover:text-brand-secondary transition-colors"
+      >
+        <span class="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center flex-shrink-0 hover:border-brand-secondary transition-colors">
+          <img src="/images/headphones-with-mic.png" alt="" class="w-5 h-5 object-contain brightness-0 invert" aria-hidden="true" />
+        </span>
+        <span class="flex flex-col leading-tight">
+          <span class="text-xs text-white/60 font-medium">Call now</span>
+          <span class="text-base font-semibold">{siteConfig.contact.phoneFormatted}</span>
+        </span>
+      </a>
+    </div>
+
+  </div>
+</section>
+) : (
+<!-- SUBPAGE VARIANT -->
+<section class="hero-section py-12 md:py-20">
+  <div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-6 max-w-[1400px] mx-auto relative">
+
+      <!-- Left Card -->
+      <div class="hero-card left-card rounded-3xl p-8 md:p-10 relative overflow-hidden">
+        {badge && (
+          <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5 border-2 border-brand-secondary/50">
+            <span class="w-2 h-2 rounded-full bg-brand-secondary"></span>
+            <span class="text-sm font-semibold text-gray-700">{getLocationText(badge)}</span>
+          </div>
+        )}
+
+        <h1 class="hero-title text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+          {title && getLocationText(title)}
+        </h1>
+
+        {subtitle && (
+          <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed max-w-lg">
+            {getLocationText(subtitle)}
+          </p>
+        )}
+
+        <div class="flex items-center gap-4 mb-6">
+          <a
+            href={buttonHref}
+            class="inline-flex items-center gap-3 bg-brand-secondary text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-brand-highlight hover:text-white transition-all shadow-md"
+          >
+            {buttonText}
+            <span class="w-7 h-7 bg-gray-900/10 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        {trustIndicators && trustIndicators.length > 0 && (
+          <div class="flex flex-wrap gap-3 mt-2">
+            {trustIndicators.map((indicator) => (
+              <span class="inline-flex items-center gap-1.5 text-sm text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-brand-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                {getLocationText(indicator)}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Right Card -->
+      <div class="hero-card right-card rounded-3xl relative overflow-visible hidden md:block">
+        <div class="absolute inset-0 rounded-3xl overflow-hidden">
+          <Image
+            src={bg2Img}
+            alt="HVAC background"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            format="webp"
+            quality={60}
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
+        </div>
+
+        <div class="relative z-[30] h-full flex items-end justify-end p-8">
+          {showArrow && (
+            <a href={buttonHref} class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-brand-secondary hover:scale-110 transition-all" aria-label="Learn more">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </a>
+          )}
+        </div>
+
+        <div class="absolute inset-x-0 bottom-0 flex justify-center items-end pointer-events-none hidden md:flex" style="height: 140%; bottom: -2%;">
+          {subpageImage ? (
+            <img src={subpageImage} alt={imageAlt} class="h-full w-auto object-contain object-bottom" loading="eager" />
+          ) : (
+            <Image src={hvacManImg} alt="Professional technician" widths={[320, 480, 640]} sizes="(max-width: 768px) 80vw, 40vw" quality={60} class="h-full w-auto object-contain object-bottom" loading="eager" />
+          )}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+)}
+
+<style>
+  .hero-main {
+    min-height: 90vh;
+  }
+
+  .hero-eyebrow {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-h1 {
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero-sub {
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-cta-btn:hover {
+    background-color: #A9E5BB !important;
+    color: #1a1a1a !important;
+  }
+  /* Subpage styles */
+  .hero-section {
+    background: linear-gradient(135deg, var(--brand-quaternary) 0%, color-mix(in srgb, var(--brand-tertiary) 50%, white) 100%);
+  }
+  .hero-card {
+    min-height: 280px;
+    border: 2px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .left-card {
+    background: linear-gradient(135deg, #e0f2ff 0%, #ddd6fe 50%, #fce7f3 100%);
+  }
+  .right-card {
+    min-height: 280px;
+    overflow: visible;
+    border: none;
+  }
+  .hero-title {
+    color: #1a1a1a;
+    line-height: 1.1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow, .hero-h1, .hero-sub { animation: none; }
+  }
+</style>

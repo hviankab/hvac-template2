@@ -1,0 +1,63 @@
+---
+import { siteConfig } from "@/config/site"
+
+interface Feature {
+  icon: "siren" | "award" | "phone" | "clock" | "shield" | "wrench";
+  text: string;
+}
+
+interface Props {
+  buttonText?: string;
+  buttonHref?: string;
+  phoneLabel?: string;
+  phone?: string;
+  features?: Feature[];
+  borderColor?: string;
+}
+
+const { 
+  buttonText = "SCHEDULE NOW", 
+  buttonHref = "/contact",
+  phoneLabel = "Call or Text for Great Service",
+  phone = siteConfig.contact.phoneFormatted,
+  features = [
+    { icon: "siren", text: "24/7 Emergency Service" },
+    { icon: "award", text: "Experienced & Certified Technicians" }
+  ],
+  borderColor
+} = Astro.props;
+
+const iconSvgs: Record<string, string> = {
+  siren: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><path d="M7 18v-6a5 5 0 1 1 10 0v6"></path><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"></path><path d="M21 12h1"></path><path d="M18.5 4.5 18 5"></path><path d="M2 12h1"></path><path d="M12 2v1"></path><path d="m4.929 4.929.707.707"></path><path d="M12 12v6"></path></svg>`,
+  award: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>`,
+};
+
+const borderStyle = borderColor ? `border-top: 4px solid ${borderColor}; border-bottom: 4px solid ${borderColor};` : "";
+---
+
+<section class="py-8 bg-primary text-primary-foreground border-t-4 border-b-4 border-brand-highlight" style={borderStyle}>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6" data-animate="fade-up">
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <a href={buttonHref} class="inline-flex items-center justify-center rounded-md bg-brand-highlight text-gray-900 px-8 py-4 text-lg font-semibold hover:bg-brand-highlight/90 transition-colors shadow-lg cta-pulse">
+          {buttonText}
+        </a>
+        <div class="text-center sm:text-left">
+          <p class="text-base opacity-90">{phoneLabel}</p>
+          <a href={`tel:${phone}`} class="text-2xl font-bold hover:underline">{phone}</a>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6" data-animate-stagger>
+        {features.map((feature) => {
+          const iconSvg = iconSvgs[feature.icon];
+          return (
+            <div class="flex items-center gap-2">
+              {iconSvg && <Fragment set:html={iconSvg} />}
+              <span class="text-base font-medium">{feature.text}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>

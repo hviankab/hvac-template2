@@ -1,0 +1,192 @@
+---
+interface ServiceCard {
+  title: string;
+  description: string;
+  icon: string;
+  href?: string;
+}
+
+interface ServiceCategory {
+  title: string;
+  services: ServiceCard[];
+}
+
+interface Props {
+  badge?: string;
+  title: string;
+  description: string;
+  categories: ServiceCategory[];
+}
+
+const { badge = "OUR SERVICES", title, description, categories } = Astro.props;
+---
+
+<section class="pt-20 pb-10 md:pt-28 md:pb-14 bg-background">
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="mb-12" data-animate="fade-up">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="block w-10 h-[3px] rounded-full bg-brand-secondary" />
+        <span class="text-sm font-bold uppercase tracking-widest text-brand-secondary" style="letter-spacing:0.1em;font-size:0.8rem;">{badge}</span>
+        <span class="block w-10 h-[3px] rounded-full bg-brand-secondary" />
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">{title}</h2>
+        <p class="text-lg text-muted-foreground leading-relaxed lg:pt-2" set:html={description} />
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap gap-3 mb-10" data-animate="fade-up" data-animate-delay="100">
+      {categories.map((category, index) => (
+        <button
+          class="service-tab px-6 py-3 rounded-full text-base font-medium transition-all duration-300"
+          data-tab={index}
+          data-active={index === 0 ? "true" : "false"}
+        >
+          {category.title}
+        </button>
+      ))}
+    </div>
+
+    <!-- Service Cards Grid -->
+    <div class="relative min-h-[800px] sm:min-h-[600px] lg:min-h-[400px]">
+      {categories.map((category, catIndex) => (
+        <div
+          class="service-content absolute inset-0 transition-opacity duration-500"
+          data-content={catIndex}
+          style={catIndex === 0 ? "opacity: 1; pointer-events: auto;" : "opacity: 0; pointer-events: none;"}
+        >
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate-stagger>
+            {category.services.map((service, serviceIndex) => {
+              const Tag = service.href ? 'a' : 'div';
+              return (
+                <Tag
+                  {...(service.href ? { href: service.href } : {})}
+                  class="service-card group p-6 rounded-2xl transition-all duration-300 hover:shadow-lg"
+                  style={`transition-delay: ${serviceIndex * 70}ms`}
+                >
+                  <div class="service-icon w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300">
+                    <span set:html={service.icon} />
+                  </div>
+                  
+                  <h3 class="font-bold text-xl mb-2 transition-colors duration-300">{service.title}</h3>
+                  <p class="text-muted-foreground text-base mb-4" set:html={service.description} />
+                  
+                  {service.href && (
+                    <div class="service-arrow inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7v10" />
+                      </svg>
+                    </div>
+                  )}
+                </Tag>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-tab {
+    background: var(--brand-tertiary);
+    color: var(--foreground);
+  }
+
+  .service-tab[data-active="true"] {
+    background: var(--brand-secondary);
+    color: white;
+    box-shadow: 0 0 0 2px var(--brand-highlight);
+  }
+
+  .service-tab:not([data-active="true"]):hover {
+    background: color-mix(in srgb, var(--brand-secondary) 20%, var(--brand-tertiary));
+  }
+
+  .service-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+  }
+
+  .service-card:hover {
+    border-color: var(--brand-highlight);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-highlight) 20%, transparent);
+  }
+
+  .service-icon {
+    background: var(--brand-tertiary);
+    color: var(--brand-secondary);
+  }
+
+  .service-card:hover .service-icon {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+  }
+
+  .service-arrow {
+    background: var(--brand-tertiary);
+    color: var(--brand-secondary);
+  }
+
+  .service-card:hover .service-arrow {
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+    transform: translate(4px, -4px);
+  }
+
+  .service-card:hover h3 {
+    color: var(--brand-secondary);
+  }
+</style>
+
+<script>
+  // Tab switching functionality
+  const tabs = document.querySelectorAll<HTMLElement>('.service-tab');
+  const contents = document.querySelectorAll<HTMLElement>('.service-content');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const tabIndex = tab.getAttribute('data-tab');
+      
+      // Update active states
+      tabs.forEach((t) => t.setAttribute('data-active', 'false'));
+      tab.setAttribute('data-active', 'true');
+
+      // Show corresponding content
+      contents.forEach((content) => {
+        const contentIndex = content.getAttribute('data-content');
+        if (contentIndex === tabIndex) {
+          content.style.opacity = '1';
+          content.style.pointerEvents = 'auto';
+        } else {
+          content.style.opacity = '0';
+          content.style.pointerEvents = 'none';
+        }
+      });
+    });
+  });
+
+  // Scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-animate]').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

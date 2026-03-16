@@ -1,0 +1,374 @@
+---
+import { getLocationText } from "@/config/site"
+
+interface FAQItem {
+  question: string;
+  answer?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+  faqs: FAQItem[];
+}
+
+const { title: rawTitle, subtitle: rawSubtitle, badge = "FAQ", faqs: rawFaqs } = Astro.props;
+
+const title = getLocationText(rawTitle);
+const subtitle = rawSubtitle ? getLocationText(rawSubtitle) : undefined;
+const faqs = rawFaqs.map(faq => ({
+  ...faq,
+  question: getLocationText(faq.question),
+  answer: faq.answer ? getLocationText(faq.answer) : undefined,
+}));
+---
+
+<section class="faq-section py-20 md:py-28">
+  <div class="container mx-auto px-4">
+
+    <!-- Header -->
+    <div class="text-center mb-14" data-animate="fade-up">
+      <div class="faq-badge-row">
+        <span class="faq-accent-line"></span>
+        <span class="faq-badge">{badge}</span>
+        <span class="faq-accent-line"></span>
+      </div>
+      <h2 class="faq-title">{title}</h2>
+      {subtitle && <p class="faq-subtitle">{subtitle}</p>}
+    </div>
+
+    <!-- Two-column layout: left decorative, right accordion -->
+    <div class="faq-layout">
+
+      <!-- Left: decorative panel -->
+      <div class="faq-side" data-animate="fade-up">
+        <div class="faq-side-card">
+          <div class="faq-side-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h3 class="faq-side-heading">Have Questions?</h3>
+          <p class="faq-side-text">
+            We're here to help. If you don't find your answer below, reach out to our team directly.
+          </p>
+          <a href="/contact" class="faq-side-btn">
+            Contact Us
+          </a>
+          <!-- Decorative circle -->
+          <div class="faq-side-circle" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Right: accordion -->
+      {faqs.filter(faq => faq.question && faq.answer).map((faq, index) => (
+        <div class="faq-item">
+          <button
+            class="faq-trigger"
+            aria-expanded="false"
+            aria-controls={`faq-panel-${index}`}
+            id={`faq-btn-${index}`}
+          >
+            <span class="faq-number">{String(index + 1).padStart(2, '0')}</span>
+            <span class="faq-question">{faq.question}</span>
+            <span class="faq-chevron">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-panel"
+            id={`faq-panel-${index}`}
+            role="region"
+            aria-labelledby={`faq-btn-${index}`}
+          >
+            <div class="faq-answer" set:html={faq.answer} />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFAQ() {
+    document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>('.faq-trigger');
+      if (!trigger) return;
+      if (trigger.dataset.init === 'true') return;
+      trigger.dataset.init = 'true';
+
+      trigger.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close all others
+        document.querySelectorAll<HTMLElement>('.faq-item').forEach((other) => {
+          const otherTrigger = other.querySelector<HTMLButtonElement>('.faq-trigger');
+          if (otherTrigger && other !== item) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            other.classList.remove('is-open');
+          }
+        });
+
+        // Toggle current
+        if (isOpen) {
+          trigger.setAttribute('aria-expanded', 'false');
+          item.classList.remove('is-open');
+        } else {
+          trigger.setAttribute('aria-expanded', 'true');
+          item.classList.add('is-open');
+        }
+      });
+    });
+  }
+
+  initFAQ();
+  document.addEventListener('astro:page-load', initFAQ);
+</script>
+
+<style>
+  .faq-section {
+    background: var(--background);
+  }
+
+  /* Header */
+  .faq-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .faq-accent-line {
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--brand-highlight);
+  }
+  .faq-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-secondary);
+  }
+  .faq-title {
+    color: var(--foreground);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .faq-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  /* Layout */
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.75rem 3rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    grid-auto-rows: auto;
+    align-items: start;
+  }
+
+  /* Side card */
+  .faq-side {
+    grid-row: 1 / 4;
+    display: flex;
+  }
+  
+  .faq-side-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--brand-secondary) 0%, color-mix(in srgb, var(--brand-secondary) 60%, black) 100%);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    color: #fff;
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+  .faq-side-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .faq-side-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .faq-side-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 2rem;
+  }
+  .faq-side-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+    color: var(--brand-secondary);
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    width: fit-content;
+  }
+  .faq-side-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    background: var(--brand-highlight);
+    color: #1a1a1a;
+  }
+  .faq-side-circle {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .faq-item {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-item:hover {
+    border-color: color-mix(in srgb, var(--brand-secondary) 40%, transparent);
+  }
+  .faq-item.is-open {
+    border-color: var(--brand-secondary);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-secondary) 8%, transparent);
+    border-left: 3px solid var(--brand-highlight);
+  }
+
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s;
+  }
+  .faq-trigger:hover {
+    background: color-mix(in srgb, var(--brand-tertiary) 40%, transparent);
+  }
+
+  .faq-number {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--brand-secondary);
+    flex-shrink: 0;
+    width: 2rem;
+    background: color-mix(in srgb, var(--brand-highlight) 15%, transparent);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+  }
+
+  .faq-question {
+    flex: 1;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--foreground);
+    line-height: 1.35;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--brand-secondary) 10%, transparent);
+    color: var(--brand-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+  }
+  .faq-item.is-open .faq-chevron {
+    background: var(--brand-secondary);
+    color: #fff;
+    transform: rotate(45deg);
+  }
+
+  /* Panel */
+  .faq-panel {
+    display: none;
+  }
+  .faq-item.is-open .faq-panel {
+    display: block;
+  }
+
+  .faq-answer {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    padding: 1rem 1.5rem 1.5rem 4.5rem;
+    background: color-mix(in srgb, var(--brand-secondary) 6%, transparent);
+  }
+  .faq-answer :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .faq-answer :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .faq-side {
+      grid-row: auto;
+    }
+    .faq-side-card {
+      text-align: center;
+    }
+    .faq-side-icon {
+      margin: 0 auto 1.5rem;
+    }
+    .faq-side-btn {
+      margin: 0 auto;
+    }
+    .faq-answer {
+      padding-left: 1.5rem;
+    }
+  }
+</style>
