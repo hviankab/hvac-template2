@@ -40,68 +40,91 @@ const {
 <!-- MAIN HERO: full-width background image, left-aligned content -->
 <section class="hero-main relative w-full min-h-[90vh] flex items-center overflow-hidden">
 
-  <!-- Background image -->
+  <!-- Background image slider -->
   <div class="absolute inset-0 z-0">
-    <img
-      src="/images/japanese-culture-house-entrance-with-plants.jpg"
-      alt="HVAC background"
-      class="w-full h-full object-cover object-center"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <!-- Dark gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/20"></div>
+    <div class="hero-bg-slide active" style="background-image: url('/images/hvac.jpg')"></div>
+    <div class="hero-bg-slide" style="background-image: url('/images/hvac-hero.jpg')"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30"></div>
   </div>
 
-  <!-- Content -->
-  <div class="relative z-10 w-full py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-4xl">
+  <!-- Two-column layout -->
+  <div class="relative z-10 w-full py-20 md:py-28">
+    <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-    <!-- Eyebrow -->
-    <div class="hero-eyebrow flex items-center gap-2 mb-4">
-      <img src="/images/fan.png" alt="" class="w-5 h-5 object-contain" aria-hidden="true" />
-      <p class="text-sm md:text-base font-semibold tracking-widest uppercase text-brand-secondary">
-        {eyebrow}
-      </p>
+      <!-- Left: content -->
+      <div class="flex-1 min-w-0 lg:pr-8">
+        <div class="hero-eyebrow flex items-center gap-2 mb-4">
+          <img src="/images/fan.png" alt="" class="w-5 h-5 object-contain" aria-hidden="true" />
+          <p class="text-sm md:text-base font-semibold tracking-widest uppercase text-brand-secondary">
+            {eyebrow}
+          </p>
+        </div>
+
+        <h1 class="hero-h1 text-4xl md:text-6xl font-bold leading-tight text-white mb-6">
+          {title}&nbsp;<span class="hero-emphasis text-brand-secondary">{titleEmphasis}</span>
+        </h1>
+
+        <p class="hero-sub text-base md:text-lg text-white/80 mb-8 max-w-xl leading-relaxed">
+          {subtitle}
+        </p>
+
+        <p class="text-xs font-semibold uppercase tracking-widest text-white/60 mb-4">
+          Let's Talk About Your Project
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <a
+            href={buttonHref}
+            class="hero-cta-btn inline-flex items-center gap-2 bg-brand-secondary text-gray-900 px-7 py-3.5 rounded-full font-semibold text-sm transition-all shadow-lg"
+          >
+            {buttonText}
+          </a>
+          <a
+            href={`tel:${siteConfig.contact.phone}`}
+            class="inline-flex items-center gap-3 text-white transition-colors"
+          >
+            <span class="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center flex-shrink-0">
+              <img src="/images/headphones-with-mic.png" alt="" class="w-5 h-5 object-contain brightness-0 invert" aria-hidden="true" />
+            </span>
+            <span class="flex flex-col leading-tight">
+              <span class="text-xs text-white/60 font-medium">Call now</span>
+              <span class="text-base font-semibold">{siteConfig.contact.phoneFormatted}</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="w-full lg:w-[420px] flex-shrink-0">
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-1">Let's Book Your Call</h3>
+          <p class="text-sm text-gray-500 mb-6">Get a free consultation. No obligations.</p>
+
+          <form class="flex flex-col gap-4" action="/contact" method="POST">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1" for="hero-name">Name <span class="text-red-500">*</span></label>
+              <input id="hero-name" name="name" type="text" required placeholder="John Smith"
+                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-secondary placeholder:text-gray-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1" for="hero-phone">Phone <span class="text-red-500">*</span></label>
+              <input id="hero-phone" name="phone" type="tel" required placeholder="(+1) 234-5678"
+                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-secondary placeholder:text-gray-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1" for="hero-email">Email <span class="text-red-500">*</span></label>
+              <input id="hero-email" name="email" type="email" required placeholder="john@email.com"
+                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-secondary placeholder:text-gray-400" />
+            </div>
+            <button type="submit"
+              class="hero-cta-btn w-full bg-brand-secondary text-gray-900 font-semibold py-3 rounded-full text-sm transition-all mt-2">
+              Request a Call
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div>
-
-    <!-- Headline -->
-    <h1 class="hero-h1 text-4xl md:text-6xl font-bold leading-tight text-white mb-6">
-      {title}&nbsp;<span class="hero-emphasis text-brand-secondary">{titleEmphasis}</span>
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="hero-sub text-base md:text-lg text-white/80 mb-8 max-w-xl leading-relaxed">
-      {subtitle}
-    </p>
-
-    <!-- Small label -->
-    <p class="text-xs font-semibold uppercase tracking-widest text-white/60 mb-4">
-      Let's Talk About Your Project
-    </p>
-
-    <!-- CTA row -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <a
-        href={buttonHref}
-        class="hero-cta-btn inline-flex items-center gap-2 bg-brand-secondary text-gray-900 px-7 py-3.5 rounded-full font-semibold text-sm transition-all shadow-lg"
-      >
-        {buttonText}
-      </a>
-
-      <a
-        href={`tel:${siteConfig.contact.phone}`}
-        class="inline-flex items-center gap-3 text-white hover:text-brand-secondary transition-colors"
-      >
-        <span class="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center flex-shrink-0 hover:border-brand-secondary transition-colors">
-          <img src="/images/headphones-with-mic.png" alt="" class="w-5 h-5 object-contain brightness-0 invert" aria-hidden="true" />
-        </span>
-        <span class="flex flex-col leading-tight">
-          <span class="text-xs text-white/60 font-medium">Call now</span>
-          <span class="text-base font-semibold">{siteConfig.contact.phoneFormatted}</span>
-        </span>
-      </a>
-    </div>
-
   </div>
 </section>
 ) : (
@@ -203,6 +226,19 @@ const {
     min-height: 90vh;
   }
 
+  .hero-bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  .hero-bg-slide.active {
+    opacity: 1;
+  }
+
   .hero-eyebrow {
     animation: fadeUp 0.6s ease both;
   }
@@ -248,3 +284,18 @@ const {
     .hero-eyebrow, .hero-h1, .hero-sub { animation: none; }
   }
 </style>
+
+<script>
+  function initHeroBgSlider() {
+    const slides = document.querySelectorAll<HTMLElement>('.hero-bg-slide')
+    if (!slides.length) return
+    let current = 0
+    setInterval(() => {
+      slides[current].classList.remove('active')
+      current = (current + 1) % slides.length
+      slides[current].classList.add('active')
+    }, 5000)
+  }
+  initHeroBgSlider()
+  document.addEventListener('astro:page-load', initHeroBgSlider)
+</script>

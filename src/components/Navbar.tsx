@@ -41,12 +41,21 @@ function UtilityBar() {
 /* ─── Services mega dropdown ─── */
 function ServicesDropdown({ isActive, onHover, onLeave }: { isActive: boolean; onHover: () => void; onLeave: () => void }) {
   const [activeItem, setActiveItem] = React.useState<string | null>(null)
+  const btnRef = React.useRef<HTMLButtonElement>(null)
+
+  React.useEffect(() => {
+    if (btnRef.current) {
+      btnRef.current.style.backgroundColor = ''
+      btnRef.current.style.color = ''
+    }
+  }, [isActive])
 
   return (
     <div className="relative flex items-center" onMouseEnter={onHover} onMouseLeave={onLeave}>
       <button
-        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-          isActive ? "bg-white text-gray-900 shadow-sm" : "text-gray-600"
+        ref={btnRef}
+        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all nav-services-btn ${
+          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-600"
         }`}
         onMouseEnter={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}}
         onMouseLeave={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}}
@@ -84,7 +93,7 @@ function ServicesDropdown({ isActive, onHover, onLeave }: { isActive: boolean; o
                   <a
                     key={child.href}
                     href={child.href}
-                    className={`block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-secondary transition-colors ${i !== 0 ? "border-t border-gray-100" : ""}`}
+                    className={`block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-secondary transition-colors nav-dropdown-item ${i !== 0 ? "border-t border-gray-100" : ""}`}
                   >
                     {child.title}
                   </a>
@@ -106,12 +115,22 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
     { title: "Pasadena", href: "/pasadena" },
     { title: "Glendale", href: "/glendale" },
   ]
+  const linkRef = React.useRef<HTMLAnchorElement>(null)
+
+  React.useEffect(() => {
+    if (linkRef.current) {
+      linkRef.current.style.backgroundColor = ''
+      linkRef.current.style.color = ''
+    }
+  }, [isActive])
+
   return (
     <div className="relative flex items-center" onMouseEnter={onHover} onMouseLeave={onLeave}>
       <a
+        ref={linkRef}
         href="/service-areas"
-        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-          isActive ? "bg-white text-gray-900 shadow-sm" : "text-gray-600"
+        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all nav-areas-btn ${
+          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-600"
         }`}
         onMouseEnter={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}}
         onMouseLeave={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}}
@@ -126,7 +145,7 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
               <a
                 key={area.href}
                 href={area.href}
-                className={`block px-5 py-3 text-sm text-gray-700 hover:text-brand-secondary hover:bg-gray-50 transition-colors ${i !== 0 ? "border-t border-gray-100" : ""}`}
+                className={`block px-5 py-3 text-sm text-gray-700 nav-dropdown-item hover:bg-gray-50 transition-colors ${i !== 0 ? "border-t border-gray-100" : ""}`}
               >
                 {area.title}
               </a>
@@ -141,10 +160,9 @@ function NavLink({ title, href }: { title: string; href: string }) {
   return (
     <a
       href={href}
-      className="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap text-gray-600 transition-all"
+      className="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap text-gray-600 transition-all nav-pill-link"
       onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}
-      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}
-    >
+      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}    >
       {title}
     </a>
   )
@@ -177,7 +195,14 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-[100] w-full" style={{ "--navbar-height": "108px" } as React.CSSProperties}>
-      <style>{`.nav-highlight-btn:hover { background-color: #A9E5BB !important; color: #1a1a1a !important; }`}</style>      {/* Row 1: Utility bar */}
+      <style>{`
+        .nav-highlight-btn:hover { background-color: #A9E5BB !important; color: #1a1a1a !important; }
+        .nav-pill-link:hover { background-color: #A9E5BB !important; color: #1a1a1a !important; }
+        .nav-services-btn:hover, .nav-areas-btn:hover { color: #1a1a1a !important; }
+        .nav-services-btn:hover *, .nav-areas-btn:hover * { color: #1a1a1a !important; }
+        .nav-dropdown-item:hover { color: #1a1a1a !important; }
+        .nav-dropdown-item:hover * { color: #1a1a1a !important; }
+      `}</style>      {/* Row 1: Utility bar */}
       <UtilityBar />
 
       {/* Row 2: Main nav */}
@@ -217,9 +242,9 @@ export function Navbar() {
               </a>
               <a
                 href="/contact"
-                className="flex items-center gap-2 bg-brand-secondary text-gray-900 px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-highlight hover:text-white transition-all whitespace-nowrap"
+                className="flex items-center gap-2 bg-brand-secondary text-gray-900 px-5 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap nav-highlight-btn"
               >
-                Get Started
+                Get a Quote
               </a>
             </div>
 

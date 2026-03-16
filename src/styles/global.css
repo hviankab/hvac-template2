@@ -165,7 +165,7 @@
   /* Global hover color for all buttons and links */
   a:hover,
   button:hover {
-    color: #1a1a1a;
+    color: #F7B32B;
   }  
   /* Performance optimizations */
   img {
@@ -438,10 +438,16 @@
 /* ── Global hover override — applies across all pages ── */
 a:hover,
 button:hover {
-  color: #1a1a1a !important;
+  color: #F7B32B;
 }
 
 a:hover *,
 button:hover * {
   color: inherit;
+}
+
+/* Nav pill links and dropdowns — black text on mint green */
+.nav-pill-link:hover,
+.nav-dropdown-item:hover {
+  color: #1a1a1a !important;
 }
