@@ -5,6 +5,7 @@ description: "Get in touch with {business} for fast, reliable HVAC solutions. Re
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContactFormSection from "@/components/sections/ContactFormSection.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
@@ -23,6 +24,15 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
   serviceOptions={["Air Conditioning", "Heating", "Indoor Air Quality", "Emergency Service", "Commercial HVAC", "Maintenance", "Other"]}
   planOptions={["Yes", "No", "Not Sure"]}
+/>
+
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
 />
 
 <CTAStrip

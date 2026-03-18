@@ -6,6 +6,7 @@ description: "Professional commercial HVAC services in {city}. Expert repair, ma
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
 import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
 import ServicesSection from "@/components/sections/ServicesSection"
@@ -25,7 +26,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
 <ContentSection
   badge="Commercial HVAC"
   title="Expert Commercial HVAC Services for Your Business Needs"
-  description="Managing a comfortable work environment is critical for your business. {fullName} provides comprehensive commercial HVAC services including <a href='/commercial/hvac-installation'><strong>installation</strong></a>, <a href='/commercial/hvac-repair'><strong>repair</strong></a>, <a href='/commercial/hvac-maintenance'><strong>maintenance</strong></a>, and <a href='/commercial/hvac-warranty'><strong>warranty support</strong></a>. Our experienced technicians understand the unique demands of commercial systems and deliver solutions that minimize downtime and maximize efficiency."
+  description="Managing a comfortable work environment is critical for your business. {fullName} provides comprehensive commercial HVAC services including <a href='/commercial/hvac-installation'><strong>installation</strong></a> and <a href='/commercial/hvac-repair'><strong>repair</strong></a>. Our experienced technicians understand the unique demands of commercial systems and deliver solutions that minimize downtime and maximize efficiency."
   features={[
     "Installation and Upgrades",
     "Maintenance and Repairs",
@@ -38,6 +39,15 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
     "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Installation-Service.webp"
   ]}
   imagePosition="left"
+/>
+
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
 />
 
 <ContentSectionAlt
@@ -76,9 +86,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   variant="services"
   items={[
     { title: "HVAC Repair", href: "/commercial/hvac-repair", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Repair-Services.webp" },
-    { title: "HVAC Maintenance", href: "/commercial/hvac-maintenance", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Warranty-Service.webp" },
-    { title: "HVAC Installation", href: "/commercial/hvac-installation", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Expert-Commercial-HVAC-Maintenance.webp" },
-    { title: "HVAC Warranty", href: "/commercial/hvac-warranty", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-Banner.webp" }
+    { title: "HVAC Installation", href: "/commercial/hvac-installation", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Expert-Commercial-HVAC-Maintenance.webp" }
   ]}
 />
 
@@ -87,7 +95,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   faqs={[
     {
       question: "How often should my commercial HVAC system be serviced?",
-      answer: "We recommend scheduling professional <a href='/commercial/hvac-maintenance'><strong>maintenance</strong></a> at least twice a year — once before the cooling season and once before the heating season. Regular maintenance helps prevent costly breakdowns and keeps your system running efficiently."
+      answer: "We recommend scheduling professional maintenance at least twice a year — once before the cooling season and once before the heating season. Regular maintenance helps prevent costly breakdowns and keeps your system running efficiently."
     },
     {
       question: "What are the benefits of upgrading to an energy-efficient commercial HVAC system?",
@@ -109,34 +117,13 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
       title: "AC Services",
       services: [
         { title: "AC Repair", description: "Fast and reliable air conditioning repairs", href: "/air-conditioning/ac-repair" },
-        { title: "AC Tune-Up / Maintenance", description: "Keep your cooling system running efficiently", href: "/air-conditioning/ac-tune-up-maintenance" },
-        { title: "AC Installation and Replacement", description: "New AC system installations", href: "/air-conditioning/ac-installation-replacement" },
-        { title: "Thermostats", description: "Smart thermostat installation and setup", href: "/air-conditioning/thermostats" }
-      ]
-    },
-    {
-      title: "Heating Services",
-      services: [
-        { title: "Furnace Repair", description: "Fast and reliable furnace repair services", href: "/heating/furnace-repair" },
-        { title: "Furnace Tune-Up / Maintenance", description: "Keep your heating system running efficiently", href: "/heating/furnace-tune-up-maintenance" },
-        { title: "Furnace Installation and Replacement", description: "New furnace installations and upgrades", href: "/heating/furnace-installation-replacement" },
-        { title: "Boilers Installation and Replacement", description: "Expert boiler services for your home", href: "/heating/boilers-installation-replacement" }
-      ]
-    },
-    {
-      title: "Indoor Air Quality",
-      services: [
-        { title: "Air Filtration Systems", description: "Improve your indoor air quality", href: "/indoor-air-quality/air-filtration-systems" },
-        { title: "Duct Cleaning and Sealing", description: "Clean and seal your ductwork", href: "/indoor-air-quality/duct-cleaning-sealing" },
-        { title: "Duct Repair and Replacement", description: "Fix or replace damaged ductwork", href: "/indoor-air-quality/duct-repair-replacement" },
-        { title: "Attic Insulation and Ventilation", description: "Optimize your insulation", href: "/indoor-air-quality/attic-insulation-ventilation" }
+        { title: "AC Installation and Replacement", description: "New AC system installations", href: "/air-conditioning/ac-installation-replacement" }
       ]
     },
     {
       title: "Emergency HVAC Services",
       services: [
         { title: "24/7 AC Repairs", description: "Round-the-clock AC emergency repairs", href: "/emergency/24-7-ac-repairs" },
-        { title: "24/7 Heating and Cooling Repairs", description: "Emergency heating and cooling services", href: "/emergency/24-7-heating-cooling-repairs" },
         { title: "24/7 Emergency Repairs", description: "Full emergency HVAC repair services", href: "/emergency/24-7-emergency-repairs" }
       ]
     }
@@ -155,7 +142,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
 
 <ServiceAreaSection
   title="Service Areas for HVAC Services in {city}"
-  description="We proudly serve businesses across all {city} boroughs, providing expert <a href='/commercial/hvac-repair'><strong>commercial HVAC repair</strong></a>, <a href='/commercial/hvac-installation'><strong>installation</strong></a>, and <a href='/commercial/hvac-maintenance'><strong>maintenance</strong></a> services wherever you need us."
+  description="We proudly serve businesses across all {city} boroughs, providing expert <a href='/commercial/hvac-repair'><strong>commercial HVAC repair</strong></a> and <a href='/commercial/hvac-installation'><strong>installation</strong></a> services wherever you need us."
   areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
 
   buttonText="SERVICE AREAS"

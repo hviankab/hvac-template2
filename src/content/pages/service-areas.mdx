@@ -53,30 +53,16 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
       description: "Round-the-clock emergency HVAC services available in all areas we serve."
     }
   ]}
-  image="https://ucarecdn.com/514fa2a4-9e6c-417b-8e38-fdab8ec5364a/-/preview/999x1000/"
+  image="/images/hvac-man.png"
   imagePosition="left"
 />
 
 <CouponsSection
+  title="Specials and Offers"
   coupons={[
-    {
-      label: "Senior & Military",
-      discount: "10% OFF",
-      description: "Senior & Military Discounts. Cannot be combined with any other offer.",
-      expires: "Coupon Expires 12/31"
-    },
-    {
-      label: "Free Camera Inspection",
-      discount: "FREE",
-      description: "Free Camera Inspection with any drain cleaning. Call for details.",
-      expires: "Coupon Expires 12/31"
-    },
-    {
-      label: "HVAC",
-      discount: "50% OFF",
-      description: "Any Typical Drill Line. Cannot be combined with any other offer.",
-      expires: "Offer Expires 12/31"
-    }
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
   ]}
 />
 
@@ -91,22 +77,16 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
       href: "/air-conditioning"
     },
     {
-      image: "https://plus.unsplash.com/premium_photo-1661963270682-4b4857b6cda2?q=80&w=1470&auto=format&fit=crop",
-      icon: "building",
-      title: "Heating Services",
-      href: "/heating"
-    },
-    {
-      image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg",
-      icon: "settings",
-      title: "Indoor Air Quality Services",
-      href: "/indoor-air-quality"
-    },
-    {
       image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp",
       icon: "wrench",
       title: "Emergency HVAC Services",
       href: "/emergency"
+    },
+    {
+      image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Installation-Service.webp",
+      icon: "building",
+      title: "Commercial HVAC Services",
+      href: "/commercial"
     }
   ]}
 />

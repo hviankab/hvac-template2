@@ -162,6 +162,36 @@
     font-weight: 700;
   }
 
+  /* Global eyebrow styling */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .eyebrow img {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+  }
+
+  .eyebrow p,
+  .eyebrow span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #dc2626; /* Red color for all eyebrows */
+  }
+
+  @media (min-width: 768px) {
+    .eyebrow p,
+    .eyebrow span {
+      font-size: 1rem;
+    }
+  }
+
   /* Global hover color for all buttons and links */
   a:hover,
   button:hover {

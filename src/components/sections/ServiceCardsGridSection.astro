@@ -1,175 +1,294 @@
 ---
 interface ServiceCard {
-  title: string;
-  description: string;
   icon: string;
-  href?: string;
+  title: string;
+  href: string;
 }
 
-interface ServiceCategory {
+interface ServiceTab {
+  id: string;
   title: string;
+  heading: string;
+  description: string;
+  image: string;
   services: ServiceCard[];
+  buttonText: string;
+  buttonHref: string;
 }
 
 interface Props {
   badge?: string;
   title: string;
   description: string;
-  categories: ServiceCategory[];
+  tabs: ServiceTab[];
 }
 
-const { badge = "OUR SERVICES", title, description, categories } = Astro.props;
+const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
 ---
 
-<section class="pt-20 pb-10 md:pt-28 md:pb-14 bg-background">
-  <div class="container mx-auto px-4">
+<section class="relative py-20 md:py-28 overflow-hidden" style="background-color: #f2f3f5;">
+  <!-- Subtle dotted pattern background -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px); background-size: 20px 20px;"></div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
     <!-- Header -->
-    <div class="mb-12" data-animate="fade-up">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="block w-10 h-[3px] rounded-full bg-brand-secondary" />
-        <span class="text-sm font-bold uppercase tracking-widest text-brand-secondary" style="letter-spacing:0.1em;font-size:0.8rem;">{badge}</span>
-        <span class="block w-10 h-[3px] rounded-full bg-brand-secondary" />
+    <div class="mb-16 text-center" data-animate="fade-up">
+      <div class="eyebrow justify-center">
+        <img src="/images/fan.png" alt="" aria-hidden="true" />
+        <span>{badge}</span>
       </div>
       
-      <div class="grid lg:grid-cols-2 gap-8 items-start">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">{title}</h2>
-        <p class="text-lg text-muted-foreground leading-relaxed lg:pt-2" set:html={description} />
-      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">{title}</h2>
+      <p class="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto" set:html={description} />
     </div>
 
-    <!-- Category Tabs -->
-    <div class="flex flex-wrap gap-3 mb-10" data-animate="fade-up" data-animate-delay="100">
-      {categories.map((category, index) => (
-        <button
-          class="service-tab px-6 py-3 rounded-full text-base font-medium transition-all duration-300"
-          data-tab={index}
-          data-active={index === 0 ? "true" : "false"}
-        >
-          {category.title}
-        </button>
-      ))}
-    </div>
-
-    <!-- Service Cards Grid -->
-    <div class="relative min-h-[800px] sm:min-h-[600px] lg:min-h-[400px]">
-      {categories.map((category, catIndex) => (
-        <div
-          class="service-content absolute inset-0 transition-opacity duration-500"
-          data-content={catIndex}
-          style={catIndex === 0 ? "opacity: 1; pointer-events: auto;" : "opacity: 0; pointer-events: none;"}
-        >
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-animate-stagger>
-            {category.services.map((service, serviceIndex) => {
-              const Tag = service.href ? 'a' : 'div';
-              return (
-                <Tag
-                  {...(service.href ? { href: service.href } : {})}
-                  class="service-card group p-6 rounded-2xl transition-all duration-300 hover:shadow-lg"
-                  style={`transition-delay: ${serviceIndex * 70}ms`}
+    <!-- Main Content Area -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Side - Featured Image with Clean House Shape -->
+      <div class="relative order-2 lg:order-1" data-animate="fade-right">
+        <div class="relative">
+          <!-- Image container -->
+          <div class="relative overflow-hidden">
+            <!-- SVG clipPath definition for house shape -->
+            <svg width="0" height="0" class="absolute">
+              <defs>
+                <clipPath id="houseShape" clipPathUnits="objectBoundingBox">
+                  <polygon points="0.5,0 0.1,0.4 0.1,1 0.9,1 0.9,0.4" />
+                </clipPath>
+              </defs>
+            </svg>
+            
+            <div class="image-container relative h-96 md:h-[500px] lg:h-[600px]">
+              {tabs.map((tab, index) => (
+                <div 
+                  class={`tab-image-wrapper absolute inset-0 transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+                  data-tab-image={tab.id}
                 >
-                  <div class="service-icon w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300">
-                    <span set:html={service.icon} />
-                  </div>
-                  
-                  <h3 class="font-bold text-xl mb-2 transition-colors duration-300">{service.title}</h3>
-                  <p class="text-muted-foreground text-base mb-4" set:html={service.description} />
-                  
-                  {service.href && (
-                    <div class="service-arrow inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M7 17L17 7M17 7H7M17 7v10" />
-                      </svg>
+                  {tab.id === 'air-conditioning' ? (
+                    <!-- House-shaped image for air conditioning -->
+                    <div class="house-frame-container relative w-full h-full flex items-center justify-center">
+                      <img 
+                        src={tab.image} 
+                        alt={tab.heading}
+                        class="w-full h-full object-cover shadow-xl"
+                        style="clip-path: url(#houseShape);"
+                      />
                     </div>
+                  ) : (
+                    <!-- Regular angled treatment for other tabs -->
+                    <img 
+                      src={tab.image} 
+                      alt={tab.heading}
+                      class="w-full h-full object-cover shadow-xl"
+                    />
                   )}
-                </Tag>
-              );
-            })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
+      </div>
+
+      <!-- Right Side - Content Panel -->
+      <div class="order-1 lg:order-2" data-animate="fade-left">
+        
+        <!-- Tab Navigation - Raised Pills -->
+        <div class="mb-8">
+          <div class="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
+            {tabs.map((tab, index) => (
+              <button
+                class="service-tab relative px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 min-w-[120px]"
+                data-tab={tab.id}
+                data-active={index === 0 ? "true" : "false"}
+              >
+                {tab.title}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Dynamic Content -->
+        <div class="tab-content-wrapper">
+          {tabs.map((tab, tabIndex) => (
+            <div
+              class="tab-content-panel transition-all duration-500"
+              data-content={tab.id}
+              style={tabIndex === 0 ? "opacity: 1; transform: translateY(0);" : "opacity: 0; transform: translateY(20px); position: absolute; pointer-events: none;"}
+            >
+              <!-- Title -->
+              <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">{tab.heading}</h3>
+              
+              <!-- Description -->
+              <p class="text-gray-600 mb-8 leading-relaxed text-lg">{tab.description}</p>
+
+              <!-- Service Cards Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                {tab.services.map((service) => (
+                  <a 
+                    href={service.href}
+                    class="service-card group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-secondary/30 transition-all duration-300"
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div class="w-16 h-16 mb-4 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                        <span class="text-brand-secondary text-2xl" set:html={service.icon} />
+                      </div>
+                      <h4 class="font-semibold text-base text-gray-900 group-hover:text-brand-secondary transition-colors">{service.title}</h4>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              <!-- CTA Button -->
+              <div>
+                <a 
+                  href={tab.buttonHref}
+                  class="inline-flex items-center px-8 py-4 bg-brand-secondary text-black font-semibold rounded-xl hover:bg-brand-highlight hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  {tab.buttonText}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7v10" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* Tab styling - raised appearance */
   .service-tab {
-    background: var(--brand-tertiary);
-    color: var(--foreground);
+    color: #6b7280;
+    background: transparent;
+    position: relative;
   }
 
   .service-tab[data-active="true"] {
-    background: var(--brand-secondary);
-    color: white;
-    box-shadow: 0 0 0 2px var(--brand-highlight);
+    background: linear-gradient(135deg, #F7B32B 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(247, 179, 43, 0.3);
+    transform: translateY(-1px);
   }
 
   .service-tab:not([data-active="true"]):hover {
-    background: color-mix(in srgb, var(--brand-secondary) 20%, var(--brand-tertiary));
+    background: #f9fafb;
+    color: #374151;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .service-card {
-    background: var(--card);
-    border: 2px solid var(--border);
+  /* Image container angled treatment */
+  .image-container {
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
   }
 
+  /* Clean house frame - no backgrounds */
+  .house-frame-container {
+    background: transparent;
+  }
+
+  /* Service card hover effects */
   .service-card:hover {
-    border-color: var(--brand-highlight);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-highlight) 20%, transparent);
+    transform: translateY(-2px);
   }
 
-  .service-icon {
-    background: var(--brand-tertiary);
-    color: var(--brand-secondary);
+  /* Tab content positioning */
+  .tab-content-wrapper {
+    position: relative;
+    min-height: 400px;
   }
 
-  .service-card:hover .service-icon {
-    background: var(--brand-highlight);
-    color: #1a1a1a;
+  .tab-content-panel {
+    width: 100%;
   }
 
-  .service-arrow {
-    background: var(--brand-tertiary);
-    color: var(--brand-secondary);
+  .tab-content-panel:not([style*="opacity: 1"]) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 
-  .service-card:hover .service-arrow {
-    background: var(--brand-highlight);
-    color: #1a1a1a;
-    transform: translate(4px, -4px);
+  /* Responsive adjustments */
+  @media (max-width: 1023px) {
+    .image-container {
+      clip-path: none;
+    }
+    
+    .tab-content-panel:not([style*="opacity: 1"]) {
+      position: static;
+      opacity: 0 !important;
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .tab-content-panel[style*="opacity: 1"] {
+      height: auto;
+    }
   }
 
-  .service-card:hover h3 {
-    color: var(--brand-secondary);
+  @media (max-width: 640px) {
+    .service-tab {
+      min-width: 100px;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
   }
 </style>
 
 <script>
   // Tab switching functionality
-  const tabs = document.querySelectorAll<HTMLElement>('.service-tab');
-  const contents = document.querySelectorAll<HTMLElement>('.service-content');
+  function initServiceTabs() {
+    const tabs = document.querySelectorAll<HTMLElement>('.service-tab');
+    const contentPanels = document.querySelectorAll<HTMLElement>('.tab-content-panel');
+    const tabImages = document.querySelectorAll<HTMLElement>('.tab-image-wrapper');
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const tabIndex = tab.getAttribute('data-tab');
-      
-      // Update active states
-      tabs.forEach((t) => t.setAttribute('data-active', 'false'));
-      tab.setAttribute('data-active', 'true');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        
+        // Update active states for tabs
+        tabs.forEach((t) => t.setAttribute('data-active', 'false'));
+        tab.setAttribute('data-active', 'true');
 
-      // Show corresponding content
-      contents.forEach((content) => {
-        const contentIndex = content.getAttribute('data-content');
-        if (contentIndex === tabIndex) {
-          content.style.opacity = '1';
-          content.style.pointerEvents = 'auto';
-        } else {
-          content.style.opacity = '0';
-          content.style.pointerEvents = 'none';
-        }
+        // Show corresponding content panel
+        contentPanels.forEach((panel) => {
+          const contentId = panel.getAttribute('data-content');
+          if (contentId === tabId) {
+            panel.style.opacity = '1';
+            panel.style.transform = 'translateY(0)';
+            panel.style.position = 'static';
+            panel.style.pointerEvents = 'auto';
+          } else {
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(20px)';
+            panel.style.position = 'absolute';
+            panel.style.pointerEvents = 'none';
+          }
+        });
+
+        // Switch featured image
+        tabImages.forEach((img) => {
+          const imageTabId = img.getAttribute('data-tab-image');
+          if (imageTabId === tabId) {
+            img.style.opacity = '1';
+          } else {
+            img.style.opacity = '0';
+          }
+        });
       });
     });
-  });
+  }
+
+  // Initialize on load and page transitions
+  initServiceTabs();
+  document.addEventListener('astro:page-load', initServiceTabs);
 
   // Scroll animations
   const observerOptions = {

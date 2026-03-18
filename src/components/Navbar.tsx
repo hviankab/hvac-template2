@@ -13,23 +13,23 @@ import { siteConfig } from "@/config/site"
 /* ─── Top utility bar ─── */
 function UtilityBar() {
   return (
-    <div className="hidden lg:block text-white text-xs" style={{backgroundColor: "#341C1C"}}>
-      <div className="container mx-auto px-6 flex items-center justify-between h-9">
+    <div className="hidden lg:block text-white text-sm" style={{backgroundColor: "#341C1C"}}>
+      <div className="container mx-auto px-6 flex items-center justify-between h-12">
         {/* Left: social icons */}
-        <div className="flex items-center gap-3">
-          <a href={siteConfig.social.facebook || "#"} aria-label="Facebook" className="hover:text-brand-secondary transition-colors"><Facebook className="w-3.5 h-3.5" /></a>
-          <a href={siteConfig.social.twitter || "#"} aria-label="Twitter" className="hover:text-brand-secondary transition-colors"><Twitter className="w-3.5 h-3.5" /></a>
-          <a href={siteConfig.social.youtube || "#"} aria-label="YouTube" className="hover:text-brand-secondary transition-colors"><Youtube className="w-3.5 h-3.5" /></a>
-          <a href={siteConfig.social.instagram || "#"} aria-label="Instagram" className="hover:text-brand-secondary transition-colors"><Instagram className="w-3.5 h-3.5" /></a>
+        <div className="flex items-center gap-4">
+          <a href={siteConfig.social.facebook || "#"} aria-label="Facebook" className="hover:text-brand-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
+          <a href={siteConfig.social.twitter || "#"} aria-label="Twitter" className="hover:text-brand-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
+          <a href={siteConfig.social.youtube || "#"} aria-label="YouTube" className="hover:text-brand-secondary transition-colors"><Youtube className="w-5 h-5" /></a>
+          <a href={siteConfig.social.instagram || "#"} aria-label="Instagram" className="hover:text-brand-secondary transition-colors"><Instagram className="w-5 h-5" /></a>
         </div>
         {/* Right: location + email */}
-        <div className="flex items-center gap-6">
-          <span className="flex items-center gap-1.5 text-white/80">
-            <MapPin className="w-3.5 h-3.5 text-brand-secondary flex-shrink-0" />
+        <div className="flex items-center gap-8">
+          <span className="flex items-center gap-2 text-white/80">
+            <MapPin className="w-4 h-4 text-brand-secondary flex-shrink-0" />
             {siteConfig.location.fullAddress}
           </span>
-          <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-1.5 text-white/80 hover:text-brand-secondary transition-colors">
-            <Mail className="w-3.5 h-3.5 text-brand-secondary flex-shrink-0" />
+          <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2 text-white/80 hover:text-brand-secondary transition-colors">
+            <Mail className="w-4 h-4 text-brand-secondary flex-shrink-0" />
             {siteConfig.contact.email}
           </a>
         </div>
@@ -54,8 +54,8 @@ function ServicesDropdown({ isActive, onHover, onLeave }: { isActive: boolean; o
     <div className="relative flex items-center" onMouseEnter={onHover} onMouseLeave={onLeave}>
       <button
         ref={btnRef}
-        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all nav-services-btn ${
-          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-600"
+        className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-base font-medium whitespace-nowrap transition-all nav-services-btn ${
+          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-900"
         }`}
         onMouseEnter={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}}
         onMouseLeave={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}}
@@ -130,7 +130,7 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
         ref={linkRef}
         href="/service-areas"
         className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all nav-areas-btn ${
-          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-600"
+          isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-900"
         }`}
         onMouseEnter={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}}
         onMouseLeave={e => { if (!isActive) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}}
@@ -160,7 +160,7 @@ function NavLink({ title, href }: { title: string; href: string }) {
   return (
     <a
       href={href}
-      className="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap text-gray-600 transition-all nav-pill-link"
+      className="px-4 py-1.5 rounded-full text-base font-medium whitespace-nowrap text-gray-900 transition-all nav-pill-link"
       onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#A9E5BB'; el.style.color = '#1a1a1a'; }}
       onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = ''; }}    >
       {title}
@@ -212,7 +212,7 @@ export function Navbar() {
 
             {/* Logo */}
             <a href="/" className="flex items-center flex-shrink-0" aria-label={`${siteConfig.business.name} - Home`}>
-              <img src={siteConfig.logo.src} alt={siteConfig.logo.alt} className="h-10 object-contain" height={40} decoding="async" loading="eager" />
+              <img src={siteConfig.logo.src} alt={siteConfig.logo.alt} className="h-16 object-contain" height={64} decoding="async" loading="eager" />
             </a>
 
             {/* Center pill nav */}
@@ -223,10 +223,10 @@ export function Navbar() {
               <NavLink title="Reviews" href="/reviews" />
               <ServiceAreasDropdown isActive={areasOpen} onHover={handleAreasHover} onLeave={handleAreasLeave} />
               <NavLink title="Contact Us" href="/contact" />
-              <a href="/maintenance-plan" className="nav-highlight-btn px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap bg-brand-secondary text-gray-900 transition-all">
+              <a href="/maintenance-plan" className="nav-highlight-btn px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap text-gray-900 transition-all">
                 Maintenance
               </a>
-              <a href="/financing" className="nav-highlight-btn px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap bg-brand-secondary text-gray-900 transition-all">
+              <a href="/financing" className="nav-highlight-btn px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap text-gray-900 transition-all">
                 Financing
               </a>
             </nav>
@@ -328,10 +328,10 @@ function MobileNav({ onClose }: { onClose: () => void }) {
       {/* Get Started CTA */}
       <div className="p-4 border-t border-gray-200 flex flex-col gap-3">
         <div className="flex gap-3">
-          <a href="/maintenance-plan" className="flex-1 flex items-center justify-center bg-brand-secondary text-gray-900 px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-highlight hover:text-white transition-all" onClick={onClose}>
+          <a href="/maintenance-plan" className="flex-1 flex items-center justify-center text-gray-900 px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-highlight hover:text-white transition-all" onClick={onClose}>
             Maintenance
           </a>
-          <a href="/financing" className="flex-1 flex items-center justify-center bg-brand-secondary text-gray-900 px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-highlight hover:text-white transition-all" onClick={onClose}>
+          <a href="/financing" className="flex-1 flex items-center justify-center text-gray-900 px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-highlight hover:text-white transition-all" onClick={onClose}>
             Financing
           </a>
         </div>

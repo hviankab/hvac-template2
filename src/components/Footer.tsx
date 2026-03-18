@@ -10,41 +10,26 @@ export function Footer() {
 
   const airConditioningServices = [
     { title: "AC Repair", href: "/air-conditioning/ac-repair" },
-    { title: "AC Tune-Up/ Maintenance", href: "/air-conditioning/ac-tune-up-maintenance" },
     { title: "AC Installation and Replacement", href: "/air-conditioning/ac-installation-replacement" },
-    { title: "Mini-Split Systems", href: "/air-conditioning/mini-split-systems" },
-    { title: "HVAC Brands", href: "/air-conditioning/hvac-brands" },
-    { title: "HVAC Warranties", href: "/air-conditioning/hvac-warranties" },
-    { title: "Thermostats", href: "/air-conditioning/thermostats" },
-  ]
-
-  const heatingServices = [
-    { title: "Furnace Repair", href: "/heating/furnace-repair" },
-    { title: "Furnace Tune Up/ Maintenance", href: "/heating/furnace-tune-up-maintenance" },
-    { title: "Furnace Installation and Replacement", href: "/heating/furnace-installation-replacement" },
-    { title: "Boilers Installation and Replacement", href: "/heating/boilers-installation-replacement" },
-  ]
-
-  const indoorAirQualityServices = [
-    { title: "Air Filtration Systems", href: "/indoor-air-quality/air-filtration-systems" },
-    { title: "Duct Cleaning and Sealing", href: "/indoor-air-quality/duct-cleaning-sealing" },
-    { title: "Duct Repair and Replacement", href: "/indoor-air-quality/duct-repair-replacement" },
-    { title: "Attic Insulation and Ventilation", href: "/indoor-air-quality/attic-insulation-ventilation" },
   ]
 
   const emergencyServices = [
     { title: "24/7 AC Repairs", href: "/emergency/24-7-ac-repairs" },
-    { title: "24/7 Heating and Cooling Repairs", href: "/emergency/24-7-heating-cooling-repairs" },
     { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs" },
+  ]
+
+  const commercialServices = [
+    { title: "HVAC Repair", href: "/commercial/hvac-repair" },
+    { title: "HVAC Installation", href: "/commercial/hvac-installation" },
   ]
 
   return (
     <footer className="bg-brand-primary text-white">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Us Column */}
-          <div className="lg:col-span-2">
+          <div>
             <h3 className="text-sm font-bold tracking-wide mb-4 flex items-center gap-2">
               <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
               CONTACT US
@@ -103,46 +88,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Heating Services Column */}
-          <div>
-            <h3 className="text-sm font-bold tracking-wide mb-4 flex items-center gap-2">
-              <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
-              HEATING SERVICES
-            </h3>
-            <ul className="space-y-2">
-              {heatingServices.map((service) => (
-                <li key={service.href}>
-                  <a
-                    href={service.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
-                  >
-                    {service.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Indoor Air Quality Services Column */}
-          <div>
-            <h3 className="text-sm font-bold tracking-wide mb-4 flex items-center gap-2">
-              <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
-              INDOOR AIR QUALITY SERVICES
-            </h3>
-            <ul className="space-y-2">
-              {indoorAirQualityServices.map((service) => (
-                <li key={service.href}>
-                  <a
-                    href={service.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
-                  >
-                    {service.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Emergency HVAC Services Column */}
           <div>
             <h3 className="text-sm font-bold tracking-wide mb-4 flex items-center gap-2">
@@ -151,6 +96,26 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               {emergencyServices.map((service) => (
+                <li key={service.href}>
+                  <a
+                    href={service.href}
+                    className="text-sm text-white/70 hover:text-white transition-colors"
+                  >
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Commercial HVAC Services Column */}
+          <div>
+            <h3 className="text-sm font-bold tracking-wide mb-4 flex items-center gap-2">
+              <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
+              COMMERCIAL HVAC SERVICES
+            </h3>
+            <ul className="space-y-2">
+              {commercialServices.map((service) => (
                 <li key={service.href}>
                   <a
                     href={service.href}

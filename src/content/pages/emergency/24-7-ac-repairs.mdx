@@ -10,6 +10,7 @@ import FAQSection from "@/components/sections/FAQSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 import CTAStrip from "@/components/sections/CTAStrip.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 
 <HeroPage
   title="24/7 AC Repairs"
@@ -24,6 +25,15 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
 <PlaceholderContentSection
   title="TO BE DETERMINED"
   subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+/>
+
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
 />
 
 <PromoTilesSection
@@ -75,10 +85,9 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   title="Related Services"
   variant="services"
   items={[
-    { title: "24/7 Heating and Cooling Repairs", href: "/emergency/24-7-heating-cooling-repairs", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp" },
     { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs", image: "https://plus.unsplash.com/premium_photo-1661963270682-4b4857b6cda2?q=80&w=1470&auto=format&fit=crop" },
     { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" },
-    { title: "AC Tune-Up / Maintenance", href: "/air-conditioning/ac-tune-up-maintenance", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" }
+    { title: "Commercial HVAC", href: "/commercial", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" }
   ]}
 />
 

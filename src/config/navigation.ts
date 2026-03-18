@@ -57,44 +57,7 @@ export const mainNavItems: MegaMenuItem[] = [
         icon: "snowflake",
         items: [
           { title: "AC Repair", href: "/air-conditioning/ac-repair" },
-          { title: "AC Tune-Up/ Maintenance", href: "/air-conditioning/ac-tune-up-maintenance" },
           { title: "AC Installation and Replacement", href: "/air-conditioning/ac-installation-replacement" },
-          { title: "Mini-Split Systems", href: "/air-conditioning/mini-split-systems" },
-          { title: "HVAC Brands", href: "/air-conditioning/hvac-brands" },
-          { title: "HVAC Warranties", href: "/air-conditioning/hvac-warranties" },
-          { title: "Thermostats", href: "/air-conditioning/thermostats" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Heating Services",
-    href: "/heating",
-    categories: [
-      {
-        title: "Heating Services",
-        icon: "flame",
-        items: [
-          { title: "Furnace Repair", href: "/heating/furnace-repair" },
-          { title: "Furnace Tune Up/ Maintenance", href: "/heating/furnace-tune-up-maintenance" },
-          { title: "Furnace Installation and Replacement", href: "/heating/furnace-installation-replacement" },
-          { title: "Boilers Installation and Replacement", href: "/heating/boilers-installation-replacement" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Indoor Air Quality",
-    href: "/indoor-air-quality",
-    categories: [
-      {
-        title: "Indoor Air Quality Services",
-        icon: "wind",
-        items: [
-          { title: "Air Filtration Systems", href: "/indoor-air-quality/air-filtration-systems" },
-          { title: "Duct Cleaning and Sealing", href: "/indoor-air-quality/duct-cleaning-sealing" },
-          { title: "Duct Repair and Replacement", href: "/indoor-air-quality/duct-repair-replacement" },
-          { title: "Attic Insulation and Ventilation", href: "/indoor-air-quality/attic-insulation-ventilation" },
         ],
       },
     ],
@@ -108,7 +71,6 @@ export const mainNavItems: MegaMenuItem[] = [
         icon: "alert",
         items: [
           { title: "24/7 AC Repairs", href: "/emergency/24-7-ac-repairs" },
-          { title: "24/7 Heating and Cooling Repairs", href: "/emergency/24-7-heating-cooling-repairs" },
           { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs" },
         ],
       },
@@ -123,9 +85,7 @@ export const mainNavItems: MegaMenuItem[] = [
         icon: "building",
         items: [
           { title: "HVAC Repair", href: "/commercial/hvac-repair" },
-          { title: "HVAC Maintenance", href: "/commercial/hvac-maintenance" },
           { title: "HVAC Installation", href: "/commercial/hvac-installation" },
-          { title: "HVAC Warranty", href: "/commercial/hvac-warranty" },
         ],
       },
     ],

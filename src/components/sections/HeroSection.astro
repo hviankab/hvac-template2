@@ -53,26 +53,26 @@ const {
 
       <!-- Left: content -->
       <div class="flex-1 min-w-0 lg:pr-8">
-        <div class="hero-eyebrow flex items-center gap-2 mb-4">
-          <img src="/images/fan.png" alt="" class="w-5 h-5 object-contain" aria-hidden="true" />
-          <p class="text-sm md:text-base font-semibold tracking-widest uppercase text-brand-secondary">
+        <div class="eyebrow">
+          <img src="/images/fan.png" alt="" aria-hidden="true" />
+          <p class="text-white">
             {eyebrow}
           </p>
         </div>
 
-        <h1 class="hero-h1 text-4xl md:text-6xl font-bold leading-tight text-white mb-6">
-          {title}&nbsp;<span class="hero-emphasis text-brand-secondary">{titleEmphasis}</span>
+        <h1 class="hero-h1 text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-7">
+          {title}&nbsp;<span class="hero-emphasis text-white">{titleEmphasis}</span>
         </h1>
 
-        <p class="hero-sub text-base md:text-lg text-white/80 mb-8 max-w-xl leading-relaxed">
+        <p class="hero-sub text-base md:text-xl text-white/80 mb-9 max-w-xl leading-relaxed">
           {subtitle}
         </p>
 
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/60 mb-4">
+        <p class="text-sm font-semibold uppercase tracking-widest text-white mb-5">
           Let's Talk About Your Project
         </p>
 
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <a
             href={buttonHref}
             class="hero-cta-btn inline-flex items-center gap-2 bg-brand-secondary text-gray-900 px-7 py-3.5 rounded-full font-semibold text-sm transition-all shadow-lg"
@@ -83,7 +83,7 @@ const {
             href={`tel:${siteConfig.contact.phone}`}
             class="inline-flex items-center gap-3 text-white transition-colors"
           >
-            <span class="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center flex-shrink-0">
+            <span class="w-11 h-11 rounded-full border-2 border-white/40 flex items-center justify-center flex-shrink-0">
               <img src="/images/headphones-with-mic.png" alt="" class="w-5 h-5 object-contain brightness-0 invert" aria-hidden="true" />
             </span>
             <span class="flex flex-col leading-tight">
@@ -97,8 +97,8 @@ const {
       <!-- Right: contact form -->
       <div class="w-full lg:w-[420px] flex-shrink-0">
         <div class="bg-white rounded-2xl shadow-2xl p-8">
-          <h3 class="text-xl font-bold text-gray-900 mb-1">Let's Book Your Call</h3>
-          <p class="text-sm text-gray-500 mb-6">Get a free consultation. No obligations.</p>
+          <h3 class="text-xl font-bold text-gray-900 mb-1.5">Let's Book Your Call</h3>
+          <p class="text-sm text-gray-500 mb-7">Get a free consultation. No obligations.</p>
 
           <form class="flex flex-col gap-4" action="/contact" method="POST">
             <div>
@@ -239,7 +239,7 @@ const {
     opacity: 1;
   }
 
-  .hero-eyebrow {
+  .eyebrow {
     animation: fadeUp 0.6s ease both;
   }
   .hero-h1 {

@@ -40,17 +40,17 @@ export const siteConfig = {
 
   // Logo
   logo: {
-    src: "/images/Whait-Logo-scaled-1-2048x626 (1).png",
+    src: "/images/download (94).avif",
     alt: "HVAC Logo",
   },
 
   // Social Media (optional)
   social: {
-    facebook: "",
-    instagram: "",
-    linkedin: "",
-    twitter: "",
-    youtube: "",
+    facebook: "https://facebook.com",
+    instagram: "https://instagram.com",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+    youtube: "https://youtube.com",
   },
 
   // SEO

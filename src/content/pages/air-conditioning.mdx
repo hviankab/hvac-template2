@@ -6,6 +6,7 @@ description: "Professional air conditioning services in {city} and surrounding a
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
 import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
 import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
@@ -32,7 +33,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
 <ContentSection
   badge="Expert HVAC Services"
   title="Professional Air Conditioning Services in {city} and Surrounding Areas"
-  description="Looking for reliable air conditioning services in {city}? {fullName} provides expert <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a>, <a href='/air-conditioning/ac-installation-replacement'><strong>installation</strong></a>, <a href='/air-conditioning/ac-tune-up-maintenance'><strong>maintenance</strong></a>, and replacement services for homes and businesses throughout the {city} area. Our certified technicians are equipped with the latest tools and training to handle all your cooling needs efficiently and affordably."
+  description="Looking for reliable air conditioning services in {city}? {fullName} provides expert <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a> and <a href='/air-conditioning/ac-installation-replacement'><strong>installation</strong></a> services for homes and businesses throughout the {city} area. Our certified technicians are equipped with the latest tools and training to handle all your cooling needs efficiently and affordably."
   features={[
     "Licensed and Insured Professionals",
     "Same-Day Service Available",
@@ -45,6 +46,15 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
     "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp"
   ]}
   imagePosition="left"
+/>
+
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
 />
 
 <ContentSectionAlt
@@ -75,9 +85,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   variant="services"
   items={[
     { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg" },
-    { title: "AC Tune-Up / Maintenance", href: "/air-conditioning/ac-tune-up-maintenance", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/12/AC-Repair-Services.webp" },
-    { title: "AC Installation and Replacement", href: "/air-conditioning/ac-installation-replacement", image: "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp" },
-    { title: "Thermostats", href: "/air-conditioning/thermostats", image: "https://www.askmoss.com/wp-content/uploads/2025/06/thermostat-repair-moss.jpg" }
+    { title: "AC Installation and Replacement", href: "/air-conditioning/ac-installation-replacement", image: "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp" }
   ]}
 />
 
@@ -113,11 +121,11 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   faqs={[
     {
       question: "What types of air conditioning systems do you service?",
-      answer: "We service all types of AC systems including central air conditioning, ductless <a href='/air-conditioning/mini-split-systems'><strong>mini-splits</strong></a>, window units, heat pumps, and <a href='/commercial'><strong>commercial HVAC systems</strong></a>. Our technicians are trained to work with all major <a href='/air-conditioning/hvac-brands'><strong>brands</strong></a>."
+      answer: "We service all types of AC systems including central air conditioning, ductless mini-splits, window units, heat pumps, and <a href='/commercial'><strong>commercial HVAC systems</strong></a>. Our technicians are trained to work with all major brands."
     },
     {
       question: "How often should I schedule AC maintenance?",
-      answer: "We recommend scheduling professional <a href='/air-conditioning/ac-tune-up-maintenance'><strong>AC maintenance</strong></a> at least once a year, ideally in the spring before the cooling season begins. Regular maintenance helps prevent breakdowns, improves efficiency, and extends the life of your system."
+      answer: "We recommend scheduling professional AC maintenance at least once a year, ideally in the spring before the cooling season begins. Regular maintenance helps prevent breakdowns, improves efficiency, and extends the life of your system."
     },
     {
       question: "Do you offer emergency AC repair services?",
@@ -132,39 +140,17 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   description="Beyond air conditioning, we offer a full range of heating, indoor air quality, emergency, and commercial HVAC services."
   categories={[
     {
-      title: "Heating Services",
-      services: [
-        { title: "Furnace Repair", description: "Fast and reliable furnace repair services", href: "/heating/furnace-repair" },
-        { title: "Furnace Tune-Up / Maintenance", description: "Keep your heating system running efficiently", href: "/heating/furnace-tune-up-maintenance" },
-        { title: "Furnace Installation and Replacement", description: "New furnace installations and upgrades", href: "/heating/furnace-installation-replacement" },
-        { title: "Boilers Installation and Replacement", description: "Expert boiler services for your home", href: "/heating/boilers-installation-replacement" }
-      ]
-    },
-    {
-      title: "Indoor Air Quality",
-      services: [
-        { title: "Air Filtration Systems", description: "Improve your home's air quality", href: "/indoor-air-quality/air-filtration-systems" },
-        { title: "Duct Cleaning and Sealing", description: "Clean and seal your ductwork", href: "/indoor-air-quality/duct-cleaning-sealing" },
-        { title: "Duct Repair and Replacement", description: "Fix or replace damaged ductwork", href: "/indoor-air-quality/duct-repair-replacement" },
-        { title: "Attic Insulation and Ventilation", description: "Optimize your home's insulation", href: "/indoor-air-quality/attic-insulation-ventilation" }
-      ]
-    },
-    {
       title: "Emergency HVAC Services",
       services: [
         { title: "24/7 AC Repairs", description: "Round-the-clock AC emergency repairs", href: "/emergency/24-7-ac-repairs" },
-        { title: "24/7 Heating and Cooling Repairs", description: "Emergency heating and cooling services", href: "/emergency/24-7-heating-cooling-repairs" },
-        { title: "24/7 Emergency Repairs", description: "Full emergency HVAC repair services", href: "/emergency/24-7-emergency-repairs" },
-        { title: "Same-Day Service", description: "Fast response when you need it most", href: "/emergency" }
+        { title: "24/7 Emergency Repairs", description: "Full emergency HVAC repair services", href: "/emergency/24-7-emergency-repairs" }
       ]
     },
     {
       title: "Commercial Services",
       services: [
         { title: "HVAC Repair", description: "Commercial HVAC repair services", href: "/commercial/hvac-repair" },
-        { title: "HVAC Maintenance", description: "Preventive commercial HVAC maintenance", href: "/commercial/hvac-maintenance" },
-        { title: "HVAC Installation", description: "New commercial HVAC installations", href: "/commercial/hvac-installation" },
-        { title: "HVAC Warranty", description: "Commercial HVAC warranty services", href: "/commercial/hvac-warranty" }
+        { title: "HVAC Installation", description: "New commercial HVAC installations", href: "/commercial/hvac-installation" }
       ]
     }
   ]}
@@ -182,7 +168,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
 
 <ServiceAreaSection
   title="Service Areas for HVAC Services in {city}"
-  description="We proudly serve homes and businesses across all {city} boroughs, providing expert <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a>, <a href='/air-conditioning/ac-installation-replacement'><strong>installation</strong></a>, and <a href='/air-conditioning/ac-tune-up-maintenance'><strong>maintenance</strong></a> services wherever you need us."
+  description="We proudly serve homes and businesses across all {city} boroughs, providing expert <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a> and <a href='/air-conditioning/ac-installation-replacement'><strong>installation</strong></a> services wherever you need us."
   areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
 
   buttonText="SERVICE AREAS"

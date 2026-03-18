@@ -5,6 +5,7 @@ description: "Build your career with {business}. Join our team of skilled profes
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 import JobOpeningsSection from "@/components/sections/JobOpeningsSection.astro"
 import CareersCTASection from "@/components/sections/CareersCTASection.astro"
 import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
@@ -48,12 +49,21 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
+/>
+
 <CareersCTASection
   title="Join the {business} Family Today!"
   description="If you're passionate about HVAC and want to be part of a team that values quality, integrity, and customer satisfaction, we want to hear from you. Submit your application today and take the first step toward a rewarding career."
   buttonText="APPLY TODAY"
   buttonHref="/contact"
-  image="https://ucarecdn.com/315825d3-5856-474f-8ac1-f793441976f7/-/preview/1000x666/"
+  image="/images/team.png"
 />
 
 <TestimonialsSection

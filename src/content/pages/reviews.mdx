@@ -5,6 +5,7 @@ description: "Read what our customers have to say about our HVAC services. Real 
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
 import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
@@ -84,7 +85,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
       initials: "JO",
       date: "3 months ago",
       rating: 5,
-      content: "We've used {business} for our restaurant for years. Their <a href='/commercial/hvac-maintenance'><strong>maintenance</strong></a> keeps us running without any hassle. Highly recommended."
+      content: "We've used {business} for our restaurant for years. Their maintenance keeps us running without any hassle. Highly recommended."
     },
     {
       name: "Patricia Gomez",
@@ -110,14 +111,22 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
+<CouponsSection
+  title="Specials and Offers"
+  coupons={[
+    { label: "First-Time Customers", discount: "$100 OFF", description: "Air Duct Cleaning for first-time customers only" },
+    { label: "Repair Special", discount: "$150 OFF", description: "Save $150 on Any Repair. Valid for repairs over $500" },
+    { label: "Maintenance", discount: "$25 OFF", description: "Your Furnace Tune-Up. Limited time offer" }
+  ]}
+/>
+
 <FinancingPlansSection
   title="Related Services"
   variant="services"
   items={[
     { title: "Air Conditioning Services", href: "/air-conditioning", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp" },
-    { title: "Heating Services", href: "/heating", image: "https://plus.unsplash.com/premium_photo-1661963270682-4b4857b6cda2?q=80&w=1470&auto=format&fit=crop" },
-    { title: "Indoor Air Quality Services", href: "/indoor-air-quality", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" },
-    { title: "Emergency HVAC Services", href: "/emergency", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" }
+    { title: "Emergency HVAC Services", href: "/emergency", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" },
+    { title: "Commercial Services", href: "/commercial", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Installation-Service.webp" }
   ]}
 />
 

@@ -1,5 +1,5 @@
 ---
-import { getLocationText } from "@/config/site"
+import { getLocationText, siteConfig } from "@/config/site"
 
 interface Coupon {
   icon?: string;
@@ -15,223 +15,317 @@ interface Props {
   title?: string;
   coupons: Coupon[];
   backgroundImage?: string;
+  variant?: string;
 }
 
 const {
   title: rawTitle = "Specials and Offers",
   coupons,
-  backgroundImage,
 } = Astro.props;
 
 const title = getLocationText(rawTitle);
 
-const centerIndex = Math.floor(coupons.length / 2);
-
-// Default background images if not provided
-const defaultBackgrounds = [
-  'https://johnh967.sg-host.com/wp-content/uploads/2024/12/AC-Repair-Services.webp',
-  'https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp',
-  'https://johnh967.sg-host.com/wp-content/uploads/slider/cache/3208844a78ae424ec0bfef8623738be2/HVAC-Repair-Banner.webp'
+// HVAC coupon data matching the reference design
+const hvacCoupons = [
+  {
+    category: "New Customers",
+    title: "Coupon",
+    subtitle: "Redeem & Save Today",
+    discount: "20% OFF",
+    description: "New Customer Discount. Cannot be combined with any other offer.",
+    expiry: "* Offer Expires: December 2026",
+    href: "/contact",
+    variant: "light"
+  },
+  {
+    category: "Free System Inspection",
+    title: "Coupon", 
+    subtitle: "Redeem & Save Today",
+    discount: "FREE",
+    description: "Complete HVAC System Inspection with any standard service call.",
+    expiry: "* Offer Expires: December 2026",
+    href: "/contact",
+    variant: "featured"
+  },
+  {
+    category: "Emergency Service",
+    title: "Coupon",
+    subtitle: "Redeem & Save Today", 
+    discount: "$50 OFF",
+    description: "Any Emergency Repair of $200 or More. Contact us now to get $50 Off today.",
+    expiry: "* Offer Expires: December 2026",
+    href: "/contact",
+    variant: "light"
+  }
 ];
 ---
 
-<section class="cpn-section py-20 md:py-28">
+<section class="coupons-section">
   <div class="container mx-auto px-4">
-    <div class="text-center mb-14" data-animate="fade-scale">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <span class="block w-10 h-1 rounded-full bg-brand-secondary"></span>
-        <span class="text-sm font-semibold uppercase tracking-widest text-brand-secondary">Limited Time</span>
-        <span class="block w-10 h-1 rounded-full bg-brand-secondary"></span>
-      </div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold">{title}</h2>
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Exclusive HVAC Offers
+      </h2>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Professional Service. Exceptional Savings.
+      </p>
     </div>
 
-    <div class="cpn-grid" data-animate-stagger>
-      {coupons.map((coupon, i) => {
-        const cardBg = coupon.backgroundImage || (i === centerIndex && backgroundImage) || defaultBackgrounds[i % defaultBackgrounds.length];
-        return (
-          <div
-            class:list={["cpn-card", { "cpn-card--featured": i === centerIndex }]}
-            style={`--cpn-bg: url('${cardBg}');`}
-            {...(i === centerIndex ? { "data-animate": "zoom-in" } : {})}
-          >
-            <div class="cpn-ribbon">
-              <span class="cpn-ribbon-text">NEW OFFER</span>
-            </div>
-
-            <div class="cpn-card-content">
-              <span class="cpn-label">{coupon.label}</span>
-              <div class="cpn-discount">{coupon.discount}</div>
-              <p class="cpn-desc">{coupon.description}</p>
-              <a
-                href={coupon.buttonHref || "/contact"}
-                class="cpn-btn"
-              >
-                {coupon.buttonText || "GET OFFER"}
-              </a>
-            </div>
+    <!-- Coupon Cards -->
+    <div class="coupons-grid">
+      {hvacCoupons.map((coupon, i) => (
+        <div class={`coupon-card coupon-${coupon.variant}`}>
+          <!-- Decorative Border -->
+          <div class="coupon-border"></div>
+          
+          <!-- Header -->
+          <div class="coupon-header">
+            <h3 class="coupon-category">{coupon.category}</h3>
+            <h4 class="coupon-title">{coupon.title}</h4>
+            <p class="coupon-subtitle">{coupon.subtitle}</p>
           </div>
-        );
-      })}
+          
+          <!-- Discount Badge -->
+          <div class="coupon-badge">
+            <span class="coupon-discount">{coupon.discount}</span>
+          </div>
+          
+          <!-- Content -->
+          <div class="coupon-content">
+            <p class="coupon-description">{coupon.description}</p>
+          </div>
+          
+          <!-- Footer -->
+          <div class="coupon-footer">
+            <p class="coupon-expiry">{coupon.expiry}</p>
+          </div>
+          
+          <!-- Decorative Circles -->
+          <div class="coupon-circles">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .cpn-section {
-    background: var(--background);
-  }
-
-  .cpn-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 72rem;
-    margin: 0 auto;
-    align-items: stretch;
-  }
-
-  .cpn-card {
+  .coupons-section {
+    background: 
+      linear-gradient(135deg, rgba(52, 28, 28, 0.65) 0%, rgba(52, 28, 28, 0.70) 100%),
+      url('https://ucarecdn.com/e390e204-5df9-4b50-97ad-8d0b54c2f9f5/complexairfiltersdiligentlypurifyindoorair.jpg') center/cover no-repeat;
+    padding: 5rem 0;
     position: relative;
-    border-radius: 1.25rem;
     overflow: hidden;
-    display: flex;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    background:
-      linear-gradient(160deg, color-mix(in srgb, var(--brand-secondary) 50%, transparent), color-mix(in srgb, var(--brand-secondary) 40%, black)),
-      var(--cpn-bg, none) center / cover no-repeat;
-    border: 2px dashed rgba(255, 255, 255, 0.5);
   }
-  .cpn-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
-  }
-
-  .cpn-card--featured {
-    background:
-      linear-gradient(160deg, color-mix(in srgb, var(--brand-secondary) 40%, transparent), color-mix(in srgb, var(--brand-secondary) 30%, black)),
-      var(--cpn-bg, none) center / cover no-repeat;
-    transform: scale(1.04);
-    z-index: 2;
-    box-shadow: 0 12px 40px color-mix(in srgb, var(--brand-secondary) 35%, transparent);
-  }
-  .cpn-card--featured:hover {
-    transform: scale(1.04) translateY(-6px);
-    box-shadow: 0 24px 60px color-mix(in srgb, var(--brand-secondary) 40%, transparent);
-  }
-
-  .cpn-ribbon {
+  
+  .coupons-section::before {
+    content: "";
     position: absolute;
-    top: 22px;
-    left: -35px;
-    background: linear-gradient(135deg, #3b82f6 0%, var(--brand-accent-secondary, #2264ac) 100%);
-    color: #fff;
-    padding: 8px 45px;
-    transform: rotate(-45deg);
-    box-shadow: 0 4px 14px rgba(34, 100, 172, 0.5);
-    z-index: 10;
-    border-top: 2px solid rgba(255, 255, 255, 0.35);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    inset: 0;
+    background: 
+      linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.25) 100%);
+    z-index: 1;
   }
 
-  .cpn-ribbon-text {
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
-
-  .cpn-card-content {
+  .container {
     position: relative;
     z-index: 2;
+  }
+
+  /* Grid */
+  .coupons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Card Base */
+  .coupon-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    min-height: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2.5rem 2rem;
-    width: 100%;
-    flex: 1;
   }
 
-  .cpn-label {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #fff;
-    padding: 0.4rem 1.25rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .coupon-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Featured Card */
+  .coupon-featured {
+    background: linear-gradient(135deg, #A9E5BB 0%, #8dd3c7 100%);
+    color: white;
+    transform: scale(1.15);
+  }
+
+  .coupon-featured:hover {
+    transform: scale(1.15) translateY(-8px);
+  }
+
+  .coupon-featured .coupon-category,
+  .coupon-featured .coupon-title,
+  .coupon-featured .coupon-subtitle,
+  .coupon-featured .coupon-description,
+  .coupon-featured .coupon-expiry {
+    color: #1e293b;
+  }
+
+  .coupon-featured .coupon-badge {
+    background: #1e293b;
+  }
+
+  .coupon-featured .coupon-discount {
+    color: white;
+  }
+
+  /* Decorative Border */
+  .coupon-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px dashed #cbd5e1;
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  .coupon-featured .coupon-border {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Header */
+  .coupon-header {
+    text-align: center;
     margin-bottom: 1.5rem;
   }
 
-  .cpn-discount {
-    font-family: 'Poppins', system-ui, sans-serif;
+  .coupon-category {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+  }
+
+  .coupon-title {
+    font-size: 2rem;
     font-weight: 700;
-    font-size: 3.5rem;
+    color: #E3170A;
+    margin-bottom: 0.25rem;
     line-height: 1;
-    color: #fff;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   }
 
-  .cpn-desc {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.88);
-    margin-bottom: 2rem;
+  .coupon-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Badge */
+  .coupon-badge {
+    background: #1e293b;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 1.5rem auto;
+    width: fit-content;
+  }
+
+  .coupon-discount {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+  }
+
+  /* Content */
+  .coupon-content {
     flex: 1;
-    display: flex;
-    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5rem;
   }
 
-  .cpn-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    color: var(--brand-secondary);
-    padding: 0.8rem 2.25rem;
-    border-radius: 9999px;
-    font-weight: 700;
+  .coupon-description {
     font-size: 0.95rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    color: #475569;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Footer */
+  .coupon-footer {
+    text-align: center;
     margin-top: auto;
   }
-  .cpn-btn:hover {
-    background: var(--brand-highlight);
-    color: #1a1a1a;
-    transform: scale(1.05);
-    box-shadow: 0 6px 24px color-mix(in srgb, var(--brand-highlight) 30%, transparent);
+
+  .coupon-expiry {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+    margin: 0;
   }
 
-  @media (max-width: 1024px) {
-    .cpn-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .cpn-card--featured {
-      transform: scale(1);
-    }
-    .cpn-card--featured:hover {
-      transform: translateY(-6px);
-    }
+  /* Decorative Circles */
+  .coupon-circles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 12px;
   }
-  @media (max-width: 640px) {
-    .cpn-grid {
-      grid-template-columns: 1fr;
+
+  .circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(45, 30, 47, 0.25);
+  }
+
+  .circle-1 {
+    top: -40px;
+    right: -40px;
+  }
+
+  .circle-2 {
+    bottom: -40px;
+    left: -40px;
+  }
+
+  .coupon-featured .circle {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .coupons-section {
+      padding: 3rem 0;
     }
-    .cpn-discount {
-      font-size: 2.75rem;
+    
+    .coupons-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .coupon-featured {
+      transform: none;
+    }
+    
+    .coupon-featured:hover {
+      transform: translateY(-8px);
     }
   }
 </style>
