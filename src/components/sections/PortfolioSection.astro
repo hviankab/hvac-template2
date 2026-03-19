@@ -3,62 +3,45 @@ interface Props {
   badge?: string;
   title: string;
   images?: string[];
+  links?: string[];
+  labels?: string[];
   columns?: number;
 }
 
-const { badge = "Portfolio", title, images = [], columns = 4 } = Astro.props;
+const { badge = "Portfolio", title, images = [], links = [], labels = [], columns = 3 } = Astro.props;
 
-// Split images into two rows: top row gets first 4, bottom row gets the rest
-const topRow = images.slice(0, 4);
-const bottomRow = images.slice(4);
+// Take only first 6 images for 2x3 grid
+const displayImages = images.slice(0, 6);
+const displayLinks = links.slice(0, 6);
+const displayLabels = labels.slice(0, 6);
 ---
 
 <section class="pf-section py-20 md:py-28">
   <div class="container mx-auto px-4">
     <div class="pf-header" data-animate="fade-scale">
-      <div class="pf-badge-row">
-        <span class="pf-accent-line"></span>
-        <span class="pf-badge">{badge}</span>
-        <span class="pf-accent-line"></span>
+      <div class="eyebrow justify-center">
+        <img src="/images/fan (2).png" alt="" aria-hidden="true" />
+        <span>{badge}</span>
       </div>
       <h2 class="pf-title">{title}</h2>
     </div>
 
-    {images.length > 0 ? (
-      <div class="pf-gallery">
-        <!-- Top row: 4 equal columns -->
-        <div class="pf-row pf-row--top" data-animate-stagger>
-          {topRow.map((img, i) => (
-            <div class="pf-item">
-              <img src={img} alt={`${title} - project ${i + 1}`} class="pf-img" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low" />
-              <div class="pf-hover">
-                <div class="pf-hover-content">
-                  <span class="pf-hover-label">Project {i + 1}</span>
-                </div>
+    {displayImages.length > 0 ? (
+      <div class="pf-gallery" data-animate-stagger>
+        {displayImages.map((img, i) => (
+          <a href={displayLinks[i] || '#'} class="pf-item">
+            <img src={img} alt={displayLabels[i] || `${title} - project ${i + 1}`} class="pf-img" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low" />
+            <div class="pf-hover">
+              <div class="pf-hover-content">
+                <span class="pf-hover-label">{displayLabels[i] || `Project ${i + 1}`}</span>
               </div>
             </div>
-          ))}
-        </div>
-
-        <!-- Bottom row: wider cards for remaining images -->
-        {bottomRow.length > 0 && (
-          <div class="pf-row pf-row--bottom" style={`--pf-bottom-count: ${bottomRow.length}`} data-animate-stagger>
-            {bottomRow.map((img, i) => (
-              <div class="pf-item">
-                <img src={img} alt={`${title} - project ${topRow.length + i + 1}`} class="pf-img" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low" />
-                <div class="pf-hover">
-                  <div class="pf-hover-content">
-                    <span class="pf-hover-label">Project {topRow.length + i + 1}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+          </a>
+        ))}
       </div>
     ) : (
-      <div class="pf-row pf-row--top" data-animate-stagger>
-        {Array.from({ length: 8 }).map((_, i) => (
+      <div class="pf-gallery" data-animate-stagger>
+        {Array.from({ length: 6 }).map((_, i) => (
           <div class="pf-item pf-item--placeholder">
             <span>Project {i + 1}</span>
           </div>
@@ -70,33 +53,12 @@ const bottomRow = images.slice(4);
 
 <style>
   .pf-section {
-    background: var(--background);
+    background: transparent;
   }
 
   .pf-header {
     text-align: center;
     margin-bottom: 3rem;
-  }
-
-  .pf-badge-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .pf-accent-line {
-    width: 2.5rem;
-    height: 3px;
-    border-radius: 2px;
-    background: var(--brand-secondary);
-  }
-  .pf-badge {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--brand-secondary);
   }
 
   .pf-title {
@@ -105,23 +67,9 @@ const bottomRow = images.slice(4);
   }
 
   .pf-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Rows */
-  .pf-row {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-  }
-
-  .pf-row--top {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .pf-row--bottom {
-    grid-template-columns: repeat(var(--pf-bottom-count, 4), 1fr);
   }
 
   /* Items */
@@ -129,10 +77,12 @@ const bottomRow = images.slice(4);
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     cursor: pointer;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.35s ease;
+    display: block;
+    text-decoration: none;
   }
   .pf-item:hover {
     box-shadow: 0 12px 32px color-mix(in srgb, var(--brand-secondary) 18%, transparent);
@@ -153,11 +103,12 @@ const bottomRow = images.slice(4);
   .pf-hover {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, color-mix(in srgb, var(--brand-secondary) 75%, transparent) 0%, transparent 60%);
+    background: rgba(0, 0, 0, 0.6);
     opacity: 0;
     transition: opacity 0.35s ease;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     padding: 1.25rem;
   }
   .pf-item:hover .pf-hover {
@@ -165,16 +116,17 @@ const bottomRow = images.slice(4);
   }
 
   .pf-hover-content {
-    transform: translateY(8px);
+    transform: scale(0.9);
     transition: transform 0.35s ease;
+    text-align: center;
   }
   .pf-item:hover .pf-hover-content {
-    transform: translateY(0);
+    transform: scale(1);
   }
 
   .pf-hover-label {
     color: #fff;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: 0.03em;
   }
@@ -192,17 +144,13 @@ const bottomRow = images.slice(4);
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .pf-row--top {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .pf-row--bottom {
+    .pf-gallery {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 640px) {
-    .pf-row--top,
-    .pf-row--bottom {
+    .pf-gallery {
       grid-template-columns: 1fr;
     }
     .pf-item {

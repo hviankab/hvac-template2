@@ -6,7 +6,6 @@ description: "Get in touch with {business} for fast, reliable HVAC solutions. Re
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContactFormSection from "@/components/sections/ContactFormSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
 <HeroPage
@@ -35,16 +34,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW"
-  buttonHref="/contact"
-  phoneLabel="Call or Text for Great Service"
-  borderColor="var(--brand-highlight)"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Service" },
-    { icon: "award", text: "Experienced and Certified Technician" }
-  ]}
-/>
+
 
 
 <ServiceAreaSection

@@ -7,7 +7,6 @@ import HeroPage from "@/components/sections/HeroPage.astro"
 import PricingPlansSection from "@/components/sections/PricingPlansSection.astro"
 import SignupBannerSection from "@/components/sections/SignupBannerSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
 <HeroPage
@@ -89,15 +88,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW"
-  buttonHref="/contact"
-  phoneLabel="Call or Text for Great Service"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Service" },
-    { icon: "award", text: "Experienced and Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   variant="compact"

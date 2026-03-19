@@ -4,6 +4,7 @@ import { getLocationText } from "@/config/site"
 
 interface Props {
   badge?: string;
+  eyebrow?: string;
   title: string;
   description: string;
   features?: string[];
@@ -12,96 +13,87 @@ interface Props {
   imagePosition?: "left" | "right";
   images?: string[];
   imageAlts?: string[];
+  certificationBadge?: string;
 }
 
 const {
   badge,
+  eyebrow = "WELCOME TO AIRTRONIX",
   title: rawTitle,
   description: rawDescription,
   features: rawFeatures = [],
-  buttonText,
-  buttonHref,
+  buttonText = "VIEW ALL SERVICES",
+  buttonHref = "/contact",
   imagePosition = "left",
   images = [],
   imageAlts = [],
+  certificationBadge = "Approved AC Repairing"
 } = Astro.props;
 
 const title = getLocationText(rawTitle);
 const description = getLocationText(rawDescription);
 const features = rawFeatures.map(getLocationText);
 
-const mainImage = images[0] || "";
-const isRight = imagePosition === "right";
+const technicianImage = images[0] || "/images/compagnons-yZmHFF-g-W0-unsplash.jpg";
+const customerImage = images[1] || "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg";
 ---
 
-<section class="cs-section py-20 md:py-28">
+<section class="content-section">
   <div class="container mx-auto px-4">
-    <div class={`cs-grid ${isRight ? "cs-grid--reversed" : ""}`}>
-
-      <!-- Image column -->
-      <div class="cs-image-col" data-animate={isRight ? "fade-left" : "fade-right"}>
-        <div class="cs-image-frame">
-          {mainImage ? (
-            <Image
-              src={mainImage}
-              alt={imageAlts[0] || title}
-              class="cs-image"
-              loading="lazy"
-              width={665}
-              height={499}
-              format="webp"
-              quality={75}
-              decoding="async"
+    <div class="content-grid">
+      
+      <!-- Left: Images Collage -->
+      <div class="image-column" data-animate="fade-right">
+        <div class="image-collage">
+          <!-- Top Right Image - Technician portrait -->
+          <div class="top-image">
+            <img 
+              src={technicianImage}
+              alt="HVAC Technician"
+              class="image-top"
             />
-          ) : (
-            <div class="cs-image-placeholder">
-              <span>Image</span>
-            </div>
-          )}
-
-          <!-- Floating stat badge -->
-          <div class="cs-stat-badge">
-            <span class="cs-stat-number">24/7</span>
-            <span class="cs-stat-label">Service</span>
+          </div>
+          
+          <!-- Bottom Left Image - Work detail -->
+          <div class="bottom-image">
+            <img 
+              src={customerImage}
+              alt="HVAC Service Work"
+              class="image-bottom"
+            />
           </div>
         </div>
-
-        <!-- Accent shape behind image -->
-        <div class="cs-accent-shape" aria-hidden="true"></div>
       </div>
 
-      <!-- Text column -->
-      <div class="cs-text-col" data-animate={isRight ? "fade-right" : "fade-left"} data-animate-delay="200">
-        {badge && (
-          <div class="cs-badge-row">
-            <span class="cs-accent-line"></span>
-            <span class="cs-badge">{badge}</span>
-          </div>
-        )}
+      <!-- Right: Content -->
+      <div class="text-column" data-animate="fade-left">
+        <div class="eyebrow">
+          <img src="/images/fan (2).png" alt="" aria-hidden="true" />
+          <span>{eyebrow}</span>
+        </div>
+        
+        <h2 class="section-title">{title}</h2>
+        
+        <p class="section-description" set:html={description} />
 
-        <h2 class="cs-title">{title}</h2>
-        <p class="cs-desc" set:html={description} />
+        <!-- Features Grid - 2 columns -->
+        <div class="features-grid">
+          {features.map((feature) => (
+            <div class="feature-item">
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span set:html={feature} />
+            </div>
+          ))}
+        </div>
 
-        {features.length > 0 && (
-          <div class="cs-features" data-animate-stagger>
-            {features.map((feature) => (
-              <div class="cs-feature">
-                <div class="cs-feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <span class="cs-feature-text" set:html={feature} />
-              </div>
-            ))}
-          </div>
-        )}
-
+        <!-- CTA Button -->
         {buttonText && buttonHref && (
-          <div class="cs-actions">
-            <a href={buttonHref} class="cs-btn">
+          <div class="cta-wrapper">
+            <a href={buttonHref} class="cta-button">
               {buttonText}
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -113,240 +105,193 @@ const isRight = imagePosition === "right";
 </section>
 
 <style>
-  .cs-section {
-    background: var(--background);
+  .content-section {
+    padding: 6rem 0;
+    background: white;
     overflow: hidden;
   }
 
-  /* Grid layout */
-  .cs-grid {
+  .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 5rem;
     align-items: center;
   }
-  .cs-grid--reversed .cs-image-col {
-    order: 2;
-  }
-  .cs-grid--reversed .cs-text-col {
-    order: 1;
-  }
 
-  /* ---- Image column ---- */
-  .cs-image-col {
+  /* ===== LEFT: Images Collage ===== */
+  .image-column {
     position: relative;
   }
 
-  .cs-image-frame {
+  .image-collage {
     position: relative;
-    z-index: 2;
-    border-radius: 1.25rem;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    height: 600px;
   }
 
-  .cs-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    aspect-ratio: 4 / 3;
-  }
-
-  .cs-image-placeholder {
-    aspect-ratio: 4 / 3;
-    background: var(--brand-tertiary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted-foreground);
-    font-size: 0.875rem;
-  }
-
-  /* Accent shape behind image */
-  .cs-accent-shape {
+  /* Top Right Image - Technician portrait */
+  .top-image {
     position: absolute;
-    bottom: -1.5rem;
-    right: -1.5rem;
+    top: 0;
+    right: 0;
     width: 60%;
-    height: 60%;
-    border-radius: 1.25rem;
-    background: var(--brand-secondary);
-    opacity: 0.08;
-    z-index: 1;
-  }
-  .cs-grid--reversed .cs-accent-shape {
-    right: auto;
-    left: -1.5rem;
+    z-index: 2;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
   }
 
-  /* Floating badge */
-  .cs-stat-badge {
-    position: absolute;
-    bottom: 1.25rem;
-    right: 1.25rem;
-    z-index: 3;
-    background: var(--brand-secondary);
-    color: #fff;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.875rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1;
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-secondary) 30%, transparent);
-    border: 2px solid var(--brand-highlight);
-  }
-  .cs-grid--reversed .cs-stat-badge {
-    right: auto;
-    left: 1.25rem;
-  }
-  .cs-stat-number {
-    font-size: 1.5rem;
-    font-weight: 800;
-    font-family: 'Poppins', system-ui, sans-serif;
-  }
-  .cs-stat-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.75;
-    margin-top: 0.15rem;
-  }
-
-  /* ---- Text column ---- */
-  .cs-text-col {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .cs-badge-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .cs-accent-line {
-    width: 2.5rem;
-    height: 3px;
-    border-radius: 2px;
-    background: var(--brand-highlight);
+  .image-top {
+    width: 100%;
+    height: auto;
     display: block;
+    object-fit: cover;
   }
-  .cs-badge {
-    font-size: 0.8rem;
+
+  /* Bottom Left Image - Work detail */
+  .bottom-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 65%;
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e2e8f0;
+  }
+
+  .image-bottom {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* ===== RIGHT: Text Column ===== */
+  .text-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--brand-secondary);
+    color: #1e293b;
+    line-height: 1.2;
+    margin: 0;
   }
 
-  .cs-title {
-    margin-bottom: 1.25rem;
-    color: var(--foreground);
-    line-height: 1.15;
-  }
-
-  .cs-desc {
-    font-size: 1.125rem;
+  .section-description {
+    font-size: 1rem;
     line-height: 1.75;
-    color: var(--muted-foreground);
-    margin-bottom: 2rem;
+    color: #64748b;
+    margin: 0;
   }
 
-  /* Features — 2-col grid */
-  .cs-features {
+  /* Features Grid - 2 columns */
+  .features-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    margin-bottom: 2.25rem;
+    margin-top: 1rem;
   }
 
-  .cs-feature {
+  .feature-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
-    background: var(--brand-tertiary);
-    border: 2px solid transparent;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .cs-feature:hover {
-    transform: translateY(-2px);
-    border-color: var(--brand-highlight);
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-secondary) 10%, transparent);
-  }
-
-  .cs-feature-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    background: var(--brand-secondary);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border: 2px solid var(--brand-highlight);
-  }
-
-  .cs-feature-text {
     font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--foreground);
+    color: #1e293b;
+    font-weight: 500;
   }
 
-  /* CTA button */
-  .cs-actions {
-    margin-top: 0.5rem;
+  .check-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #E3170A;
+    flex-shrink: 0;
   }
 
-  .cs-btn {
+  /* CTA Button */
+  .cta-wrapper {
+    margin-top: 1rem;
+  }
+
+  .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.875rem 2rem;
-    border-radius: 9999px;
-    background: var(--brand-secondary);
-    color: #fff;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: #F7B32B;
+    color: black;
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+    border-radius: 50px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(247, 179, 43, 0.25);
+    border: 1px solid #F7B32B;
   }
-  .cs-btn:hover {
-    background: var(--brand-highlight);
-    color: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-highlight) 30%, transparent);
+
+  .cta-button:hover {
+    background: #A9E5BB;
+    color: black;
+    border-color: #A9E5BB;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(169, 229, 187, 0.3);
   }
-  .cs-btn svg {
+
+  .arrow-icon {
+    width: 1rem;
+    height: 1rem;
     transition: transform 0.3s ease;
   }
-  .cs-btn:hover svg {
+
+  .cta-button:hover .arrow-icon {
     transform: translateX(4px);
   }
 
-  /* ---- Responsive ---- */
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
-    .cs-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+    .content-section {
+      padding: 3rem 0;
     }
-    .cs-grid--reversed .cs-image-col {
-      order: 0;
+
+    .image-collage {
+      height: 400px;
     }
-    .cs-grid--reversed .cs-text-col {
-      order: 0;
+
+    .top-image {
+      width: 65%;
     }
-    .cs-features {
-      grid-template-columns: 1fr;
+
+    .bottom-image {
+      width: 70%;
     }
-    .cs-accent-shape {
-      display: none;
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-description {
+      font-size: 0.95rem;
     }
   }
 </style>

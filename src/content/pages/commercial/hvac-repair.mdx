@@ -9,7 +9,6 @@ import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
 
 <HeroPage
@@ -18,7 +17,7 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
   backgroundImage="https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg"
-  image="/images/bg2.jpg"
+  image="/images/technician.png"
   imageAlt="Commercial HVAC repair technician"
 />
 
@@ -91,15 +90,7 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW!"
-  buttonHref="/contact"
-  phoneLabel="CALL OR TEXT FOR GREAT SERVICE"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Services" },
-    { icon: "award", text: "Experienced and Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   title="Service Areas for Commercial HVAC Services in {city}"

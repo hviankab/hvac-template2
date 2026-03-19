@@ -9,7 +9,6 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
 import JobOpeningsSection from "@/components/sections/JobOpeningsSection.astro"
 import CareersCTASection from "@/components/sections/CareersCTASection.astro"
 import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
 <HeroPage
@@ -102,15 +101,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW"
-  buttonHref="/contact"
-  phoneLabel="Call or Text for Great Service"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Service" },
-    { icon: "award", text: "Experienced & Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   title="Expert HVAC Services in {city} and Surrounding Areas"

@@ -12,7 +12,6 @@ import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
 import ServicesSection from "@/components/sections/ServicesSection"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 
 <HeroPage
   title="Air Conditioning Services in {city}"
@@ -20,7 +19,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
   backgroundImage="https://f.hubspotusercontent40.net/hubfs/9492292/AdobeStock_290366802.jpeg"
-  image="/images/bg2.jpg"
+  image="/images/technician.png"
   imageAlt="AC service technician"
   trustIndicators={[
     "Licensed and Insured Professionals",
@@ -156,15 +155,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW!"
-  buttonHref="/contact"
-  phoneLabel="CALL OR TEXT FOR GREAT SERVICE"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Services" },
-    { icon: "award", text: "Experienced and Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   title="Service Areas for HVAC Services in {city}"

@@ -7,7 +7,6 @@ import HeroPage from "@/components/sections/HeroPage.astro"
 import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
 import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
 <HeroPage
@@ -15,7 +14,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   subtitle="Your Feedback Matters! Share Your Experience with Our HVAC Services"
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
-  backgroundImage="/images/bg2.jpg"
+  backgroundImage="/images/hvac-hero.jpg"
   image="https://images.pexels.com/photos/34069/pexels-photo.jpg"
   imageAlt="HVAC service background"
 />
@@ -130,15 +129,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW!"
-  buttonHref="/contact"
-  phoneLabel="CALL OR TEXT FOR GREAT SERVICE"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Services" },
-    { icon: "award", text: "Experienced and Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   title="Heating & Cooling Solutions in Your Area"

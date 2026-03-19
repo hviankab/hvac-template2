@@ -12,7 +12,6 @@ import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
 import FAQSection from "@/components/sections/FAQSection.astro"
 import ServicesSection from "@/components/sections/ServicesSection"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
 
 <HeroPage
   title="Emergency HVAC Services in {city}"
@@ -20,7 +19,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   buttonText="CALL NOW"
   buttonHref="/contact"
   backgroundImage="https://johnh967.sg-host.com/wp-content/uploads/2024/11/Emergency-HVAC-Service-Banner.webp"
-  image="/images/bg2.jpg"
+  image="/images/technician.png"
   imageAlt="Emergency HVAC service"
   trustIndicators={[
     "24/7 Emergency Service",
@@ -160,15 +159,7 @@ import CTAStrip from "@/components/sections/CTAStrip.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW!"
-  buttonHref="/contact"
-  phoneLabel="CALL OR TEXT FOR GREAT SERVICE"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Services" },
-    { icon: "award", text: "Experienced and Certified Technicians" }
-  ]}
-/>
+
 
 <ServiceAreaSection
   title="Service Areas for HVAC Services in {city}"

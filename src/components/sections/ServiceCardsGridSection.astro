@@ -26,7 +26,7 @@ interface Props {
 const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
 ---
 
-<section class="relative py-20 md:py-28 overflow-hidden" style="background-color: #f2f3f5;">
+<section class="relative py-12 md:py-16 pb-8 md:pb-10 overflow-hidden" style="background-color: #f7f7f7;">
   <!-- Subtle dotted pattern background -->
   <div class="absolute inset-0 opacity-20">
     <div class="absolute inset-0" style="background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px); background-size: 20px 20px;"></div>
@@ -34,108 +34,87 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
 
   <div class="container mx-auto px-4 relative z-10">
     <!-- Header -->
-    <div class="mb-16 text-center" data-animate="fade-up">
+    <div class="mb-12 text-center" data-animate="fade-up">
       <div class="eyebrow justify-center">
-        <img src="/images/fan.png" alt="" aria-hidden="true" />
+        <img src="/images/fan (2).png" alt="" aria-hidden="true" />
         <span>{badge}</span>
       </div>
       
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">{title}</h2>
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4 text-gray-900">
+        {title}
+      </h2>
       <p class="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto" set:html={description} />
     </div>
 
-    <!-- Main Content Area -->
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      
-      <!-- Left Side - Featured Image with Clean House Shape -->
-      <div class="relative order-2 lg:order-1" data-animate="fade-right">
-        <div class="relative">
-          <!-- Image container -->
-          <div class="relative overflow-hidden">
-            <!-- SVG clipPath definition for house shape -->
-            <svg width="0" height="0" class="absolute">
-              <defs>
-                <clipPath id="houseShape" clipPathUnits="objectBoundingBox">
-                  <polygon points="0.5,0 0.1,0.4 0.1,1 0.9,1 0.9,0.4" />
-                </clipPath>
-              </defs>
-            </svg>
-            
-            <div class="image-container relative h-96 md:h-[500px] lg:h-[600px]">
-              {tabs.map((tab, index) => (
-                <div 
-                  class={`tab-image-wrapper absolute inset-0 transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
-                  data-tab-image={tab.id}
-                >
-                  {tab.id === 'air-conditioning' ? (
-                    <!-- House-shaped image for air conditioning -->
-                    <div class="house-frame-container relative w-full h-full flex items-center justify-center">
-                      <img 
-                        src={tab.image} 
-                        alt={tab.heading}
-                        class="w-full h-full object-cover shadow-xl"
-                        style="clip-path: url(#houseShape);"
-                      />
-                    </div>
-                  ) : (
-                    <!-- Regular angled treatment for other tabs -->
-                    <img 
-                      src={tab.image} 
-                      alt={tab.heading}
-                      class="w-full h-full object-cover shadow-xl"
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+    <!-- Tab Navigation - Pill Container Style -->
+    <div class="mb-8 flex justify-center" data-animate="fade-up">
+      <div class="inline-flex items-center gap-2 p-2 bg-blue-50 rounded-full shadow-md overflow-x-auto max-w-full">
+        {tabs.map((tab, index) => (
+          <button
+            class="service-tab relative px-6 py-3 text-sm md:text-base font-medium transition-all duration-300 rounded-full whitespace-nowrap"
+            data-tab={tab.id}
+            data-active={index === 0 ? "true" : "false"}
+          >
+            {tab.title}
+          </button>
+        ))}
       </div>
+    </div>
 
-      <!-- Right Side - Content Panel -->
-      <div class="order-1 lg:order-2" data-animate="fade-left">
-        
-        <!-- Tab Navigation - Raised Pills -->
-        <div class="mb-8">
-          <div class="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
-            {tabs.map((tab, index) => (
-              <button
-                class="service-tab relative px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 min-w-[120px]"
-                data-tab={tab.id}
-                data-active={index === 0 ? "true" : "false"}
-              >
-                {tab.title}
-              </button>
-            ))}
-          </div>
-        </div>
+    <!-- Content Area: Image Left + Content Right -->
+    <div class="tab-content-wrapper">
+      {tabs.map((tab, tabIndex) => (
+        <div
+          class="tab-content-panel transition-all duration-500"
+          data-content={tab.id}
+          style={tabIndex === 0 ? "opacity: 1;" : "opacity: 0; position: absolute; pointer-events: none;"}
+        >
+          <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left: Featured Image -->
+            <div class="relative" data-animate="fade-right">
+              <div class="relative overflow-hidden rounded-lg shadow-lg border border-gray-200">
+                <div class="relative h-80 md:h-[400px] lg:h-[480px]">
+                  <img 
+                    src={tab.image} 
+                    alt={tab.heading}
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
 
-        <!-- Dynamic Content -->
-        <div class="tab-content-wrapper">
-          {tabs.map((tab, tabIndex) => (
-            <div
-              class="tab-content-panel transition-all duration-500"
-              data-content={tab.id}
-              style={tabIndex === 0 ? "opacity: 1; transform: translateY(0);" : "opacity: 0; transform: translateY(20px); position: absolute; pointer-events: none;"}
-            >
+            <!-- Right: Content -->
+            <div class="flex flex-col justify-center" data-animate="fade-left">
               <!-- Title -->
               <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">{tab.heading}</h3>
               
               <!-- Description -->
               <p class="text-gray-600 mb-8 leading-relaxed text-lg">{tab.description}</p>
 
-              <!-- Service Cards Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                {tab.services.map((service) => (
+              <!-- Service List with Alternating Icons -->
+              <div class="space-y-4 mb-8">
+                {tab.services.map((service, index) => (
                   <a 
                     href={service.href}
-                    class="service-card group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-secondary/30 transition-all duration-300"
+                    class="service-item group flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-all duration-300"
+                    data-no-yellow-hover
                   >
-                    <div class="flex flex-col items-center text-center">
-                      <div class="w-16 h-16 mb-4 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
-                        <span class="text-brand-secondary text-2xl" set:html={service.icon} />
-                      </div>
-                      <h4 class="font-semibold text-base text-gray-900 group-hover:text-brand-secondary transition-colors">{service.title}</h4>
+                    <!-- Alternating Fan and AC icons -->
+                    <div class="flex-shrink-0 w-6 h-6 mt-1">
+                      <img 
+                        src={index === 0 ? "/images/fan (1).png" : "/images/air-conditioning.png"} 
+                        alt="" 
+                        class="w-full h-full object-contain" 
+                      />
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="flex-1">
+                      <h4 class="service-title font-semibold text-lg text-gray-900 transition-colors mb-1">
+                        {service.title}
+                      </h4>
+                      <p class="text-gray-600 text-sm">Professional service with expert technicians and quality guarantee</p>
                     </div>
                   </a>
                 ))}
@@ -145,7 +124,7 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
               <div>
                 <a 
                   href={tab.buttonHref}
-                  class="inline-flex items-center px-8 py-4 bg-brand-secondary text-black font-semibold rounded-xl hover:bg-brand-highlight hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl"
+                  class="service-cta-button inline-flex items-center px-8 py-4 bg-brand-secondary text-black font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   {tab.buttonText}
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -154,54 +133,79 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
                 </a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  /* Tab styling - raised appearance */
+  /* Pill container tabs matching screenshot */
   .service-tab {
     color: #6b7280;
     background: transparent;
+    border: none;
     position: relative;
+    z-index: 1;
+  }
+
+  .service-tab:hover:not([data-active="true"]) {
+    color: #4b5563;
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .service-tab[data-active="true"] {
-    background: linear-gradient(135deg, #F7B32B 0%, #f59e0b 100%);
-    color: #1a1a1a;
-    box-shadow: 0 4px 12px rgba(247, 179, 43, 0.3);
-    transform: translateY(-1px);
+    color: white;
+    background: #1e3a8a;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
   }
 
-  .service-tab:not([data-active="true"]):hover {
-    background: #f9fafb;
-    color: #374151;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* CTA Button hover override */
+  .service-cta-button {
+    border: 1px solid #F7B32B;
   }
 
-  /* Image container angled treatment */
-  .image-container {
-    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+  .service-cta-button:hover {
+    background-color: #A9E5BB !important;
+    color: #000000 !important;
+    border-color: #A9E5BB !important;
   }
 
-  /* Clean house frame - no backgrounds */
-  .house-frame-container {
-    background: transparent;
+  /* Responsive tabs - horizontal scroll on mobile */
+  @media (max-width: 767px) {
+    .service-tab {
+      font-size: 0.875rem;
+      padding: 0.625rem 1.25rem;
+    }
   }
 
-  /* Service card hover effects */
-  .service-card:hover {
-    transform: translateY(-2px);
+  /* Service items - override global yellow hover */
+  a.service-item[data-no-yellow-hover] {
+    color: inherit !important;
+  }
+
+  a.service-item[data-no-yellow-hover]:hover {
+    color: inherit !important;
+  }
+
+  a.service-item[data-no-yellow-hover] .service-title {
+    color: #111827 !important;
+  }
+
+  a.service-item[data-no-yellow-hover]:hover .service-title {
+    color: #dc2626 !important;
+  }
+
+  a.service-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 
   /* Tab content positioning */
   .tab-content-wrapper {
     position: relative;
-    min-height: 400px;
+    min-height: 600px;
   }
 
   .tab-content-panel {
@@ -217,10 +221,6 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
 
   /* Responsive adjustments */
   @media (max-width: 1023px) {
-    .image-container {
-      clip-path: none;
-    }
-    
     .tab-content-panel:not([style*="opacity: 1"]) {
       position: static;
       opacity: 0 !important;
@@ -232,14 +232,6 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
       height: auto;
     }
   }
-
-  @media (max-width: 640px) {
-    .service-tab {
-      min-width: 100px;
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-    }
-  }
 </style>
 
 <script>
@@ -247,7 +239,6 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
   function initServiceTabs() {
     const tabs = document.querySelectorAll<HTMLElement>('.service-tab');
     const contentPanels = document.querySelectorAll<HTMLElement>('.tab-content-panel');
-    const tabImages = document.querySelectorAll<HTMLElement>('.tab-image-wrapper');
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
@@ -262,24 +253,12 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
           const contentId = panel.getAttribute('data-content');
           if (contentId === tabId) {
             panel.style.opacity = '1';
-            panel.style.transform = 'translateY(0)';
             panel.style.position = 'static';
             panel.style.pointerEvents = 'auto';
           } else {
             panel.style.opacity = '0';
-            panel.style.transform = 'translateY(20px)';
             panel.style.position = 'absolute';
             panel.style.pointerEvents = 'none';
-          }
-        });
-
-        // Switch featured image
-        tabImages.forEach((img) => {
-          const imageTabId = img.getAttribute('data-tab-image');
-          if (imageTabId === tabId) {
-            img.style.opacity = '1';
-          } else {
-            img.style.opacity = '0';
           }
         });
       });

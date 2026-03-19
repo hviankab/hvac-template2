@@ -5,14 +5,13 @@ description: "{business} - Expert heating and cooling services in {city} and sur
 
 import HeroSection from "@/components/sections/HeroSection.astro"
 import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
-import ServicesSection from "@/components/sections/ServicesSection"
-import MaintenancePlanSection from "@/components/sections/MaintenancePlanSection.astro"
-import FinancingSection from "@/components/sections/FinancingSection.astro"
 import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
-import CTAStrip from "@/components/sections/CTAStrip.astro"
+import FAQSection from "@/components/sections/FAQSection.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 
 <HeroSection
@@ -25,18 +24,23 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
 />
 
 <ContentSection
-  title="Dedicated to Your Comfort and Quality HVAC Service"
-  description="We are committed to delivering reliable, energy-efficient, and high-quality heating and cooling solutions for your home or business. Our certified technicians are equipped with modern tools and years of experience to ensure your HVAC system performs at its best. From <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a> to <a href='/emergency'><strong>emergency services</strong></a> and <a href='/commercial'><strong>commercial solutions</strong></a>, we handle it all."
+  eyebrow="WELCOME TO YOUR HVAC EXPERTS"
+  title="Air Conditioning Repair, Heating Service & Installation"
+  description="Bring comfort to your home with professional HVAC services. Our certified technicians provide reliable heating and cooling solutions with quality workmanship and exceptional customer service."
+  certificationBadge="Approved AC Repairing"
   features={[
-    "Fast and Reliable Service",
-    "Certified Technicians",
-    "Affordable Pricing",
-    "24/7 Emergency Support"
+    "Highly Professional Staff",
+    "Accurate Testing Process",
+    "100% Satisfaction Guarantee",
+    "Unrivalle Workmanship",
+    "Quality Control System",
+    "Timely Delivery"
   ]}
-  buttonText="Learn More About Our HVAC Services"
-  buttonHref="/about"
+  buttonText="VIEW ALL SERVICES"
+  buttonHref="/contact"
   images={[
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp"
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
   ]}
   imagePosition="left"
 />
@@ -121,63 +125,49 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<MaintenancePlanSection
-  eyebrow="Maintenance Plan"
-  title="Affordable HVAC Maintenance Plans to Keep Your System Running Efficiently Year-Round"
-  description="Regular <a href='/maintenance-plan'><strong>maintenance</strong></a> helps prevent costly breakdowns and extends the life of your HVAC system."
-  includedItems={[
-    { title: "Extend system lifespan", description: "Regular maintenance keeps your system running longer" },
-    { title: "Reduce energy bills", description: "Efficient systems use less energy and save you money" },
-    { title: "Improve air quality", description: "Clean filters and components mean cleaner air" },
-    { title: "Priority service scheduling", description: "Get fast-track service when you need it most" }
-  ]}
-  benefits={[
-    "Prevent unexpected breakdowns",
-    "Improve efficiency and lower utility bills",
-    "Extend the lifespan of your HVAC system",
-    "Gain peace of mind knowing your system is in expert hands"
-  ]}
-  buttonText="VIEW MAINTENANCE PLANS"
-  buttonHref="/maintenance-plan"
-/>
-
-
-<FinancingSection
-  title="Get a New HVAC System Without Breaking the Bank"
-  description="We offer flexible <a href='/financing'><strong>financing solutions</strong></a> to make HVAC upgrades more affordable."
-  paymentPlans={[
-    "Affordable Monthly Payments",
-    "Low Interest Rates",
-    "Quick Approval",
-    "Flexible Payment Options"
-  ]}
-  financingOptions={[
-    "New AC installations",
-    "Furnace replacements",
-    "Complete HVAC system upgrades",
-    "Emergency repairs and more"
-  ]}
+<OurProcessSection
+  eyebrow="OUR PROCESS"
+  title="We'll get the job done efficiently and professionally"
+  description="Our streamlined HVAC service process ensures your comfort is restored quickly with expert care and attention to detail."
   steps={[
-    { title: "Contact Us", description: "Contact us to discuss your HVAC needs" },
-    { title: "Choose a Plan", description: "Choose a plan and payment option that works for you" },
-    { title: "Enjoy Quality Service", description: "Enjoy high-quality HVAC service with affordable terms" }
+    {
+      step: "STEP 1",
+      icon: "/images/fan (1).png",
+      title: "Schedule Appointment",
+      description: "Contact us to schedule a convenient time for your HVAC service. We offer flexible scheduling to fit your busy lifestyle."
+    },
+    {
+      step: "STEP 2",
+      icon: "/images/heating.png",
+      title: "We Arrive Within 1 Hr",
+      description: "Our certified technicians arrive promptly with fully-stocked trucks, ready to diagnose and resolve your HVAC issues."
+    },
+    {
+      step: "STEP 3",
+      icon: "/images/air-conditioning.png",
+      title: "Solve Your Problem",
+      description: "We complete the repair or installation efficiently, test the system thoroughly, and ensure your complete satisfaction."
+    }
   ]}
-  buttonText="Apply Now"
-  buttonHref="/financing"
 />
 
-<PortfolioSection
-  badge="Portfolio"
-  title="Our Featured Works"
-  images={[
-    "https://johnh967.sg-host.com/wp-content/uploads/slider/cache/3208844a78ae424ec0bfef8623738be2/HVAC-Repair-Banner.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/12/AC-Repair-Services.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/12/Professional-24_7-Heating-and-Cooling-Repairs.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466578360_545600454753059_5640968860261965384_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466555884_570355772412079_4111747127252492406_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466796006_1587175318903711_6684948885555680268_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp"
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Assured Air Conditioner Services"
+  description="HVAC problems need no translation—our team of expert technicians provides care that's tailored to you. From emergency repairs to complete system installations, we deliver reliable heating and cooling solutions designed for your comfort."
+  badgeText="Expert HVAC Care"
+  badgeSubtext="Tailored to You"
+  image="/images/hvac.jpg"
+  services={[
+    { text: "Air conditioning Service" },
+    { text: "Airconditioning Installation" },
+    { text: "Air Conditioning maintenance" },
+    { text: "Heating replacement" },
+    { text: "Heating Services" },
+    { text: "Heating installation" },
+    { text: "Heating maintenance" },
+    { text: "HVAC repair 7 emergency service" },
+    { text: "Air conditioning replacement" }
   ]}
 />
 
@@ -273,13 +263,64 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<CTAStrip
-  buttonText="SCHEDULE NOW"
-  buttonHref="/contact"
-  phoneLabel="Call or Text for Great Service"
-  features={[
-    { icon: "siren", text: "24/7 Emergency Service" },
-    { icon: "award", text: "Experienced & Certified Technicians" }
+<PortfolioSection
+  badge="GALLERY"
+  title="See Our Quality Work"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/meticulous-wiremen-expertly-refilling-freon-external-air-conditioner-while-using-manifold-measurement-device-closely-measure-pressure-hvac-system-ensuring-perfect-cooling-performance.jpg"
+  ]}
+  links={[
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs"
+  ]}
+  labels={[
+    "AC Repair",
+    "AC Installation & Replacement",
+    "Commercial HVAC Repair",
+    "Commercial HVAC Installation",
+    "24/7 AC Repairs",
+    "24/7 Emergency Repairs"
+  ]}
+/>
+
+<FAQSection
+  badge="FAQ"
+  title="Frequently Asked Questions"
+  description="Find answers to common questions about our HVAC services, pricing, and maintenance plans."
+  faqs={[
+    {
+      question: "How often should I service my HVAC system?",
+      answer: "We recommend servicing your HVAC system at least twice a year - once before the cooling season and once before the heating season. Regular maintenance helps prevent breakdowns, improves efficiency, and extends the life of your system."
+    },
+    {
+      question: "What are signs that my AC needs repair?",
+      answer: "Common signs include weak airflow, warm air blowing from vents, unusual noises, strange odors, frequent cycling, high energy bills, and moisture or leaks around the unit. If you notice any of these issues, contact us for a professional inspection."
+    },
+    {
+      question: "How long does an HVAC system typically last?",
+      answer: "With proper maintenance, a well-installed HVAC system can last 15-20 years. However, factors like usage, maintenance frequency, and local climate can affect lifespan. Regular tune-ups can help maximize your system's longevity."
+    },
+    {
+      question: "Do you offer emergency HVAC services?",
+      answer: "Yes! We provide 24/7 emergency HVAC services for urgent heating and cooling issues. Whether it's a broken AC in summer or a failed heater in winter, our technicians are ready to help restore your comfort quickly."
+    },
+    {
+      question: "What size HVAC system do I need for my home?",
+      answer: "The right size depends on factors like your home's square footage, insulation, ceiling height, number of windows, and local climate. Our technicians perform detailed load calculations to recommend the perfect system size for optimal efficiency and comfort."
+    },
+    {
+      question: "Do you offer financing options?",
+      answer: "Yes, we offer flexible financing options to make HVAC repairs, replacements, and installations more affordable. Contact us to learn about our current financing plans and find one that fits your budget."
+    }
   ]}
 />
 
