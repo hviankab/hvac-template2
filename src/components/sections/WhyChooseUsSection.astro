@@ -1,0 +1,260 @@
+---
+interface Service {
+  text: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  badgeText?: string;
+  badgeSubtext?: string;
+  image?: string;
+  services: Service[];
+}
+
+const {
+  eyebrow = "WHY CHOOSE US",
+  title,
+  description,
+  badgeText = "Trusted by",
+  badgeSubtext = "9800+ happy customers",
+  image = "/images/technician.png",
+  services
+} = Astro.props;
+---
+
+<section class="why-choose-section">
+  <div class="content-wrapper">
+    
+    <!-- Left: Full-height Image with Badge -->
+    <div class="image-column" data-animate="fade-right">
+      <img 
+        src={image}
+        alt="HVAC Technician at work"
+        class="technician-image"
+      />
+      
+      <!-- Trust Badge -->
+      <div class="trust-badge">
+        <div class="badge-text">
+          <div class="badge-title">{badgeText}</div>
+          <div class="badge-subtitle">{badgeSubtext}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Content -->
+    <div class="text-column" data-animate="fade-left">
+      <div class="text-content">
+        <div class="eyebrow">
+          <img src="/images/fan (2).png" alt="" aria-hidden="true" />
+          <span>{eyebrow}</span>
+        </div>
+        
+        <h2 class="section-title">{title}</h2>
+        
+        <p class="section-description">{description}</p>
+
+        <!-- Services Grid - 2 columns -->
+        <div class="services-grid">
+          {services.map((service) => (
+            <div class="service-item">
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{service.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose-section {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle pattern overlay */
+  .why-choose-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== LEFT: Full-height Image Column ===== */
+  .image-column {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .technician-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Trust Badge */
+  .trust-badge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: #E3170A;
+    color: white;
+    padding: 1.5rem 1.75rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(227, 23, 10, 0.4);
+    z-index: 10;
+  }
+
+  .badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .badge-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* ===== RIGHT: Text Column ===== */
+  .text-column {
+    display: flex;
+    align-items: center;
+    padding: 5rem 4rem;
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+  }
+
+  /* Eyebrow uses global styling from global.css, just keep icon white for dark background */
+  .eyebrow img {
+    filter: brightness(0) invert(1);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  /* Services Grid - 2 columns */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 500;
+  }
+
+  .check-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #A9E5BB;
+    flex-shrink: 0;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .image-column {
+      min-height: 400px;
+    }
+
+    .text-column {
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .image-column {
+      min-height: 300px;
+    }
+
+    .text-column {
+      padding: 2rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-description {
+      font-size: 0.95rem;
+    }
+
+    .trust-badge {
+      top: 1rem;
+      right: 1rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .badge-title {
+      font-size: 0.75rem;
+    }
+
+    .badge-subtitle {
+      font-size: 0.875rem;
+    }
+  }
+</style>
