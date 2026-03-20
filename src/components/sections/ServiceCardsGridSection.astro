@@ -94,7 +94,7 @@ const { badge = "OUR SERVICES", title, description, tabs } = Astro.props;
 
               <!-- Service List with Alternating Icons -->
               <div class="space-y-4 mb-8">
-                {tab.services.map((service, index) => (
+                {tab.services && tab.services.map((service, index) => (
                   <a 
                     href={service.href}
                     class="service-item group flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-all duration-300"

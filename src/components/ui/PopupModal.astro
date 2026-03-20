@@ -16,7 +16,7 @@ const {
 
 <div
   id="popup-modal"
-  class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto"
+  class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/70 backdrop-blur-sm overflow-y-auto"
   role="dialog"
   aria-modal="true"
   aria-labelledby="popup-title"
@@ -25,90 +25,76 @@ const {
   data-trigger-id={triggerId}
 >
   <div class="popup-wrapper animate-scale-in">
-    <!-- Offer sticker overlay (outside container to avoid overflow clip) -->
-    <img
-      src="/images/offer.png"
-      alt="Special offer"
-      class="popup-sticker"
-      width="160"
-      height="160"
-      loading="lazy"
-      decoding="async"
-    />
-
-  <div class="popup-container">
-
-    <!-- Close button -->
-    <button
-      id="close-popup"
-      class="popup-close"
-      aria-label="Close popup"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-
-    <!-- Top: Full-width gradient banner -->
-    <div class="popup-banner">
-      <div class="popup-banner-bg"></div>
+    <div class="popup-container">
+      
+      <!-- Background Image -->
       <img
-        src="/images/team.png"
-        alt="Professional HVAC team"
-        class="popup-banner-img"
-        width="480"
-        height="320"
+        src="/images/popup.jpg"
+        alt="HVAC Service"
+        class="popup-bg-image"
         loading="lazy"
         decoding="async"
       />
-      <div class="popup-banner-content">
-        <span class="popup-eyebrow">Limited Time Offer</span>
-        <div class="popup-discount">
-          <span class="popup-dollar">$</span>50
-          <span class="popup-off">OFF</span>
+      
+      <!-- Overlay -->
+      <div class="popup-overlay"></div>
+
+      <!-- Close button -->
+      <button
+        id="close-popup"
+        class="popup-close"
+        aria-label="Close popup"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Content -->
+      <div class="popup-content">
+        <h2 id="popup-title" class="popup-title">
+          GET ON THE LIST
+        </h2>
+        
+        <div class="popup-divider"></div>
+        
+        <p class="popup-description">
+          Sign up for our emails and be the first to know about<br/>
+          new arrivals, exclusives and promotions, plus
+        </p>
+        
+        <div class="popup-offer-section">
+          <span class="popup-enjoy">ENJOY</span>
+          <div class="popup-discount-large">
+            $50
+          </div>
+          <span class="popup-off-text">OFF</span>
+          <p class="popup-purchase-text">YOUR PURCHASE*</p>
         </div>
-        <p class="popup-qualifier">Any service over $500</p>
+
+        <!-- Email Input -->
+        <form class="popup-form">
+          <input
+            type="email"
+            placeholder="Your Email Address"
+            class="popup-email-input"
+            required
+          />
+          
+          <button type="submit" class="popup-submit-btn">
+            UNLOCK OFFER
+          </button>
+        </form>
+
+        <button id="close-popup-bottom" class="popup-continue">
+          CONTINUE TO SITE
+        </button>
+
+        <p class="popup-disclaimer">
+          *Valid for new customers and online only
+        </p>
       </div>
-      <!-- Decorative circles -->
-      <div class="popup-circle popup-circle-1"></div>
-      <div class="popup-circle popup-circle-2"></div>
     </div>
-
-    <!-- Bottom: Content area -->
-    <div class="popup-body">
-      <h2 id="popup-title" class="popup-heading">
-        Your Comfort<br/>Can't Wait
-      </h2>
-      <p class="popup-subtext">
-        Expert HVAC service, 24/7 emergency response, and financing options available.
-      </p>
-
-      <!-- Trust indicators as inline pills -->
-      <div class="popup-pills">
-        <span class="popup-pill">✓ Licensed & Insured</span>
-        <span class="popup-pill">✓ 24/7 Available</span>
-        <span class="popup-pill">✓ 5-Star Rated</span>
-      </div>
-
-      <!-- CTA stack -->
-      <div class="popup-actions">
-        <a href="/contact" class="popup-btn-primary">
-          Claim Your Discount
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </a>
-        <a href={`tel:${siteConfig.contact.phone}`} class="popup-btn-phone">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          {siteConfig.contact.phoneFormatted}
-        </a>
-      </div>
-
-      <button id="close-popup-bottom" class="popup-dismiss">No thanks, maybe later</button>
-    </div>
-  </div>
   </div>
 </div>
 
@@ -148,7 +134,7 @@ const {
     if (triggerId) {
       document.getElementById(triggerId)?.addEventListener("click", (e) => {
         e.preventDefault();
-        showPopup();
+        showPopup(true);
       });
     }
 
@@ -163,72 +149,33 @@ const {
 
 <style>
   @keyframes scale-in {
-    from { opacity: 0; transform: scale(0.92) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
   .animate-scale-in {
-    animation: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .popup-wrapper {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 1rem;
-  }
-
-  .popup-sticker {
-    position: absolute;
-    top: 7rem;
-    left: -3rem;
-    width: 180px;
-    height: 180px;
-    z-index: 40;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.4));
-    transform: rotate(-10deg);
-    pointer-events: none;
   }
 
   .popup-container {
     position: relative;
     width: 100%;
+    min-height: 550px;
     border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   }
 
-  .popup-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 30;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .popup-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-  }
-
-  /* === Banner === */
-  .popup-banner {
-    position: relative;
-    padding: 2rem 2rem 1.75rem;
-    overflow: hidden;
-    text-align: center;
-  }
-  .popup-banner-img {
+  .popup-bg-image {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -236,218 +183,187 @@ const {
     object-fit: cover;
     z-index: 0;
   }
-  .popup-banner-bg {
+
+  .popup-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--brand-secondary) 85%, transparent) 0%, color-mix(in srgb, var(--brand-secondary) 50%, black) 60%, color-mix(in srgb, var(--brand-secondary) 30%, black) 100%);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
-  .popup-banner-content {
+
+  .popup-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 30;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .popup-close:hover {
+    transform: scale(1.1);
+  }
+
+  .popup-content {
     position: relative;
     z-index: 2;
-  }
-
-  .popup-eyebrow {
-    display: inline-block;
-    background: color-mix(in srgb, var(--brand-highlight) 20%, transparent);
-    border: 1px solid color-mix(in srgb, var(--brand-highlight) 50%, transparent);
-    color: var(--brand-highlight);
-    padding: 0.35rem 1.25rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 1.25rem;
-  }
-
-  .popup-discount {
-    font-family: 'Poppins', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 5rem;
-    line-height: 0.9;
-    color: #fff;
-    letter-spacing: -0.03em;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  .popup-dollar {
-    font-size: 3rem;
-    vertical-align: super;
-    margin-right: -0.1em;
-    color: var(--brand-highlight);
-  }
-  .popup-off {
-    display: block;
-    font-size: 2.25rem;
-    letter-spacing: 0.15em;
-    opacity: 0.85;
-    margin-top: -0.2rem;
-  }
-
-  .popup-qualifier {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-  }
-
-  /* Decorative circles */
-  .popup-circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 1;
-  }
-  .popup-circle-1 {
-    width: 200px;
-    height: 200px;
-    top: -60px;
-    right: -40px;
-    background: rgba(255, 255, 255, 0.04);
-  }
-  .popup-circle-2 {
-    width: 140px;
-    height: 140px;
-    bottom: -30px;
-    left: -30px;
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  /* === Body === */
-  .popup-body {
-    background: var(--card);
-    padding: 1.5rem 2rem 1.5rem;
+    padding: 2.5rem 2.5rem 2rem;
     text-align: center;
-    border-top: 3px solid var(--brand-highlight);
+    color: white;
   }
 
-  .popup-heading {
-    font-family: 'Poppins', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1.15;
-    color: var(--foreground);
-    margin-bottom: 0.35rem;
+  .popup-title {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    color: white;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
   }
 
-  .popup-subtext {
+  .popup-divider {
+    width: 70px;
+    height: 2px;
+    background: white;
+    margin: 0 auto 1.25rem;
+  }
+
+  .popup-description {
     font-size: 0.9rem;
-    color: var(--muted-foreground);
     line-height: 1.5;
-    margin-bottom: 1rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
   }
 
-  /* Trust pills */
-  .popup-pills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-bottom: 1.25rem;
-  }
-  .popup-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    background: var(--brand-tertiary);
-    color: var(--brand-secondary);
-    padding: 0.3rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.7rem;
-    font-weight: 600;
+  .popup-offer-section {
+    margin-bottom: 1.5rem;
   }
 
-  /* CTA buttons */
-  .popup-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .popup-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.8rem 1.75rem;
-    background: linear-gradient(160deg, var(--brand-secondary) 0%, color-mix(in srgb, var(--brand-secondary) 60%, black) 100%);
-    color: #fff;
-    font-family: 'Poppins', system-ui, sans-serif;
-    font-weight: 700;
+  .popup-enjoy {
+    display: block;
     font-size: 1rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    box-shadow: 0 6px 24px color-mix(in srgb, var(--brand-secondary) 35%, transparent), inset 0 1px 0 color-mix(in srgb, var(--brand-highlight) 30%, transparent);
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .popup-btn-primary:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 36px color-mix(in srgb, var(--brand-secondary) 45%, transparent);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.25rem;
+    font-weight: 300;
   }
 
-  .popup-btn-phone {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.7rem 1.75rem;
-    background: var(--foreground);
-    color: var(--background);
-    font-weight: 700;
+  .popup-discount-large {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 5.5rem;
+    line-height: 1;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .popup-off-text {
+    display: block;
+    font-size: 1.75rem;
+    letter-spacing: 0.2em;
+    margin-top: -0.5rem;
+    margin-bottom: 0.25rem;
+    font-weight: 300;
+  }
+
+  .popup-purchase-text {
     font-size: 1rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: opacity 0.25s, transform 0.25s;
-  }
-  .popup-btn-phone:hover {
-    opacity: 0.88;
-    transform: translateY(-2px);
+    letter-spacing: 0.15em;
+    font-weight: 300;
   }
 
-  .popup-dismiss {
-    background: none;
+  .popup-form {
+    max-width: 420px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .popup-email-input {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background: white;
     border: none;
-    color: var(--muted-foreground);
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 0.25rem;
-    transition: color 0.2s;
+    border-radius: 0;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 0.875rem;
+    color: #6b7280;
   }
-  .popup-dismiss:hover {
-    color: var(--foreground);
+  .popup-email-input::placeholder {
+    color: #9ca3af;
+  }
+  .popup-email-input:focus {
+    outline: 2px solid #1e3a8a;
   }
 
-  @media (max-width: 480px) {
-    .popup-sticker {
-      width: 110px;
-      height: 110px;
-      top: -1.5rem;
-      left: -1.5rem;
-    }
+  .popup-submit-btn {
+    width: 100%;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .popup-submit-btn:hover {
+    background: white;
+    color: #1a1a1a;
+  }
+
+  .popup-continue {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    padding: 0.625rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.2s;
+    margin-bottom: 1rem;
+  }
+  .popup-continue:hover {
+    opacity: 0.8;
+  }
+
+  .popup-disclaimer {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+  }
+
+  @media (max-width: 640px) {
     .popup-container {
-      border-radius: 1.25rem;
+      min-height: 500px;
+      border-width: 2px;
     }
-    .popup-banner {
-      padding: 1.75rem 1.25rem 1.5rem;
+    .popup-content {
+      padding: 2rem 1.5rem 1.75rem;
     }
-    .popup-discount {
-      font-size: 4rem;
-    }
-    .popup-dollar {
-      font-size: 2.5rem;
-    }
-    .popup-off {
+    .popup-title {
       font-size: 1.75rem;
     }
-    .popup-body {
-      padding: 1.25rem 1.25rem 1.25rem;
+    .popup-description {
+      font-size: 0.85rem;
     }
-    .popup-heading {
-      font-size: 1.3rem;
+    .popup-discount-large {
+      font-size: 4.5rem;
+    }
+    .popup-off-text {
+      font-size: 1.5rem;
     }
   }
 </style>

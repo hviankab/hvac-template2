@@ -5,12 +5,11 @@ description: "Professional commercial HVAC services in {city}. Expert repair, ma
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
-import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServicesSection from "@/components/sections/ServicesSection"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="Commercial HVAC Services"
@@ -49,95 +48,161 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<ContentSectionAlt
-  title="Why Choose Our Commercial HVAC"
-  titleHighlight="Services?"
-  description="We deliver dependable, energy-efficient commercial HVAC solutions backed by years of experience and a commitment to keeping your business comfortable."
-  image="https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Maintenance-Service.webp"
-  imageAlt="Commercial HVAC technician"
-  imagePosition="left"
-  features={[
+<ServiceCardsGridSection
+  badge="OUR SERVICES"
+  title="Complete Commercial HVAC Solutions"
+  description="Professional HVAC services designed specifically for businesses. From repairs to new installations, we keep your commercial property comfortable."
+  tabs={[
     {
-      title: "Expertise",
-      description: "Our certified technicians specialize in commercial HVAC systems of all sizes and brands, delivering reliable results every time."
-    },
-    {
-      title: "24/7 Emergency Service",
-      description: "HVAC emergencies don't wait for business hours. Our <a href='/emergency'><strong>emergency HVAC</strong></a> team is available around the clock to keep your operations running smoothly."
-    },
-    {
-      title: "Cutting-Edge Technology",
-      description: "We use the latest diagnostic tools and energy-efficient equipment to optimize your commercial HVAC system's performance."
-    },
-    {
-      title: "Energy Savings",
-      description: "Our solutions are designed to reduce energy consumption and lower operating costs for your business."
-    },
-    {
-      title: "Certified Professionals",
-      description: "All our technicians are fully licensed, insured, and trained to handle complex commercial HVAC systems."
-    }
-  ]}
-/>
-
-<FinancingPlansSection
-  title="Our Commercial HVAC Services"
-  variant="services"
-  items={[
-    { title: "HVAC Repair", href: "/commercial/hvac-repair", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Repair-Services.webp" },
-    { title: "HVAC Installation", href: "/commercial/hvac-installation", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Expert-Commercial-HVAC-Maintenance.webp" }
-  ]}
-/>
-
-<FAQSection
-  title="Frequently Asked Questions about Commercial HVAC Services in {city}"
-  faqs={[
-    {
-      question: "How often should my commercial HVAC system be serviced?",
-      answer: "We recommend scheduling professional maintenance at least twice a year — once before the cooling season and once before the heating season. Regular maintenance helps prevent costly breakdowns and keeps your system running efficiently."
-    },
-    {
-      question: "What are the benefits of upgrading to an energy-efficient commercial HVAC system?",
-      answer: "Energy-efficient systems can significantly reduce your utility bills, improve indoor comfort, qualify for tax incentives, and reduce your business's carbon footprint. Our team can help you evaluate the best options for your building."
-    },
-    {
-      question: "How do I know if my commercial HVAC system needs repair or replacement?",
-      answer: "Signs that your system may need attention include inconsistent temperatures, unusual noises, rising energy bills, frequent breakdowns, and the system being over 15 years old. Our technicians can assess your system and provide honest recommendations."
-    }
-  ]}
-/>
-
-<ServicesSection
-  client:visible
-  title="Related Services"
-  description="Explore our full range of HVAC services for residential and commercial properties."
-  categories={[
-    {
-      title: "AC Services",
+      id: "commercial-repair",
+      title: "HVAC Repair",
+      heading: "Commercial HVAC Repair Services",
+      description: "Minimize downtime with fast, reliable commercial HVAC repairs. Our experienced technicians understand the unique demands of commercial systems and deliver solutions that keep your business running.",
+      image: "/images/hvac-technician-refilling-freon.jpg",
       services: [
-        { title: "AC Repair", description: "Fast and reliable air conditioning repairs", href: "/air-conditioning/ac-repair" },
-        { title: "AC Installation and Replacement", description: "New AC system installations", href: "/air-conditioning/ac-installation-replacement" }
-      ]
+        { icon: "/images/fan (1).png", title: "Emergency Commercial Repairs", href: "/commercial/hvac-repair" },
+        { icon: "/images/air-conditioning.png", title: "Preventive Maintenance", href: "/commercial/hvac-repair" }
+      ],
+      buttonText: "Learn More About Repairs",
+      buttonHref: "/commercial/hvac-repair"
     },
     {
-      title: "Emergency HVAC Services",
+      id: "commercial-installation",
+      title: "HVAC Installation",
+      heading: "Commercial HVAC Installation",
+      description: "Upgrade your commercial property with a new, energy-efficient HVAC system. We handle complete installations for businesses of all sizes with minimal disruption to your operations.",
+      image: "/images/hvac.jpg",
       services: [
-        { title: "24/7 AC Repairs", description: "Round-the-clock AC emergency repairs", href: "/emergency/24-7-ac-repairs" },
-        { title: "24/7 Emergency Repairs", description: "Full emergency HVAC repair services", href: "/emergency/24-7-emergency-repairs" }
-      ]
+        { icon: "/images/fan (1).png", title: "New System Installation", href: "/commercial/hvac-installation" },
+        { icon: "/images/air-conditioning.png", title: "System Upgrades", href: "/commercial/hvac-installation" }
+      ],
+      buttonText: "Learn More About Installation",
+      buttonHref: "/commercial/hvac-installation"
     }
   ]}
 />
 
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Serve Commercial Clients"
+  description="We understand that your business can't afford downtime. Our streamlined process ensures minimal disruption and maximum efficiency."
+  steps={[
+    {
+      step: "STEP 1",
+      icon: "/images/headphones-with-mic.png",
+      title: "Consultation",
+      description: "Contact us to discuss your commercial HVAC needs. We'll schedule a convenient time for assessment."
+    },
+    {
+      step: "STEP 2",
+      icon: "/images/fan (1).png",
+      title: "Site Assessment",
+      description: "Our commercial HVAC specialist evaluates your system and property requirements."
+    },
+    {
+      step: "STEP 3",
+      icon: "/images/mail (2).png",
+      title: "Detailed Proposal",
+      description: "We provide a comprehensive quote with transparent pricing and timeline for your project."
+    },
+    {
+      step: "STEP 4",
+      icon: "/images/technician.png",
+      title: "Professional Service",
+      description: "Our certified team completes the work efficiently with minimal disruption to your business."
+    },
+    {
+      step: "STEP 5",
+      icon: "/images/air-conditioning.png",
+      title: "Quality Assurance",
+      description: "We thoroughly test and verify your commercial HVAC system meets all performance standards."
+    },
+    {
+      step: "STEP 6",
+      icon: "/images/heating.png",
+      title: "Ongoing Support",
+      description: "We provide continued support and maintenance to keep your system running optimally."
+    }
+  ]}
+/>
 
+<TestimonialsSection
+  badge="TESTIMONIALS"
+  title="What Our Commercial Clients Say"
+  description="Trusted by businesses across {city} for reliable commercial HVAC services."
+  testimonials={[
+    {
+      name: "Michael Chen",
+      initials: "MC",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "We manage multiple office buildings and {business} handles all our HVAC needs. Professional, reliable, and always responsive. Highly recommend for commercial properties."
+    },
+    {
+      name: "Sarah Johnson",
+      initials: "SJ",
+      date: "1 month ago",
+      rating: 5,
+      content: "Our restaurant's HVAC system failed during peak hours. {business} responded immediately and had us back up in no time. Excellent emergency service!"
+    },
+    {
+      name: "David Martinez",
+      initials: "DM",
+      date: "3 weeks ago",
+      rating: 5,
+      content: "Best commercial HVAC company we've worked with. They installed a new system in our warehouse and it's been running flawlessly. Great team!"
+    },
+    {
+      name: "Jennifer Lee",
+      initials: "JL",
+      date: "1 week ago",
+      rating: 5,
+      content: "We've been using {business} for our retail store's HVAC maintenance for years. Always professional, always on time. Worth every penny!"
+    },
+    {
+      name: "Robert Taylor",
+      initials: "RT",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Excellent commercial HVAC service! They upgraded our office building's system and our energy bills have dropped significantly. Very impressed!"
+    },
+    {
+      name: "Amanda White",
+      initials: "AW",
+      date: "4 days ago",
+      rating: 5,
+      content: "Professional and knowledgeable team. They handle all our commercial properties and we've never had any issues. Highly recommend for business owners."
+    }
+  ]}
+/>
 
-<ServiceAreaSection
-  title="Service Areas for HVAC Services in {city}"
-  description="We proudly serve businesses across all {city} boroughs, providing expert <a href='/commercial/hvac-repair'><strong>commercial HVAC repair</strong></a> and <a href='/commercial/hvac-installation'><strong>installation</strong></a> services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
+<PortfolioSection
+  badge="GALLERY"
+  title="Commercial HVAC Projects"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/hvac-technician-refilling-freon.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
+  ]}
+  links={[
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs"
+  ]}
+  labels={[
+    "Commercial HVAC Repair",
+    "Commercial Installation",
+    "AC Repair Services",
+    "AC Installation",
+    "Emergency AC Service",
+    "24/7 Emergency Repairs"
+  ]}
 />
 
 

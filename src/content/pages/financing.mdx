@@ -4,75 +4,99 @@ description: "Get the HVAC repairs and upgrades you need today with flexible pay
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import FinancingIntroSection from "@/components/sections/FinancingIntroSection.astro"
-import SignupBannerSection from "@/components/sections/SignupBannerSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ContentSection from "@/components/sections/ContentSection.astro"
+import FlexibleFinancingSection from "@/components/sections/FlexibleFinancingSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 
 <HeroPage
   title="Affordable HVAC Financing Solutions"
   subtitle="Get the HVAC repairs and upgrades you need today with flexible payment plans designed to fit your budget. Quick approval and no-interest options available!"
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
-  backgroundImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1000&q=80"
+  backgroundImage="/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
 />
 
-<FinancingIntroSection
-  title="Financing Options for Every Budget"
-  description="At {business}, we understand that keeping your home comfortable shouldn't be a financial burden. To help you select the best HVAC solutions for your needs, we offer a range of <a href='/financing'><strong>financing options</strong></a> designed to fit any budget."
-  subtitle="Why Choose Financing Through {business}?"
-  benefits={[
-    "Flexible promotions and competitive interest rates",
-    "Quick credit decisions and funding",
-    "Manageable repayment plans",
-    "Friendly, high-quality customer service"
+<ContentSection
+  eyebrow="FINANCING OPTIONS"
+  title="Making HVAC Services Affordable for Everyone"
+  description="At {business}, we believe everyone deserves a comfortable home. That's why we've partnered with leading financial institutions to provide flexible financing solutions that make quality HVAC services accessible to all homeowners."
+  features={[
+    "Flexible payment plans",
+    "Quick approval process",
+    "Competitive interest rates",
+    "No hidden fees",
+    "Multiple financing options",
+    "Expert financial guidance"
   ]}
-/>
-
-<SignupBannerSection
-  title="Apply for Financing and Get Approved in Minutes!"
-  description="Don't let budget concerns delay your HVAC repairs. Our quick and easy application process gets you approved fast."
-  calloutText="Start your application today and get the HVAC services you need!"
-  buttonText="APPLY NOW"
+  buttonText="APPLY FOR FINANCING"
   buttonHref="/contact"
-/>
-
-<FinancingPlansSection
-  title="Related Services"
-  variant="services"
-  items={[
-    { title: "Air Conditioning Services", href: "/air-conditioning", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp" },
-    { title: "Emergency HVAC Services", href: "/emergency", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" },
-    { title: "Commercial Services", href: "/commercial", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Installation-Service.webp" }
+  images={[
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/hvac-technician-refilling-freon.jpg"
   ]}
 />
 
-<FAQSection
-  title="Frequently Asked Questions"
-  faqs={[
+<FlexibleFinancingSection
+  title="Our Flexible Financing Plans"
+  subtitle="We've partnered with leading financial institutions to offer you:"
+  options={[
     {
-      question: "What financing options does {business} offer?",
-      answer: "We offer a variety of financing options including low-interest plans, no-interest options for qualified customers (0% for up to 12 months), and custom payment terms to fit your budget."
+      icon: "$",
+      title: "Low-Interest Plans",
+      description: "Competitive rates to suit your financial needs."
     },
     {
-      question: "How do I apply for financing?",
-      answer: "Applying is quick and easy! Simply <a href='/contact'><strong>contact us</strong></a> or visit our office, and our team will guide you through the application process. Most applications receive instant decisions."
+      icon: "%",
+      title: "No-Interest Options",
+      description: "Qualified customers can enjoy 0% interest plans for up to 12 months."
     },
     {
-      question: "What types of HVAC services can I finance?",
-      answer: "You can finance virtually any HVAC service we offer, including AC installations, furnace replacements, duct repairs, indoor air quality upgrades, and more."
+      icon: "💳",
+      title: "Custom Payment Terms",
+      description: "Flexible terms that fit your budget, from short-term to extended plans."
+    },
+    {
+      icon: "⏱",
+      title: "Quick Approval Process",
+      description: "Fast and hassle-free financing applications with instant decisions in many cases."
     }
   ]}
 />
 
-
-
-<ServiceAreaSection
-  variant="compact"
-  title="Proudly Serving {city}"
-  description="We provide reliable residential HVAC services throughout {city} and nearby areas like <a href='/santa-monica'><strong>Santa Monica</strong></a>, <a href='/pasadena'><strong>Pasadena</strong></a>, and <a href='/glendale'><strong>Glendale</strong></a>. <a href='/contact'><strong>Contact us</strong></a> to see if we serve your neighborhood!"
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Why Choose {business} for Your HVAC Financing?"
+  image="/images/hvac.jpg"
+  reasons={[
+    {
+      icon: "⚡",
+      title: "Fast Approval",
+      description: "Get approved in minutes with our streamlined application process."
+    },
+    {
+      icon: "💰",
+      title: "Flexible Terms",
+      description: "Choose payment plans that work for your budget and timeline."
+    },
+    {
+      icon: "🔒",
+      title: "Secure Process",
+      description: "Your financial information is protected with industry-leading security."
+    },
+    {
+      icon: "👥",
+      title: "Expert Support",
+      description: "Our team guides you through every step of the financing process."
+    },
+    {
+      icon: "✓",
+      title: "No Hidden Fees",
+      description: "Transparent pricing with no surprise charges or hidden costs."
+    },
+    {
+      icon: "🏆",
+      title: "Trusted Partners",
+      description: "We work with reputable financial institutions you can trust."
+    }
+  ]}
 />

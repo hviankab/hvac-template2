@@ -1,29 +1,47 @@
 ---
 title: "Commercial HVAC Installation"
-description: "Expert commercial HVAC installation for offices, retail, and industrial spaces. Professional commercial installation in {city}."
+description: "Professional commercial HVAC installation services for businesses in {city}. New system installations and upgrades."
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PlaceholderContentSection from "@/components/sections/PlaceholderContentSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceDetailSection from "@/components/sections/ServiceDetailSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 
 <HeroPage
   title="Commercial HVAC Installation"
-  subtitle="Custom HVAC installations designed for your commercial space and budget."
+  subtitle="Professional commercial HVAC installation services for your business."
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
   backgroundImage="https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg"
   image="/images/technician.png"
-  imageAlt="Commercial HVAC installation"
+  imageAlt="Commercial HVAC installation technician"
 />
 
-<PlaceholderContentSection
-  title="TO BE DETERMINED"
-  subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+<ServiceDetailSection
+  description="<p>Investing in a new commercial HVAC system is crucial for maintaining a comfortable environment for your employees and customers. Our certified commercial HVAC technicians provide expert installation services for businesses of all sizes.</p><p>We design and install commercial HVAC systems that meet your facility's specific needs, ensuring optimal comfort, energy efficiency, and reliability. From small offices to large commercial buildings, we handle every aspect of your installation.</p>"
+  includedServices={[
+    "Commercial load calculation and system design",
+    "Energy-efficient equipment selection",
+    "Rooftop unit installation",
+    "Multi-zone system installation",
+    "Ductwork design and installation",
+    "System commissioning and testing"
+  ]}
+  notes="All commercial installations include manufacturer warranty and our workmanship guarantee. Flexible scheduling to minimize business disruption."
+  ctaText="Our certified commercial HVAC technicians ensure your new system is installed correctly for optimal performance and energy efficiency."
+  otherServices={[
+    { title: "Commercial HVAC Repair", href: "/commercial/hvac-repair" },
+    { title: "AC Installation", href: "/air-conditioning/ac-installation-replacement" },
+    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs" },
+    { title: "Maintenance Plans", href: "/maintenance-plan" }
+  ]}
+  serviceImage="/images/hvac-technician-refilling-freon.jpg"
+  contactTitle="Need Help?"
+  contactDescription="Have questions about commercial HVAC installation? Contact us today for a free consultation."
+  contactButtonText="Contact Us"
+  contactButtonHref="/contact"
 />
 
 <CouponsSection
@@ -35,69 +53,51 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   ]}
 />
 
-<PromoTilesSection
-  tiles={[
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Handle Commercial HVAC Installation"
+  description="Our comprehensive process ensures your commercial HVAC system is installed efficiently and correctly."
+  steps={[
     {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+      step: "01",
+      title: "Site Assessment",
+      description: "We evaluate your facility's heating and cooling needs and recommend the best solution.",
+      icon: "/images/headphones-with-mic.png"
     },
     {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
+      step: "02",
+      title: "System Design",
+      description: "Our engineers design a custom HVAC solution that meets your specific requirements.",
+      icon: "/images/air-conditioning.png"
     },
     {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
+      step: "03",
+      title: "Professional Installation",
+      description: "Our certified technicians install your system with minimal disruption to your business.",
+      icon: "/images/heating.png"
+    },
+    {
+      step: "04",
+      title: "Commissioning",
+      description: "We test and optimize your system to ensure peak performance and efficiency.",
+      icon: "/images/technician.png"
     }
   ]}
 />
 
-<FAQSection
-  title="Frequently Asked Questions about Commercial HVAC Installation in {city}"
-  faqs={[
-    {
-      question: "How long does a commercial HVAC installation take?",
-      answer: "Installation timelines vary based on the size and complexity of the project. A small office system may take 2-3 days, while larger commercial installations can take 1-4 weeks. We work around your business schedule to minimize disruption."
-    },
-    {
-      question: "What size commercial HVAC system do I need?",
-      answer: "System sizing depends on your building's square footage, ceiling height, insulation, occupancy, equipment heat loads, and local climate. Our engineers perform a detailed load calculation to recommend the right system size for optimal efficiency and comfort."
-    },
-    {
-      question: "Do you handle permits and code compliance?",
-      answer: "Yes. We handle all necessary permits and ensure your installation meets {city} building codes and regulations. Our team is fully licensed and experienced with local requirements for <a href='/commercial'><strong>commercial HVAC</strong></a> projects."
-    }
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Why Choose Us for Commercial Installation"
+  description="We're committed to providing expert commercial HVAC installation with certified technicians, quality equipment, and guaranteed satisfaction."
+  badgeText="Trusted by"
+  badgeSubtext="9800+ happy customers"
+  image="/images/hvac.jpg"
+  services={[
+    { text: "Certified Commercial HVAC Specialists" },
+    { text: "Custom System Design" },
+    { text: "Energy-Efficient Solutions" },
+    { text: "Flexible Scheduling Options" },
+    { text: "Manufacturer Warranty Protection" },
+    { text: "100% Satisfaction Guarantee" }
   ]}
 />
-
-<FinancingPlansSection
-  title="Related Services"
-  variant="services"
-  items={[
-    { title: "Commercial HVAC Repair", href: "/commercial/hvac-repair", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp" },
-    { title: "Emergency HVAC", href: "/emergency", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" },
-    { title: "AC Installation", href: "/air-conditioning/ac-installation-replacement", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" }
-  ]}
-/>
-
-
-
-<ServiceAreaSection
-  title="Service Areas for Commercial HVAC Services in {city}"
-  description="We proudly serve businesses across all {city} boroughs, providing expert commercial HVAC services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-/>
-

@@ -7,24 +7,12 @@
   <button
     id="free-scan-trigger"
     class="fab-btn group"
-    aria-label="Get $50 off your next service"
+    aria-label="Claim your $50 voucher"
   >
-    <!-- Pulsing ring -->
-    <span class="fab-pulse"></span>
-
-    <!-- Icon circle -->
-    <span class="fab-icon">
-      <svg class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-          d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-      </svg>
-    </span>
-
-    <!-- Text -->
-    <span class="fab-text">
-      <span class="fab-label">Limited Offer</span>
-      <span class="fab-value">$50 OFF</span>
-    </span>
+    <span class="fab-text">Claim Voucher</span>
+    
+    <!-- Gift icon -->
+    <span class="fab-icon">🎁</span>
   </button>
 </div>
 
@@ -37,65 +25,60 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.65rem 1.5rem 0.65rem 0.65rem;
-    background: linear-gradient(135deg, var(--brand-highlight) 0%, color-mix(in srgb, var(--brand-highlight) 80%, #d97706) 100%);
-    color: #1a1a1a;
-    border: none;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f2557 50%, #061133 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 9999px;
     cursor: pointer;
-    box-shadow: 0 8px 32px color-mix(in srgb, var(--brand-highlight) 40%, transparent);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    box-shadow: 0 8px 32px rgba(6, 17, 51, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
   }
-  .fab-btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 12px 44px color-mix(in srgb, var(--brand-highlight) 60%, transparent);
-  }
-  .fab-btn:active {
-    transform: scale(0.97);
-  }
-
-  .fab-pulse {
+  
+  .fab-btn::before {
+    content: '';
     position: absolute;
-    inset: -4px;
+    inset: 0;
     border-radius: 9999px;
-    border: 2px solid var(--brand-highlight);
-    opacity: 0;
-    animation: pulse-ring 2.5s ease-out infinite;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+    opacity: 1;
+    transition: opacity 0.3s;
   }
-
-  .fab-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: background 0.2s;
+  
+  .fab-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 50%, #0f2557 100%);
+    box-shadow: 0 12px 40px rgba(6, 17, 51, 0.6), 0 6px 20px rgba(30, 58, 138, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
   }
-  .fab-btn:hover .fab-icon {
-    background: rgba(0, 0, 0, 0.25);
+  
+  .fab-btn:hover::before {
+    opacity: 0.8;
+  }
+  
+  .fab-btn:active {
+    transform: translateY(-1px) scale(1);
   }
 
   .fab-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
-  .fab-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    opacity: 0.75;
+
+  .fab-icon {
+    font-size: 1.25rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s;
   }
-  .fab-value {
-    font-family: 'Poppins', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: 0.02em;
+  
+  .fab-btn:hover .fab-icon {
+    transform: scale(1.1) rotate(5deg);
   }
 
   @keyframes fab-enter {
@@ -107,10 +90,5 @@
       opacity: 1;
       transform: translateY(0) scale(1);
     }
-  }
-
-  @keyframes pulse-ring {
-    0% { opacity: 0.6; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.15); }
   }
 </style>

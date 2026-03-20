@@ -5,13 +5,11 @@ description: "Professional air conditioning services in {city} and surrounding a
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
-import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServicesSection from "@/components/sections/ServicesSection"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="Air Conditioning Services in {city}"
@@ -42,7 +40,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   buttonText="Contact Us"
   buttonHref="/contact"
   images={[
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp"
+    "/images/hvac-technician-refilling-freon.jpg"
   ]}
   imagePosition="left"
 />
@@ -56,114 +54,161 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<ContentSectionAlt
-  title="Why Choose Us for Air Conditioning Services in"
-  titleHighlight="{city}?"
-  description="We deliver dependable, energy-efficient cooling solutions backed by years of experience and a commitment to customer satisfaction."
-  image="https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp"
-  imageAlt="Air conditioning units"
-  imagePosition="left"
-  features={[
+<ServiceCardsGridSection
+  badge="OUR SERVICES"
+  title="Comprehensive Air Conditioning Services"
+  description="From repairs to installations, we provide complete AC solutions to keep your home or business comfortable year-round."
+  tabs={[
     {
-      title: "Experienced Local Professionals",
-      description: "Our certified HVAC technicians have years of hands-on experience serving {city} homeowners and businesses with reliable cooling solutions."
-    },
-    {
-      title: "Fast Response Times",
-      description: "We understand that AC problems can't wait. That's why we offer same-day and <a href='/emergency/24-7-ac-repairs'><strong>emergency service</strong></a> to get your system back up and running quickly."
-    },
-    {
-      title: "Transparent Pricing",
-      description: "No hidden fees or surprise charges. We provide upfront estimates so you know exactly what to expect before any work begins."
-    }
-  ]}
-/>
-
-<FinancingPlansSection
-  title="Our Air Conditioning Services"
-  variant="services"
-  items={[
-    { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg" },
-    { title: "AC Installation and Replacement", href: "/air-conditioning/ac-installation-replacement", image: "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp" }
-  ]}
-/>
-
-<PromoTilesSection
-  tiles={[
-    {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
-    },
-    {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
-    },
-    {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
-    }
-  ]}
-/>
-
-<FAQSection
-  title="Frequently Asked Questions about AC Services in {city}"
-  faqs={[
-    {
-      question: "What types of air conditioning systems do you service?",
-      answer: "We service all types of AC systems including central air conditioning, ductless mini-splits, window units, heat pumps, and <a href='/commercial'><strong>commercial HVAC systems</strong></a>. Our technicians are trained to work with all major brands."
-    },
-    {
-      question: "How often should I schedule AC maintenance?",
-      answer: "We recommend scheduling professional AC maintenance at least once a year, ideally in the spring before the cooling season begins. Regular maintenance helps prevent breakdowns, improves efficiency, and extends the life of your system."
-    },
-    {
-      question: "Do you offer emergency AC repair services?",
-      answer: "Yes, we offer <a href='/emergency/24-7-ac-repairs'><strong>24/7 emergency AC repair</strong></a> services throughout {city}. When your AC breaks down unexpectedly, our team is ready to respond quickly and restore your comfort."
-    }
-  ]}
-/>
-
-<ServicesSection
-  client:visible
-  title="Explore Our Other HVAC Services"
-  description="Beyond air conditioning, we offer a full range of heating, indoor air quality, emergency, and commercial HVAC services."
-  categories={[
-    {
-      title: "Emergency HVAC Services",
+      id: "ac-repair",
+      title: "AC Repair",
+      heading: "Expert AC Repair Services",
+      description: "When your air conditioning system breaks down, you need fast, reliable repair service. Our certified technicians diagnose and fix AC problems quickly to restore your comfort.",
+      image: "/images/hvac-technician-refilling-freon.jpg",
       services: [
-        { title: "24/7 AC Repairs", description: "Round-the-clock AC emergency repairs", href: "/emergency/24-7-ac-repairs" },
-        { title: "24/7 Emergency Repairs", description: "Full emergency HVAC repair services", href: "/emergency/24-7-emergency-repairs" }
-      ]
+        { icon: "/images/fan (1).png", title: "Emergency AC Repairs", href: "/emergency/24-7-ac-repairs" },
+        { icon: "/images/air-conditioning.png", title: "AC System Diagnostics", href: "/air-conditioning/ac-repair" }
+      ],
+      buttonText: "Learn More About AC Repair",
+      buttonHref: "/air-conditioning/ac-repair"
     },
     {
-      title: "Commercial Services",
+      id: "ac-installation",
+      title: "AC Installation",
+      heading: "Professional AC Installation",
+      description: "Upgrade to a new, energy-efficient air conditioning system. We handle complete AC installations with expert precision and quality workmanship.",
+      image: "/images/hvac.jpg",
       services: [
-        { title: "HVAC Repair", description: "Commercial HVAC repair services", href: "/commercial/hvac-repair" },
-        { title: "HVAC Installation", description: "New commercial HVAC installations", href: "/commercial/hvac-installation" }
-      ]
+        { icon: "/images/fan (1).png", title: "New AC System Installation", href: "/air-conditioning/ac-installation-replacement" },
+        { icon: "/images/air-conditioning.png", title: "AC Replacement Services", href: "/air-conditioning/ac-installation-replacement" }
+      ],
+      buttonText: "Learn More About Installation",
+      buttonHref: "/air-conditioning/ac-installation-replacement"
     }
   ]}
 />
 
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Deliver Exceptional AC Service"
+  description="From your first call to project completion, we follow a proven process to ensure quality results and your complete satisfaction."
+  steps={[
+    {
+      step: "STEP 1",
+      icon: "/images/headphones-with-mic.png",
+      title: "Contact Us",
+      description: "Call or schedule online. We'll discuss your AC needs and set up a convenient appointment time."
+    },
+    {
+      step: "STEP 2",
+      icon: "/images/fan (1).png",
+      title: "Inspection & Diagnosis",
+      description: "Our certified technician arrives on time, inspects your system, and provides a detailed assessment."
+    },
+    {
+      step: "STEP 3",
+      icon: "/images/mail (2).png",
+      title: "Transparent Quote",
+      description: "We provide upfront pricing with no hidden fees. You'll know exactly what to expect before we begin."
+    },
+    {
+      step: "STEP 4",
+      icon: "/images/technician.png",
+      title: "Expert Service",
+      description: "Our team completes the work efficiently using quality parts and proven techniques."
+    },
+    {
+      step: "STEP 5",
+      icon: "/images/air-conditioning.png",
+      title: "Quality Check",
+      description: "We test your system thoroughly to ensure everything works perfectly before we leave."
+    },
+    {
+      step: "STEP 6",
+      icon: "/images/heating.png",
+      title: "Follow-Up",
+      description: "We follow up to ensure your satisfaction and answer any questions you may have."
+    }
+  ]}
+/>
 
+<TestimonialsSection
+  badge="TESTIMONIALS"
+  title="What Our AC Customers Say"
+  description="Don't just take our word for it - hear from satisfied customers about their air conditioning service experience with {business}."
+  testimonials={[
+    {
+      name: "Karen Williams",
+      initials: "KW",
+      date: "1 week ago",
+      rating: 5,
+      content: "Our AC stopped working during a heatwave. {business} came out the same day and had it fixed in no time. Professional and affordable!"
+    },
+    {
+      name: "Tom Anderson",
+      initials: "TA",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Excellent AC installation service! The team was punctual, professional, and cleaned up everything. Our new system works perfectly."
+    },
+    {
+      name: "Maria Santos",
+      initials: "MS",
+      date: "3 days ago",
+      rating: 5,
+      content: "Best AC repair service in {city}! They diagnosed the problem quickly and explained everything clearly. Highly recommend!"
+    },
+    {
+      name: "James Mitchell",
+      initials: "JM",
+      date: "1 month ago",
+      rating: 5,
+      content: "We've been using {business} for AC maintenance for years. Always reliable, always professional. Worth every penny!"
+    },
+    {
+      name: "Patricia Lee",
+      initials: "PL",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Called for emergency AC repair and they arrived within an hour. Fixed the issue fast and the price was very fair. Thank you!"
+    },
+    {
+      name: "Daniel Brown",
+      initials: "DB",
+      date: "5 days ago",
+      rating: 5,
+      content: "Outstanding service from start to finish. Our new AC system is so much more efficient. The team was knowledgeable and courteous."
+    }
+  ]}
+/>
 
-<ServiceAreaSection
-  title="Service Areas for HVAC Services in {city}"
-  description="We proudly serve homes and businesses across all {city} boroughs, providing expert <a href='/air-conditioning/ac-repair'><strong>AC repair</strong></a> and <a href='/air-conditioning/ac-installation-replacement'><strong>installation</strong></a> services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
+<PortfolioSection
+  badge="GALLERY"
+  title="Our AC Installation & Repair Work"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/hvac-technician-refilling-freon.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
+  ]}
+  links={[
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/emergency/24-7-ac-repairs",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/emergency/24-7-emergency-repairs"
+  ]}
+  labels={[
+    "AC Repair Services",
+    "AC Installation",
+    "Emergency AC Repairs",
+    "Commercial HVAC",
+    "HVAC Installation",
+    "24/7 Emergency Service"
+  ]}
 />
 
 

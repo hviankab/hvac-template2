@@ -4,12 +4,11 @@ description: "Learn about {business} - expert HVAC services you can trust in {ci
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PlaceholderContentSection from "@/components/sections/PlaceholderContentSection.astro"
+import ContentSection from "@/components/sections/ContentSection.astro"
+import OurTeamSection from "@/components/sections/OurTeamSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="About Expert HVAC Services You Can Trust"
@@ -19,9 +18,107 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   backgroundImage="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1000&q=80"
 />
 
-<PlaceholderContentSection
-  title="TO BE DETERMINED"
-  subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+<ContentSection
+  eyebrow="ABOUT {business}"
+  title="Your Trusted HVAC Partner in {city}"
+  description="At {business}, we're dedicated to providing exceptional heating and cooling solutions to homes and businesses throughout {city}. With years of experience and a commitment to quality, our certified technicians deliver reliable service you can count on."
+  features={[
+    "Licensed & Insured Professionals",
+    "24/7 Emergency Service Available",
+    "Upfront Transparent Pricing",
+    "100% Satisfaction Guaranteed",
+    "Energy-Efficient Solutions",
+    "Same-Day Service Available"
+  ]}
+  buttonText="LEARN MORE"
+  buttonHref="/contact"
+  images={[
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
+  ]}
+/>
+
+<OurTeamSection
+  badge="OUR TEAM"
+  title="Meet the Experts Behind {business}"
+  description="Our certified HVAC technicians bring years of experience and dedication to every job. We're committed to providing exceptional service and ensuring your complete satisfaction."
+  team={[
+    {
+      name: "John Anderson",
+      role: "Lead HVAC Technician",
+      initials: "JA",
+      social: {
+        linkedin: "https://linkedin.com/in/john-anderson",
+        twitter: "https://twitter.com/johnanderson",
+        facebook: "https://facebook.com/johnanderson"
+      }
+    },
+    {
+      name: "Sarah Mitchell",
+      role: "Senior Technician",
+      initials: "SM",
+      social: {
+        linkedin: "https://linkedin.com/in/sarah-mitchell",
+        instagram: "https://instagram.com/sarahmitchell"
+      }
+    },
+    {
+      name: "Michael Rodriguez",
+      role: "Installation Specialist",
+      initials: "MR",
+      social: {
+        linkedin: "https://linkedin.com/in/michael-rodriguez",
+        twitter: "https://twitter.com/mrodriguez"
+      }
+    },
+    {
+      name: "Emily Chen",
+      role: "Service Manager",
+      initials: "EC",
+      social: {
+        linkedin: "https://linkedin.com/in/emily-chen",
+        facebook: "https://facebook.com/emilychen",
+        instagram: "https://instagram.com/emilychen"
+      }
+    },
+    {
+      name: "David Thompson",
+      role: "HVAC Technician",
+      initials: "DT",
+      social: {
+        linkedin: "https://linkedin.com/in/david-thompson",
+        twitter: "https://twitter.com/dthompson"
+      }
+    },
+    {
+      name: "Lisa Martinez",
+      role: "Customer Service Lead",
+      initials: "LM",
+      social: {
+        linkedin: "https://linkedin.com/in/lisa-martinez",
+        facebook: "https://facebook.com/lisamartinez"
+      }
+    },
+    {
+      name: "Robert Williams",
+      role: "Commercial Specialist",
+      initials: "RW",
+      social: {
+        linkedin: "https://linkedin.com/in/robert-williams",
+        instagram: "https://instagram.com/robertwilliams"
+      }
+    },
+    {
+      name: "Jennifer Brown",
+      role: "Maintenance Coordinator",
+      initials: "JB",
+      social: {
+        linkedin: "https://linkedin.com/in/jennifer-brown",
+        twitter: "https://twitter.com/jbrown",
+        facebook: "https://facebook.com/jenniferbrown"
+      }
+    }
+  ]}
 />
 
 <CouponsSection
@@ -33,86 +130,81 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<PromoTilesSection
-  tiles={[
+<TestimonialsSection
+  badge="TESTIMONIALS"
+  title="What Our Customers Say"
+  description="Don't just take our word for it - hear from our satisfied customers about their experience with {business}."
+  testimonials={[
     {
-      type: "maintenance",
-      title: "Maintenance Plan",
-      priceLabel: ["Starting at", "$14.33", "Priority Service"],
-      buttonText: "View Maintenance Plans",
-      buttonHref: "/maintenance-plan",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
+      name: "Sarah Johnson",
+      initials: "SJ",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Exceptional service! The technician was professional, knowledgeable, and fixed our AC issue quickly. Highly recommend {business} for all your HVAC needs."
     },
     {
-      type: "financing",
-      headline: ["No Interest", "No Payment", "Until 2026!"],
-      subtext: "Affordable payment plans available",
-      buttonText: "Apply Now",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
+      name: "Michael Chen",
+      initials: "MC",
+      date: "1 month ago",
+      rating: 5,
+      content: "Best HVAC company in {city}! They installed our new heating system and the quality of work was outstanding. Fair pricing and excellent customer service."
     },
     {
-      type: "emergency",
-      tag: "24/7 Service",
-      discount: "20% OFF",
-      subheadline: ["All HVAC", "Repair Services"],
-      buttonText: "Call Now",
-      buttonHref: "/contact",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+      name: "Jennifer Martinez",
+      initials: "JM",
+      date: "3 weeks ago",
+      rating: 5,
+      content: "Called them for an emergency repair and they arrived within an hour. Professional, efficient, and reasonably priced. Will definitely use them again!"
+    },
+    {
+      name: "David Thompson",
+      initials: "DT",
+      date: "1 week ago",
+      rating: 5,
+      content: "Outstanding experience from start to finish. The team was courteous, explained everything clearly, and left the work area spotless. Five stars!"
+    },
+    {
+      name: "Lisa Anderson",
+      initials: "LA",
+      date: "2 months ago",
+      rating: 5,
+      content: "We've been using {business} for years for our maintenance plan. They're reliable, trustworthy, and always go above and beyond. Couldn't ask for better service."
+    },
+    {
+      name: "Robert Williams",
+      initials: "RW",
+      date: "3 weeks ago",
+      rating: 5,
+      content: "Impressed with their professionalism and expertise. They diagnosed the problem quickly and provided multiple solutions. Great communication throughout the process."
     }
   ]}
 />
 
-<FinancingPlansSection
-  variant="services"
-  title="Related Services"
-  items={[
-    {
-      title: "Air Conditioning Services",
-      image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp",
-      href: "/air-conditioning"
-    },
-    {
-      title: "Emergency HVAC Services",
-      image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp",
-      href: "/emergency"
-    },
-    {
-      title: "Commercial HVAC Services",
-      image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Commercial-HVAC-Installation-Service.webp",
-      href: "/commercial"
-    }
+<PortfolioSection
+  badge="GALLERY"
+  title="See Our Quality Work"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/hvac-technician-refilling-freon.jpg"
   ]}
-/>
-
-<FAQSection
-  title="Frequently Asked Questions"
-  faqs={[
-    {
-      question: "What HVAC services do you offer?",
-      answer: "We offer a full range of residential and commercial HVAC services including AC repair and installation, furnace repair and replacement, duct cleaning and sealing, indoor air quality solutions, and <a href='/emergency'><strong>24/7 emergency</strong></a> HVAC services."
-    },
-    {
-      question: "What areas do you serve?",
-      answer: "We proudly serve {city} and surrounding areas including <a href='/santa-monica'><strong>Santa Monica</strong></a>, <a href='/pasadena'><strong>Pasadena</strong></a>, <a href='/glendale'><strong>Glendale</strong></a>, Beverly Hills, Hollywood, Downtown LA, and many more neighborhoods across the greater {city} region."
-    },
-    {
-      question: "How much do your services cost?",
-      answer: "We offer transparent, upfront pricing with no hidden fees. The cost depends on the specific service needed. <a href='/contact'><strong>Contact us</strong></a> for a free estimate and we'll provide a detailed quote before any work begins. We also offer <a href='/financing'><strong>financing options</strong></a> to make services more affordable."
-    }
+  links={[
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs"
   ]}
-/>
-
-
-
-<ServiceAreaSection
-  title="Proudly Serving {city}"
-  description="We provide expert residential and commercial HVAC solutions across the city, from Hollywood Hills to Santa Monica. Whether you need AC repair, furnace installation, duct cleaning, or indoor air quality services, our team is here to help. We also offer routine <a href='/maintenance-plan'><strong>maintenance</strong></a> and <a href='/emergency'><strong>24/7 emergency services</strong></a> to keep your HVAC system in top shape."
-  areas={[
-    "Santa Monica", "Pasadena", "Glendale", "Downtown {city}", "Hollywood",
-    "Beverly Hills", "Venice", "Westwood", "Culver City", "San Fernando Valley",
-    "Studio City", "North Hollywood", "Sherman Oaks", "Encino", "Burbank",
-    "Torrance", "Long Beach", "Inglewood", "El Segundo", "Brentwood",
-    "Silver Lake", "Echo Park", "Hancock Park", "Marina del Rey", "Manhattan Beach"
+  labels={[
+    "AC Repair",
+    "AC Installation & Replacement",
+    "Commercial HVAC Repair",
+    "Commercial HVAC Installation",
+    "24/7 AC Repairs",
+    "24/7 Emergency Repairs"
   ]}
 />

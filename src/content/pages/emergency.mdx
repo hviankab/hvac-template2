@@ -5,13 +5,11 @@ description: "24/7 emergency HVAC services in {city}. Fast, reliable emergency A
 
 import HeroPage from "@/components/sections/HeroPage.astro"
 import ContentSection from "@/components/sections/ContentSection.astro"
-import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServicesSection from "@/components/sections/ServicesSection"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import TestimonialsSection from "@/components/sections/TestimonialsSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="Emergency HVAC Services in {city}"
@@ -55,119 +53,161 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<ContentSectionAlt
-  badge="Expert Promise"
-  title="Why Choose Our Emergency HVAC"
-  titleHighlight="Services?"
-  description="When facing an HVAC emergency, you need a team you can trust 24/7. Our certified technicians are dispatched quickly to diagnose and resolve your heating or cooling emergency, so you can get back to comfort fast."
-  image="https://johnh967.sg-host.com/wp-content/uploads/2024/11/24_7-Emergency-Repair-Services.webp"
-  imageAlt="Emergency HVAC technician"
-  imagePosition="left"
-  features={[
+<ServiceCardsGridSection
+  badge="OUR SERVICES"
+  title="24/7 Emergency HVAC Services"
+  description="When HVAC emergencies strike, we're ready to respond. Fast, reliable emergency service available around the clock."
+  tabs={[
     {
-      title: "24/7 Availability",
-      description: "We're available around the clock, every day of the year. Day or night, our team is just a phone call away to handle any HVAC emergency."
-    },
-    {
-      title: "Experienced Technicians",
-      description: "Our certified HVAC technicians have the skills and tools to diagnose and resolve your emergency quickly and correctly the first time."
-    },
-    {
-      title: "Transparent Pricing",
-      description: "No surprise fees. We provide upfront pricing before any emergency work begins so you know exactly what to expect."
-    },
-    {
-      title: "Fast Response Times",
-      description: "We understand emergencies can't wait. Our dispatchers prioritize emergency calls to get a technician to your door as quickly as possible."
-    }
-  ]}
-/>
-
-<FinancingPlansSection
-  title="Comprehensive Emergency HVAC Services"
-  variant="services"
-  items={[
-    { title: "24/7 AC Repairs", href: "/emergency/24-7-ac-repairs", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Heating-and-Cooling-Emergency-Repair-Services.webp" },
-    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/24_7-Emergency-Repair-Services.webp" }
-  ]}
-/>
-
-<PromoTilesSection
-  tiles={[
-    {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
-    },
-    {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
-    },
-    {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
-    }
-  ]}
-/>
-
-<FAQSection
-  title="Frequently Asked Questions about Emergency HVAC Services"
-  faqs={[
-    {
-      question: "What qualifies as an HVAC emergency?",
-      answer: "An HVAC emergency includes complete system failure during extreme temperatures, gas leaks, carbon monoxide alerts, no heat during freezing weather, or any situation that poses a safety risk. If you're unsure, <a href='/contact'><strong>call us</strong></a> and we'll help you determine the urgency."
-    },
-    {
-      question: "How quickly can you respond to an emergency?",
-      answer: "We prioritize emergency calls and typically have a technician dispatched within the hour. Response times may vary based on location and demand, but we always aim to reach you as quickly as possible."
-    },
-    {
-      question: "Is emergency service available on weekends and holidays?",
-      answer: "Yes, our emergency HVAC services are available 24 hours a day, 7 days a week, including all weekends and holidays. We never close when you need us most."
-    }
-  ]}
-/>
-
-<ServicesSection
-  client:visible
-  title="Related Services"
-  description="Explore our full range of HVAC services for year-round comfort and efficiency."
-  categories={[
-    {
-      title: "AC Services",
+      id: "emergency-ac",
+      title: "24/7 AC Repairs",
+      heading: "Emergency AC Repair Services",
+      description: "Air conditioning failure can't wait. Our emergency AC repair team is available 24/7 to restore your cooling system quickly and get you back to comfort.",
+      image: "/images/hvac-technician-refilling-freon.jpg",
       services: [
-        { title: "AC Repair", description: "Fast and reliable air conditioning repairs", href: "/air-conditioning/ac-repair" },
-        { title: "AC Installation and Replacement", description: "New AC system installations", href: "/air-conditioning/ac-installation-replacement" }
-      ]
+        { icon: "/images/fan (1).png", title: "24/7 AC Emergency Response", href: "/emergency/24-7-ac-repairs" },
+        { icon: "/images/air-conditioning.png", title: "Same-Day AC Repairs", href: "/emergency/24-7-ac-repairs" }
+      ],
+      buttonText: "Learn More About Emergency AC",
+      buttonHref: "/emergency/24-7-ac-repairs"
     },
     {
-      title: "Commercial Services",
+      id: "emergency-hvac",
+      title: "24/7 Emergency Repairs",
+      heading: "Complete Emergency HVAC Services",
+      description: "From heating failures to complete system breakdowns, our emergency HVAC team handles all urgent repairs day or night to keep your home comfortable.",
+      image: "/images/hvac.jpg",
       services: [
-        { title: "HVAC Repair", description: "Commercial HVAC repair services", href: "/commercial/hvac-repair" },
-        { title: "HVAC Installation", description: "New commercial HVAC installations", href: "/commercial/hvac-installation" }
-      ]
+        { icon: "/images/fan (1).png", title: "Emergency Heating Repairs", href: "/emergency/24-7-emergency-repairs" },
+        { icon: "/images/air-conditioning.png", title: "24/7 HVAC System Repairs", href: "/emergency/24-7-emergency-repairs" }
+      ],
+      buttonText: "Learn More About Emergency Service",
+      buttonHref: "/emergency/24-7-emergency-repairs"
     }
   ]}
 />
 
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Handle Emergency HVAC Calls"
+  description="When you have an HVAC emergency, every minute counts. Here's how we respond quickly to restore your comfort."
+  steps={[
+    {
+      step: "STEP 1",
+      icon: "/images/headphones-with-mic.png",
+      title: "Emergency Call",
+      description: "Call our 24/7 emergency line. We prioritize urgent calls and dispatch a technician immediately."
+    },
+    {
+      step: "STEP 2",
+      icon: "/images/fan (1).png",
+      title: "Rapid Response",
+      description: "Our emergency technician arrives quickly, fully equipped to handle your HVAC emergency."
+    },
+    {
+      step: "STEP 3",
+      icon: "/images/mail (2).png",
+      title: "Quick Diagnosis",
+      description: "We quickly identify the problem and provide upfront emergency service pricing."
+    },
+    {
+      step: "STEP 4",
+      icon: "/images/technician.png",
+      title: "Emergency Repair",
+      description: "Our technician performs the necessary repairs to restore your system as quickly as possible."
+    },
+    {
+      step: "STEP 5",
+      icon: "/images/air-conditioning.png",
+      title: "System Testing",
+      description: "We thoroughly test your system to ensure it's working properly before we leave."
+    },
+    {
+      step: "STEP 6",
+      icon: "/images/heating.png",
+      title: "Follow-Up Care",
+      description: "We follow up to ensure your system continues to work and you're completely satisfied."
+    }
+  ]}
+/>
 
+<TestimonialsSection
+  badge="TESTIMONIALS"
+  title="What Our Emergency Service Customers Say"
+  description="When you need emergency HVAC service, you need a team you can trust. Here's what our customers say about our 24/7 emergency response."
+  testimonials={[
+    {
+      name: "Robert Martinez",
+      initials: "RM",
+      date: "1 week ago",
+      rating: 5,
+      content: "Our AC went out at 2 AM during a heatwave. {business} arrived within 45 minutes and had us back up and running in no time. Incredible emergency service!"
+    },
+    {
+      name: "Emily Thompson",
+      initials: "ET",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Furnace died on Christmas Eve. Called {business} and they sent someone right away. Professional, efficient, and saved our holiday. Can't thank them enough!"
+    },
+    {
+      name: "James Wilson",
+      initials: "JW",
+      date: "3 days ago",
+      rating: 5,
+      content: "Fast response time and excellent service. The technician was knowledgeable and fixed our heating issue quickly. Highly recommend for emergency HVAC needs."
+    },
+    {
+      name: "Maria Garcia",
+      initials: "MG",
+      date: "1 month ago",
+      rating: 5,
+      content: "Called at midnight with no heat and a baby at home. {business} prioritized our call and had someone here within the hour. True lifesavers!"
+    },
+    {
+      name: "David Lee",
+      initials: "DL",
+      date: "2 weeks ago",
+      rating: 5,
+      content: "Professional emergency service at a fair price. No hidden fees, just honest work. They've earned a customer for life."
+    },
+    {
+      name: "Amanda Brown",
+      initials: "AB",
+      date: "5 days ago",
+      rating: 5,
+      content: "AC broke during a weekend heatwave. {business} came out same day and fixed it fast. Their emergency service is top-notch!"
+    }
+  ]}
+/>
 
-<ServiceAreaSection
-  title="Service Areas for HVAC Services in {city}"
-  description="We proudly serve homes and businesses across all {city} boroughs, providing expert <a href='/emergency/24-7-ac-repairs'><strong>emergency AC repair</strong></a> and <a href='/emergency/24-7-emergency-repairs'><strong>24/7 emergency services</strong></a> wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
+<PortfolioSection
+  badge="GALLERY"
+  title="Emergency HVAC Repairs We Handle"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/hvac-technician-refilling-freon.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg"
+  ]}
+  links={[
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs",
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation"
+  ]}
+  labels={[
+    "24/7 AC Repairs",
+    "24/7 Emergency Repairs",
+    "AC Repair Services",
+    "AC Installation",
+    "Commercial HVAC",
+    "Emergency Response"
+  ]}
 />
 
 

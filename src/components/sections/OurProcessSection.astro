@@ -40,11 +40,6 @@ const {
           <!-- Step Badge -->
           <div class="step-badge">{step.step}</div>
           
-          <!-- Connecting Line (not on last item) -->
-          {index < steps.length - 1 && (
-            <div class="connecting-line"></div>
-          )}
-          
           <!-- Icon -->
           <div class="step-icon">
             <img src={step.icon} alt="" class="icon-img" />
@@ -80,7 +75,7 @@ const {
   .section-description {
     font-size: 1.125rem;
     line-height: 1.75;
-    color: #64748b;
+    color: #1e293b;
     max-width: 700px;
     margin: 0 auto;
   }
@@ -105,7 +100,7 @@ const {
   }
 
   .step-card:hover {
-    border-color: #F7B32B;
+    border-color: #dc2626;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transform: translateY(-4px);
   }
@@ -116,25 +111,18 @@ const {
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: #F7B32B;
-    color: black;
+    background: #1e3a8a;
+    color: white;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.375rem 1rem;
     border-radius: 4px;
     letter-spacing: 0.05em;
+    transition: background 0.3s ease;
   }
 
-  /* Connecting Line */
-  .connecting-line {
-    position: absolute;
-    top: 50%;
-    right: -2rem;
-    width: 2rem;
-    height: 2px;
-    background: linear-gradient(to right, #cbd5e1 0%, #cbd5e1 50%, transparent 50%, transparent 100%);
-    background-size: 8px 2px;
-    z-index: -1;
+  .step-card:hover .step-badge {
+    background: #dc2626;
   }
 
   /* Icon */
@@ -164,7 +152,7 @@ const {
   .step-description {
     font-size: 1rem;
     line-height: 1.6;
-    color: #64748b;
+    color: #1e293b;
     margin: 0;
   }
 
@@ -173,10 +161,6 @@ const {
     .steps-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
-    }
-
-    .connecting-line {
-      display: none;
     }
 
     .section-title {

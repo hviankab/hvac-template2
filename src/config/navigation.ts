@@ -26,12 +26,11 @@ export const utilityNavItems: NavItem[] = [
       { title: "Specials and Offers", href: "/specials-and-offers" },
     ],
   },
-  { title: "Reviews", href: "/reviews" },
   { title: "Contact Us", href: "/contact" },
   { title: "Careers", href: "/careers" },
   {
     title: "Service Areas",
-    href: "/service-areas",
+    href: "#",
     children: [
       { title: "Santa Monica", href: "/santa-monica" },
       { title: "Pasadena", href: "/pasadena" },

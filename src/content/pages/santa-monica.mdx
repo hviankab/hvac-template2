@@ -4,22 +4,18 @@ description: "Expert heating and cooling solutions for homes and businesses in S
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import ContentSection from "@/components/sections/ContentSection.astro"
-import ContentSectionAlt from "@/components/sections/ContentSectionAlt.astro"
-import CouponsSection from "@/components/sections/CouponsSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import ServicesSection from "@/components/sections/ServicesSection"
-import PortfolioSection from "@/components/sections/PortfolioSection.astro"
-import ReviewsSection from "@/components/sections/ReviewsSection.astro"
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import LocationIntroSection from "@/components/sections/LocationIntroSection.astro"
+import CouponsSection from "@/components/sections/CouponsSection.astro"
+import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="Santa Monica"
   subtitle="Providing expert heating and cooling solutions to homes and businesses in Santa Monica — ensuring reliable and efficient HVAC services every time. Call us for expert assistance!"
   buttonText="SCHEDULE SERVICE"
   buttonHref="/contact"
-  backgroundImage="/images/hvac-hero.jpg"
+  backgroundImage="/images/download (73).avif"
   trustIndicators={[
     "Serving Our Community for 20 Years",
     "Quality Service",
@@ -27,28 +23,26 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<ContentSectionAlt
-  badge="SERVICE AREAS"
-  title="Reliable HVAC Solutions in"
-  titleHighlight="Santa Monica, CA"
-  description="Regular maintenance is key to preventing costly repairs and ensuring the efficiency of your HVAC systems. At {business}, our HVAC <a href='/maintenance-plan'><strong>Maintenance Plans</strong></a> are designed to keep your home or business comfortable year-round."
-  featuresTitle="Why Santa Monica Residents Trust Us"
-  features={[
-    {
-      title: "Local Knowledge",
-      description: "With years of experience serving Santa Monica, we understand the specific HVAC requirements of the area."
-    },
-    {
-      title: "Prompt Response",
-      description: "We're committed to addressing your heating and cooling issues quickly and effectively."
-    },
-    {
-      title: "Comprehensive Services",
-      description: "From minor repairs to major installations, we handle it all with precision and care."
-    }
-  ]}
-  image="https://ideallabourhire.com.au/wp-content/uploads/2024/08/plumber-job-sydney.jpeg"
-  imagePosition="left"
+<ServiceAreaSection
+  title="Heating & Cooling Solutions in Your Area"
+  description=""
+  areas={["Santa Monica", "Pasadena", "Glendale"]}
+  mapAddress="Santa Monica, CA"
+  variant="full"
+/>
+
+<LocationIntroSection
+  badge="Residential & Commercial"
+  title="SANTA MONICA WIDE LICENSED HVAC SERVICES"
+  description="At {business}, we serve Santa Monica with comprehensive HVAC services including"
+  highlights={["residential HVAC", "commercial HVAC", "specialty services", "maintenance plans"]}
+  serviceArea="Our experienced team handles routine maintenance to emergency repairs. We also serve West County."
+  guaranteeText="When you need professional HVAC services, we guarantee to fix it right the first time or return at our expense - that's our satisfaction promise to you!"
+  infoBoxText="We service the entirety of Santa Monica and all surrounding areas within a 50km radius of the CBD. Use a team of trusted master HVAC technicians with an impeccable reputation - contact our professional HVAC team today!"
+  buttonText="TALK TO A TECHNICIAN NOW"
+  buttonHref="/contact"
+  image="/images/hvac-hero.jpg"
+  imageAlt="HVAC Technician at Work"
 />
 
 <CouponsSection
@@ -60,144 +54,102 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   ]}
 />
 
-<FinancingPlansSection
-  variant="features"
-  title="Why Santa Monica Residents Trust Us"
-  items={[
+<ServiceCardsGridSection
+  badge="OUR SERVICES"
+  title="Complete HVAC Services for Santa Monica"
+  description="We provide comprehensive heating and cooling solutions for homes and businesses in Santa Monica. Our certified technicians are ready to handle all your HVAC needs."
+  tabs={[
     {
-      icon: "map",
-      title: "Local Knowledge",
-      text: "With years of experience serving Santa Monica, we understand the specific HVAC needs of the area."
-    },
-    {
-      icon: "clock",
-      title: "Prompt Response",
-      text: "We prioritize fast and reliable service, ensuring issues are resolved quickly and efficiently."
-    },
-    {
-      icon: "wrench",
-      title: "Comprehensive Services",
-      text: "From minor repairs to major installations, we handle it all with precision and care."
-    }
-  ]}
-/>
-
-<PromoTilesSection
-  tiles={[
-    {
-      type: "maintenance",
-      title: "MAINTENANCE PLAN",
-      priceLabel: ["STARTS AT", "$14.33", "PER MONTH"],
-      buttonText: "Contact Us",
-      buttonHref: "/contact",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
-    },
-    {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENT", "UNTIL 2026"],
-      subtext: "WITH APPROVED FINANCING",
-      buttonText: "Explore Financing Options",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
-    },
-    {
-      type: "emergency",
-      tag: "Emergency HVAC Services",
-      discount: "20% OFF",
-      subheadline: ["ALL EMERGENCY", "HVAC SERVICES"],
-      buttonText: "BOOK NOW",
-      buttonHref: "/contact",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
-    }
-  ]}
-/>
-
-<ServicesSection
-  client:load
-  title="Our Professional HVAC Services"
-  description="We specialize in providing top-notch heating and cooling solutions tailored to meet your needs. Whether you're dealing with an urgent repair or planning an HVAC upgrade, our team is here to deliver reliable, efficient, and affordable services. Explore what we offer:"
-  categories={[
-    {
+      id: "air-conditioning",
       title: "Air Conditioning Services",
+      heading: "Professional Air Conditioning Services",
+      description: "Keep your Santa Monica home cool and comfortable with our comprehensive AC services.",
+      image: "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
       services: [
-        { title: "AC Repair", description: "Fast and reliable AC repairs" },
-        { title: "AC Installation & Replacement", description: "New AC system installations" }
-      ]
+        {
+          icon: "❄️",
+          title: "AC Repair",
+          href: "/air-conditioning/ac-repair"
+        },
+        {
+          icon: "🔧",
+          title: "AC Installation and Replacement",
+          href: "/air-conditioning/ac-installation-replacement"
+        }
+      ],
+      buttonText: "View AC Services",
+      buttonHref: "/air-conditioning"
     },
     {
-      title: "Emergency HVAC Services",
+      id: "emergency",
+      title: "Emergency HVAC",
+      heading: "24/7 Emergency HVAC Services",
+      description: "HVAC emergencies don't wait for business hours. Our emergency response team is available 24/7.",
+      image: "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
       services: [
-        { title: "24/7 AC Repairs", description: "Round-the-clock AC emergency repairs" },
-        { title: "24/7 Emergency Repairs", description: "Complete emergency HVAC services" }
-      ]
+        {
+          icon: "🚨",
+          title: "24/7 AC Repairs",
+          href: "/emergency/24-7-ac-repairs"
+        },
+        {
+          icon: "⚡",
+          title: "24/7 Emergency Repairs",
+          href: "/emergency/24-7-emergency-repairs"
+        }
+      ],
+      buttonText: "Get Emergency Service",
+      buttonHref: "/emergency"
     },
     {
-      title: "Commercial HVAC Services",
+      id: "commercial",
+      title: "Commercial",
+      heading: "Commercial HVAC Solutions",
+      description: "Reliable HVAC solutions for businesses of all sizes in Santa Monica.",
+      image: "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
       services: [
-        { title: "HVAC Repair", description: "Fast commercial repairs" },
-        { title: "HVAC Installation", description: "Complete commercial systems" }
-      ]
+        {
+          icon: "🔧",
+          title: "HVAC Repair",
+          href: "/commercial/hvac-repair"
+        },
+        {
+          icon: "🏢",
+          title: "HVAC Installation",
+          href: "/commercial/hvac-installation"
+        }
+      ],
+      buttonText: "View Commercial Services",
+      buttonHref: "/commercial"
     }
   ]}
 />
 
 <PortfolioSection
-  badge="Portfolio"
-  title="Our Featured Works"
+  badge="GALLERY"
+  title="See Our Quality Work"
   images={[
-    "https://johnh967.sg-host.com/wp-content/uploads/slider/cache/3208844a78ae424ec0bfef8623738be2/HVAC-Repair-Banner.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/12/AC-Repair-Services.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/2024/12/Professional-24_7-Heating-and-Cooling-Repairs.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466578360_545600454753059_5640968860261965384_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466555884_570355772412079_4111747127252492406_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466796006_1587175318903711_6684948885555680268_nfull.webp",
-    "https://johnh967.sg-host.com/wp-content/uploads/sb-instagram-feed-images/466556611_1575760946412367_152571973762791733_nfull.webp"
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/hvac-technician-refilling-freon.jpg"
   ]}
-/>
-
-<ReviewsSection
-  badge="GOOGLE REVIEWS"
-  title="What Our Clients Say"
-  description="At {business}, we believe that every home and business deserves access to reliable HVAC services, no matter the budget. That's why we offer flexible <a href='/financing'><strong>financing options</strong></a> to make your heating and cooling projects more manageable and stress-free."
-  reviews={[
-    {
-      name: "Eric Rogers",
-      time: "1 year ago",
-      content: "Over the past 15 years or so my wife and I have needed a few repairs or maintenance items in our home, and each time {business} has been there to take care of our needs.",
-      readMoreHref: "#"
-    },
-    {
-      name: "Michael Abrocincks",
-      time: "1 year ago",
-      content: "{business} has been such a great company to work with — from our initial consult to the final repair. Highly recommended!",
-      readMoreHref: "#"
-    },
-    {
-      name: "David Stanton",
-      time: "1 year ago",
-      content: "I couldn't be more grateful for the incredible service I received when my AC went out. The team responded quickly and professionally.",
-      readMoreHref: "#"
-    },
-    {
-      name: "Domestic",
-      time: "1 year ago",
-      content: "Great company and great people!",
-      readMoreHref: "#"
-    }
+  links={[
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs"
   ]}
-  verifiedBy="View Google Testimonials"
-/>
-
-<ServiceAreaSection
-  title="Expert HVAC Services in {city} and Surrounding Areas"
-  description="Looking for reliable HVAC services in {city}? We provide expert residential and <a href='/commercial'><strong>commercial</strong></a> heating and cooling solutions across the city, from Hollywood Hills to Santa Monica. Whether you need AC repair, furnace installation, duct cleaning, or emergency services, our licensed team serves your area with speed, skill, and care. We offer reliable <a href='/maintenance-plan'><strong>maintenance</strong></a> and <a href='/emergency'><strong>24/7 emergency services</strong></a> to keep your HVAC system in top shape. Serving neighborhoods like Downtown LA, Beverly Hills, and <a href='/pasadena'><strong>Pasadena</strong></a>, we are committed to quality, efficiency, and customer satisfaction. <a href='/contact'><strong>Call us today</strong></a> to schedule your service!"
-  areas={[
-    "Santa Monica", "Pasadena", "Culver City", "Downtown {city}", "Hollywood",
-    "Beverly Hills", "Venice", "Westwood", "Culver City", "San Fernando Valley",
-    "San Diego", "El Monte", "Hollywood", "Santa Monica", "Beverly Hills",
-    "Torrance", "Long Beach", "Inglewood", "El Segundo", "Brentwood",
-    "Silver Lake", "Echo Park", "Hancock Park", "Marina del Rey", "Manhattan Beach"
+  labels={[
+    "AC Repair",
+    "AC Installation & Replacement",
+    "Commercial HVAC Repair",
+    "Commercial HVAC Installation",
+    "24/7 AC Repairs",
+    "24/7 Emergency Repairs"
   ]}
-  mapAddress="Santa Monica, CA"
 />

@@ -7,6 +7,9 @@ import ThemeProvider from "@/components/ThemeProvider.astro"
 import { siteConfig, getLocationText } from "@/config/site"
 import PopupModal from "@/components/ui/PopupModal.astro"
 import FreeScanButton from "@/components/ui/FreeScanButton.astro"
+import FAQSection from "@/components/sections/FAQSection.astro"
+import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import CTABannerSection from "@/components/sections/CTABannerSection.astro"
 
 interface Props {
   title: string
@@ -97,6 +100,57 @@ const canonical = new URL(Astro.url.pathname, siteConfig.seo.siteUrl).href
     <main class="flex-1">
       <slot />
     </main>
+    
+    <!-- Global sections that appear on all pages -->
+    <FAQSection
+      badge="FAQ"
+      title="Frequently Asked Questions"
+      description="Find answers to common questions about our HVAC services, pricing, and maintenance plans."
+      faqs={[
+        {
+          question: "How often should I service my HVAC system?",
+          answer: "We recommend servicing your HVAC system at least twice a year - once before the cooling season and once before the heating season. Regular maintenance helps prevent breakdowns, improves efficiency, and extends the life of your system."
+        },
+        {
+          question: "What are signs that my AC needs repair?",
+          answer: "Common signs include weak airflow, warm air blowing from vents, unusual noises, strange odors, frequent cycling, high energy bills, and moisture or leaks around the unit. If you notice any of these issues, contact us for a professional inspection."
+        },
+        {
+          question: "Do you offer emergency HVAC services?",
+          answer: "Yes! We provide 24/7 emergency HVAC services for urgent heating and cooling issues. Whether it's a broken AC in summer or a failed heater in winter, our technicians are ready to help restore your comfort quickly."
+        },
+        {
+          question: "Do you offer financing options?",
+          answer: "Yes, we offer flexible financing options to make HVAC repairs, replacements, and installations more affordable. Contact us to learn about our current financing plans and find one that fits your budget."
+        }
+      ]}
+    />
+
+    <!-- ServiceAreaSection appears after FAQ on non-location pages -->
+    {!(Astro.url.pathname === '/santa-monica' || 
+        Astro.url.pathname === '/pasadena' || 
+        Astro.url.pathname === '/glendale' ||
+        Astro.url.pathname === '/santa-monica/' || 
+        Astro.url.pathname === '/pasadena/' || 
+        Astro.url.pathname === '/glendale/') && (
+      <ServiceAreaSection
+        title="Heating & Cooling Solutions in Your Area"
+        description=""
+        areas={[
+          "Santa Monica", "Pasadena", "Glendale"
+        ]}
+      />
+    )}
+
+    <CTABannerSection
+      badge="READY FOR COMFORT?"
+      title="Ready to Experience Superior HVAC Service?"
+      description="Partner with us to transform your home comfort and achieve reliable heating and cooling. Let's create something amazing together."
+      buttonText="Get Started Today"
+      buttonHref="/contact"
+      backgroundImage="/images/compagnons-yZmHFF-g-W0-unsplash.jpg"
+    />
+    
     <Footer />
     <FreeScanButton />
     <PopupModal />

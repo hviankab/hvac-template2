@@ -4,12 +4,10 @@ description: "Professional commercial HVAC repair services to keep your business
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PlaceholderContentSection from "@/components/sections/PlaceholderContentSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceDetailSection from "@/components/sections/ServiceDetailSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 
 <HeroPage
   title="Commercial HVAC Repair"
@@ -21,9 +19,29 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   imageAlt="Commercial HVAC repair technician"
 />
 
-<PlaceholderContentSection
-  title="TO BE DETERMINED"
-  subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+<ServiceDetailSection
+  description="<p>When your commercial HVAC system fails, it can disrupt your business operations and affect employee productivity. Our certified commercial HVAC technicians provide fast, reliable repair services to minimize downtime and restore comfort to your facility.</p><p>We service all types of commercial HVAC systems, from rooftop units to complex multi-zone systems. Our technicians are available 24/7 to handle emergency repairs and keep your business running smoothly.</p>"
+  includedServices={[
+    "Commercial HVAC system diagnostics",
+    "Rooftop unit repair and maintenance",
+    "Multi-zone system troubleshooting",
+    "Refrigeration system repair",
+    "Commercial thermostat repair",
+    "Emergency repair services"
+  ]}
+  notes="24/7 emergency commercial HVAC repair services available. Preventive maintenance contracts available to minimize downtime."
+  ctaText="Our certified commercial HVAC technicians are available 24/7 to handle all your business HVAC needs. We minimize downtime and maximize efficiency."
+  otherServices={[
+    { title: "Commercial HVAC Installation", href: "/commercial/hvac-installation" },
+    { title: "AC Repair", href: "/air-conditioning/ac-repair" },
+    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs" },
+    { title: "Maintenance Plans", href: "/maintenance-plan" }
+  ]}
+  serviceImage="/images/hvac-technician-refilling-freon.jpg"
+  contactTitle="Need Help?"
+  contactDescription="Have questions about commercial HVAC repair? Contact us today for a free consultation."
+  contactButtonText="Contact Us"
+  contactButtonHref="/contact"
 />
 
 <CouponsSection
@@ -35,70 +53,51 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   ]}
 />
 
-<PromoTilesSection
-  tiles={[
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Handle Commercial HVAC Repairs"
+  description="Our efficient process ensures minimal disruption to your business operations."
+  steps={[
     {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+      step: "01",
+      title: "Emergency Response",
+      description: "Contact us anytime for fast commercial HVAC repair service. We prioritize business emergencies.",
+      icon: "/images/headphones-with-mic.png"
     },
     {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
+      step: "02",
+      title: "System Assessment",
+      description: "Our technicians quickly diagnose the issue and provide a detailed repair plan.",
+      icon: "/images/technician.png"
     },
     {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
+      step: "03",
+      title: "Efficient Repair",
+      description: "We complete repairs quickly with minimal disruption to your business operations.",
+      icon: "/images/heating.png"
+    },
+    {
+      step: "04",
+      title: "System Verification",
+      description: "We test the system thoroughly to ensure optimal performance and reliability.",
+      icon: "/images/air-conditioning.png"
     }
   ]}
 />
 
-<FAQSection
-  title="Frequently Asked Questions about Commercial HVAC Repair in {city}"
-  faqs={[
-    {
-      question: "How quickly can you respond to a commercial HVAC emergency?",
-      answer: "We understand that HVAC downtime costs your business money. Our commercial team offers priority response times, typically arriving within 1-2 hours for emergency calls across the {city} area."
-    },
-    {
-      question: "What types of commercial HVAC systems do you repair?",
-      answer: "We service all commercial HVAC systems including rooftop units (RTUs), split systems, VRF/VRV systems, chillers, boilers, and packaged units from all major manufacturers. Our technicians are trained on both traditional and modern commercial systems."
-    },
-    {
-      question: "Do you offer commercial HVAC service contracts?",
-      answer: "Yes. Our commercial <a href='/maintenance-plan'><strong>maintenance</strong></a> contracts include scheduled preventive maintenance, priority emergency service, discounted repair rates, and detailed system reports. We customize plans based on your building's needs and equipment."
-    }
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Why Choose Us for Commercial HVAC"
+  description="We're committed to providing exceptional commercial HVAC services with certified technicians, fast response times, and guaranteed satisfaction."
+  badgeText="Trusted by"
+  badgeSubtext="9800+ happy customers"
+  image="/images/hvac.jpg"
+  services={[
+    { text: "Certified Commercial HVAC Technicians" },
+    { text: "24/7 Emergency Service Available" },
+    { text: "Minimal Business Disruption" },
+    { text: "Preventive Maintenance Programs" },
+    { text: "All Major Brands Serviced" },
+    { text: "100% Satisfaction Guarantee" }
   ]}
 />
-
-<FinancingPlansSection
-  title="Related Services"
-  variant="services"
-  items={[
-    { title: "Commercial HVAC Installation", href: "/commercial/hvac-installation", image: "https://plus.unsplash.com/premium_photo-1661963270682-4b4857b6cda2?q=80&w=1470&auto=format&fit=crop" },
-    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" },
-    { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" }
-  ]}
-/>
-
-
-
-<ServiceAreaSection
-  title="Service Areas for Commercial HVAC Services in {city}"
-  description="We proudly serve businesses across all {city} boroughs, providing expert commercial HVAC services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-/>
-
-

@@ -1,27 +1,37 @@
 ---
-interface Service {
-  text: string;
+interface Reason {
+  icon?: string;
+  title?: string;
+  text?: string;
+  description?: string;
 }
 
 interface Props {
+  badge?: string;
   eyebrow?: string;
   title: string;
-  description: string;
+  description?: string;
   badgeText?: string;
   badgeSubtext?: string;
   image?: string;
-  services: Service[];
+  services?: Reason[];
+  reasons?: Reason[];
 }
 
 const {
+  badge,
   eyebrow = "WHY CHOOSE US",
   title,
   description,
   badgeText = "Trusted by",
   badgeSubtext = "9800+ happy customers",
   image = "/images/technician.png",
-  services
+  services = [],
+  reasons = []
 } = Astro.props;
+
+// Use either services or reasons, whichever is provided
+const items = reasons.length > 0 ? reasons : services;
 ---
 
 <section class="why-choose-section">
@@ -54,16 +64,16 @@ const {
         
         <h2 class="section-title">{title}</h2>
         
-        <p class="section-description">{description}</p>
+        {description && <p class="section-description">{description}</p>}
 
         <!-- Services Grid - 2 columns -->
         <div class="services-grid">
-          {services.map((service) => (
+          {items.map((item) => (
             <div class="service-item">
               <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M5 13l4 4L19 7" />
               </svg>
-              <span>{service.text}</span>
+              <span>{item.title || item.text || item.description}</span>
             </div>
           ))}
         </div>

@@ -4,10 +4,9 @@ description: "Enjoy peace of mind and save money with our tailored HVAC maintena
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PricingPlansSection from "@/components/sections/PricingPlansSection.astro"
-import SignupBannerSection from "@/components/sections/SignupBannerSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import MaintenancePricingSection from "@/components/sections/MaintenancePricingSection.astro"
+import ServiceCardsGridSection from "@/components/sections/ServiceCardsGridSection.astro"
+import PortfolioSection from "@/components/sections/PortfolioSection.astro"
 
 <HeroPage
   title="HVAC Maintenance Plans"
@@ -17,84 +16,160 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
   backgroundImage="/images/hvac.jpg"
 />
 
-<PricingPlansSection
-  title="Protect Your HVAC System with {business} Maintenance Plans"
-  description="At {business}, we understand that regular maintenance is essential to keep your HVAC system efficient and prevent costly repairs. That is why we have designed flexible maintenance plans to meet your needs and budget. Our expert team will ensure your home or business heating and cooling operates at peak performance year-round."
+<MaintenancePricingSection
+  title="Pricing Plan Package"
+  description="At {business}, we understand that regular maintenance is essential to keep your plumbing system efficient and prevent costly repairs. That's why we've designed flexible maintenance plans to meet your needs and budget. Our expert team will ensure your home or business plumbing operates at peak performance year round."
   plans={[
     {
-      ribbon: "GREAT",
-      ribbonColor: "great",
-      title: "BASIC PLAN",
-      price: "$9.99",
-      period: "/month",
+      title: "BASIC PACKAGE",
+      price: "$450",
+      period: "/Year",
+      subtitle: "Basic Services & Repairs",
       features: [
-        "Annual HVAC system inspection",
-        "Priority scheduling for emergency repairs",
-        "5% discount on all repairs and services"
-      ]
+        "Plus Cost Transparency",
+        "Efficiency & Time Saving",
+        "Guarantee & Service Warranty",
+        "Ease Of Comparison",
+        "Emergency Services",
+        "Preventive Maintenance"
+      ],
+      buttonText: "CHOOSE PLAN",
+      buttonHref: "/contact"
     },
     {
-      ribbon: "BEST DEAL",
-      ribbonColor: "best",
-      title: "PREMIUM PLAN",
-      price: "$29.99",
-      period: "/month",
+      title: "PREMIUM PACKAGE",
+      price: "$1200",
+      period: "/Year",
+      subtitle: "Major Installations & Upgrades",
       features: [
-        "Everything in the Standard Plan",
-        "Sewer line inspection with a camera",
-        "Emergency service fee waived",
-        "15% discount on all repairs and services"
-      ]
+        "Plus Cost Transparency",
+        "Efficiency & Time Saving",
+        "Guarantee & Service Warranty",
+        "Ease Of Comparison",
+        "Emergency Services",
+        "Preventive Maintenance"
+      ],
+      buttonText: "CHOOSE PLAN",
+      buttonHref: "/contact",
+      featured: true,
+      badge: "BEST PACKAGE"
     },
     {
-      ribbon: "BETTER",
-      ribbonColor: "better",
-      title: "STANDARD PLAN",
-      price: "$19.99",
-      period: "/month",
+      title: "PRO PACKAGE",
+      price: "$1600",
+      period: "/Year",
+      subtitle: "Maintenance Plans & Emergency Services",
       features: [
-        "Everything in the Basic Plan",
-        "Annual water heater inspection and flush",
-        "Leak detection service for pipes and fixtures",
-        "10% discount on all repairs and services"
-      ]
+        "Plus Cost Transparency",
+        "Efficiency & Time Saving",
+        "Guarantee & Service Warranty",
+        "Ease Of Comparison",
+        "Emergency Services",
+        "Preventive Maintenance"
+      ],
+      buttonText: "CHOOSE PLAN",
+      buttonHref: "/contact"
+    }
+  ]}
+  footerNote="All plans include flexible payment options and can be customized to your needs"
+/>
+
+<ServiceCardsGridSection
+  badge="OUR SERVICES"
+  title="Complete HVAC Services"
+  description="We provide comprehensive heating and cooling solutions for homes and businesses. Our certified technicians are ready to handle all your HVAC needs."
+  tabs={[
+    {
+      id: "air-conditioning",
+      title: "Air Conditioning Services",
+      heading: "Professional Air Conditioning Services",
+      description: "Keep your home cool and comfortable with our comprehensive AC services.",
+      image: "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+      services: [
+        {
+          icon: "❄️",
+          title: "AC Repair",
+          href: "/air-conditioning/ac-repair"
+        },
+        {
+          icon: "🔧",
+          title: "AC Installation and Replacement",
+          href: "/air-conditioning/ac-installation-replacement"
+        }
+      ],
+      buttonText: "View AC Services",
+      buttonHref: "/air-conditioning"
+    },
+    {
+      id: "emergency",
+      title: "Emergency HVAC",
+      heading: "24/7 Emergency HVAC Services",
+      description: "HVAC emergencies don't wait for business hours. Our emergency response team is available 24/7.",
+      image: "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
+      services: [
+        {
+          icon: "🚨",
+          title: "24/7 AC Repairs",
+          href: "/emergency/24-7-ac-repairs"
+        },
+        {
+          icon: "⚡",
+          title: "24/7 Emergency Repairs",
+          href: "/emergency/24-7-emergency-repairs"
+        }
+      ],
+      buttonText: "Get Emergency Service",
+      buttonHref: "/emergency"
+    },
+    {
+      id: "commercial",
+      title: "Commercial",
+      heading: "Commercial HVAC Solutions",
+      description: "Reliable HVAC solutions for businesses of all sizes.",
+      image: "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+      services: [
+        {
+          icon: "🔧",
+          title: "HVAC Repair",
+          href: "/commercial/hvac-repair"
+        },
+        {
+          icon: "🏢",
+          title: "HVAC Installation",
+          href: "/commercial/hvac-installation"
+        }
+      ],
+      buttonText: "View Commercial Services",
+      buttonHref: "/commercial"
     }
   ]}
 />
 
-<SignupBannerSection
-  title="Sign Up for a Maintenance Plan Today!"
-  description="Protect your home and save money with {business} Maintenance Plans. Choose the option that is right for you and enjoy peace of mind all year long."
-  calloutText="Call us or Sign Up Online today to get started!"
-  buttonText="Sign Up Online"
-  buttonHref="/contact"
-/>
-
-<FAQSection
-  title="Frequently Asked Questions"
-  faqs={[
-    {
-      question: "What is included in an HVAC maintenance plan?",
-      answer: "Our maintenance plans include annual system inspections, priority scheduling, discounts on repairs, and additional services depending on the plan level."
-    },
-    {
-      question: "Can I upgrade my plan later?",
-      answer: "Yes! You can upgrade your maintenance plan at any time. Simply <a href='/contact'><strong>contact us</strong></a> and we will help you transition to a higher tier plan that better suits your needs."
-    },
-    {
-      question: "Is there a cancellation fee?",
-      answer: "We offer flexible cancellation options. Please contact our team to discuss the terms and conditions of your specific plan."
-    }
+<PortfolioSection
+  badge="GALLERY"
+  title="See Our Quality Work"
+  images={[
+    "/images/tekton-ndJlw4Bz-1Y-unsplash (1).jpg",
+    "/images/raymond-yeung--BWDRf_mG9Q-unsplash.jpg",
+    "/images/hvac.jpg",
+    "/images/hvac-hero.jpg",
+    "/images/compagnons-yZmHFF-g-W0-unsplash.jpg",
+    "/images/hvac-technician-refilling-freon.jpg"
   ]}
-/>
-
-
-
-<ServiceAreaSection
-  variant="compact"
-  title="Proudly Serving {city}"
-  description="We provide reliable residential HVAC services throughout {city} and nearby areas like <a href='/santa-monica'><strong>Santa Monica</strong></a>, <a href='/pasadena'><strong>Pasadena</strong></a>, and <a href='/glendale'><strong>Glendale</strong></a>. <a href='/contact'><strong>Contact us</strong></a> to see if we serve your neighborhood!"
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-
+  links={[
+    "/air-conditioning/ac-repair",
+    "/air-conditioning/ac-installation-replacement",
+    "/commercial/hvac-repair",
+    "/commercial/hvac-installation",
+    "/emergency/24-7-ac-repairs",
+    "/emergency/24-7-emergency-repairs"
+  ]}
+  labels={[
+    "AC Repair",
+    "AC Installation & Replacement",
+    "Commercial HVAC Repair",
+    "Commercial HVAC Installation",
+    "24/7 AC Repairs",
+    "24/7 Emergency Repairs"
+  ]}
 />

@@ -115,20 +115,19 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
     { title: "Pasadena", href: "/pasadena" },
     { title: "Glendale", href: "/glendale" },
   ]
-  const linkRef = React.useRef<HTMLAnchorElement>(null)
+  const btnRef = React.useRef<HTMLButtonElement>(null)
 
   React.useEffect(() => {
-    if (linkRef.current) {
-      linkRef.current.style.backgroundColor = ''
-      linkRef.current.style.color = ''
+    if (btnRef.current) {
+      btnRef.current.style.backgroundColor = ''
+      btnRef.current.style.color = ''
     }
   }, [isActive])
 
   return (
     <div className="relative flex items-center" onMouseEnter={onHover} onMouseLeave={onLeave}>
-      <a
-        ref={linkRef}
-        href="/service-areas"
+      <button
+        ref={btnRef}
         className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all nav-areas-btn ${
           isActive ? "bg-[#A9E5BB] text-gray-900 shadow-sm" : "text-gray-900"
         }`}
@@ -137,7 +136,7 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
       >
         Service Areas
         <ChevronDown className={`h-3 w-3 transition-transform ${isActive ? "rotate-180" : ""}`} />
-      </a>
+      </button>
       {isActive && (
         <div className="absolute top-full left-0 pt-3 z-[90]">
           <div className="bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden min-w-[200px]">
@@ -145,7 +144,7 @@ function ServiceAreasDropdown({ isActive, onHover, onLeave }: { isActive: boolea
               <a
                 key={area.href}
                 href={area.href}
-                className={`block px-5 py-3 text-sm text-gray-700 nav-dropdown-item hover:bg-gray-50 transition-colors ${i !== 0 ? "border-t border-gray-100" : ""}`}
+                className={`block px-5 py-3 text-sm text-gray-700 nav-dropdown-item hover:bg-gray-50 hover:text-brand-secondary transition-colors ${i !== 0 ? "border-t border-gray-100" : ""}`}
               >
                 {area.title}
               </a>
@@ -220,15 +219,14 @@ export function Navbar() {
               <NavLink title="Home" href="/" />
               <NavLink title="About Us" href="/about" />
               <ServicesDropdown isActive={servicesOpen} onHover={handleServicesHover} onLeave={handleServicesLeave} />
-              <NavLink title="Reviews" href="/reviews" />
-              <ServiceAreasDropdown isActive={areasOpen} onHover={handleAreasHover} onLeave={handleAreasLeave} />
-              <NavLink title="Contact Us" href="/contact" />
-              <a href="/maintenance-plan" className="nav-highlight-btn px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap text-gray-900 transition-all">
+              <a href="/maintenance-plan" className="px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap transition-all bg-[#F7B32B] text-black hover:bg-[#A9E5BB]" style={{ color: 'black' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'black'; e.currentTarget.style.backgroundColor = '#A9E5BB'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'black'; e.currentTarget.style.backgroundColor = '#F7B32B'; }}>
                 Maintenance
               </a>
-              <a href="/financing" className="nav-highlight-btn px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap text-gray-900 transition-all">
+              <a href="/financing" className="px-4 py-1.5 rounded-full text-base font-semibold whitespace-nowrap transition-all bg-[#F7B32B] text-black hover:bg-[#A9E5BB]" style={{ color: 'black' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'black'; e.currentTarget.style.backgroundColor = '#A9E5BB'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'black'; e.currentTarget.style.backgroundColor = '#F7B32B'; }}>
                 Financing
               </a>
+              <ServiceAreasDropdown isActive={areasOpen} onHover={handleAreasHover} onLeave={handleAreasLeave} />
+              <NavLink title="Contact Us" href="/contact" />
             </nav>
 
             {/* Right: phone circle + CTA */}
@@ -279,11 +277,17 @@ function MobileNav({ onClose }: { onClose: () => void }) {
   const mainLinks = [
     { title: "Home", href: "/" },
     { title: "About Us", href: "/about" },
-    { title: "Reviews", href: "/reviews" },
-    { title: "Service Areas", href: "/service-areas" },
     { title: "Contact Us", href: "/contact" },
     { title: "Careers", href: "/careers" },
   ]
+
+  const serviceAreas = [
+    { title: "Santa Monica", href: "/santa-monica" },
+    { title: "Pasadena", href: "/pasadena" },
+    { title: "Glendale", href: "/glendale" },
+  ]
+
+  const [areasOpen, setAreasOpen] = React.useState(false)
 
   return (
     <div className="flex flex-col">
@@ -318,6 +322,23 @@ function MobileNav({ onClose }: { onClose: () => void }) {
               {mainNavItems.map((item) => (
                 <a key={item.href} href={item.href} className="block py-2 text-sm text-gray-600 hover:text-brand-secondary" onClick={onClose}>
                   {item.title}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Service Areas accordion */}
+        <div className="border-b border-gray-100">
+          <button onClick={() => setAreasOpen(!areasOpen)} className="flex items-center justify-between w-full py-3 font-medium text-gray-800">
+            Service Areas
+            <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${areasOpen ? "rotate-180" : ""}`} />
+          </button>
+          {areasOpen && (
+            <div className="pb-3 pl-4">
+              {serviceAreas.map((area) => (
+                <a key={area.href} href={area.href} className="block py-2 text-sm text-gray-600 hover:text-brand-secondary" onClick={onClose}>
+                  {area.title}
                 </a>
               ))}
             </div>

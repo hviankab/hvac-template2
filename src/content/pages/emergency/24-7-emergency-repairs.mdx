@@ -1,29 +1,47 @@
 ---
 title: "24/7 Emergency Repairs"
-description: "Comprehensive 24/7 emergency HVAC repair services for any heating or cooling crisis. Expert emergency solutions in {city}."
+description: "24/7 emergency HVAC repair services in {city}. Fast response for all heating and cooling emergencies."
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PlaceholderContentSection from "@/components/sections/PlaceholderContentSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceDetailSection from "@/components/sections/ServiceDetailSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 
 <HeroPage
   title="24/7 Emergency Repairs"
-  subtitle="Comprehensive emergency HVAC repairs — any system, any time, any day."
-  buttonText="SCHEDULE SERVICE"
+  subtitle="Fast, reliable emergency HVAC repairs available 24/7."
+  buttonText="CALL NOW"
   buttonHref="/contact"
   backgroundImage="https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg"
   image="/images/technician.png"
   imageAlt="Emergency HVAC repair technician"
 />
 
-<PlaceholderContentSection
-  title="TO BE DETERMINED"
-  subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+<ServiceDetailSection
+  description="<p>HVAC emergencies don't wait for business hours. Whether your heating fails on a cold winter night or your AC breaks down during a heat wave, our 24/7 emergency HVAC repair service is here to help.</p><p>Our certified technicians are on call around the clock, ready to respond to your heating and cooling emergencies. We arrive quickly with fully stocked service vehicles to diagnose and repair your HVAC system, restoring comfort to your home fast.</p>"
+  includedServices={[
+    "24/7 emergency HVAC service",
+    "Heating system emergency repairs",
+    "AC emergency repairs",
+    "Furnace emergency service",
+    "Heat pump emergency repairs",
+    "Emergency thermostat replacement"
+  ]}
+  notes="Emergency HVAC service available 24 hours a day, 365 days a year. Fast response times guaranteed. All emergency repairs backed by our satisfaction guarantee."
+  ctaText="Our emergency HVAC technicians are standing by 24/7 to handle all your heating and cooling emergencies. Call now for immediate help."
+  otherServices={[
+    { title: "24/7 AC Repairs", href: "/emergency/24-7-ac-repairs" },
+    { title: "AC Repair", href: "/air-conditioning/ac-repair" },
+    { title: "Commercial HVAC", href: "/commercial/hvac-repair" },
+    { title: "Maintenance Plans", href: "/maintenance-plan" }
+  ]}
+  serviceImage="/images/hvac-technician-refilling-freon.jpg"
+  contactTitle="Need Help Now?"
+  contactDescription="HVAC emergency? Call us now for immediate 24/7 emergency repair service."
+  contactButtonText="Call Now"
+  contactButtonHref="/contact"
 />
 
 <CouponsSection
@@ -35,70 +53,51 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   ]}
 />
 
-<PromoTilesSection
-  tiles={[
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Handle Emergency HVAC Repairs"
+  description="Our rapid emergency response process gets your heating or cooling system running again quickly."
+  steps={[
     {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+      step: "01",
+      title: "Emergency Call",
+      description: "Contact us anytime, day or night, for immediate emergency HVAC repair service.",
+      icon: "/images/headphones-with-mic.png"
     },
     {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
+      step: "02",
+      title: "Rapid Response",
+      description: "Our emergency technicians arrive quickly, ready to diagnose and repair your system.",
+      icon: "/images/technician.png"
     },
     {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
+      step: "03",
+      title: "Fast Repair",
+      description: "We work efficiently to repair your HVAC system and restore comfort to your home.",
+      icon: "/images/heating.png"
+    },
+    {
+      step: "04",
+      title: "System Verification",
+      description: "We test your system thoroughly to ensure it's working properly and reliably.",
+      icon: "/images/air-conditioning.png"
     }
   ]}
 />
 
-<FAQSection
-  title="Frequently Asked Questions about 24/7 Emergency Repairs in {city}"
-  faqs={[
-    {
-      question: "What should I do while waiting for an emergency repair?",
-      answer: "If you smell gas, leave the home immediately and call 911. For other emergencies, turn off your HVAC system at the thermostat, check your circuit breaker, and if safe, open windows for ventilation. Our dispatch team can walk you through safety steps over the phone."
-    },
-    {
-      question: "Do you repair all HVAC brands?",
-      answer: "Yes. Our emergency technicians are trained and equipped to repair all major HVAC brands including Carrier, Trane, Lennox, Rheem, Goodman, York, and more. We carry common parts on our trucks for faster repairs."
-    },
-    {
-      question: "Will I get an estimate before emergency work begins?",
-      answer: "Absolutely. Even in an emergency, we provide a clear diagnosis and upfront pricing before starting any repairs. You'll know exactly what the issue is and what it will cost before we proceed."
-    }
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Why Choose Us for Emergency HVAC"
+  description="We're committed to providing fast, reliable emergency HVAC service with certified technicians available 24/7/365."
+  badgeText="Trusted by"
+  badgeSubtext="9800+ happy customers"
+  image="/images/hvac.jpg"
+  services={[
+    { text: "24/7/365 Emergency Service" },
+    { text: "Rapid Response Times" },
+    { text: "Certified HVAC Technicians" },
+    { text: "Fully Equipped Service Vehicles" },
+    { text: "Transparent Emergency Pricing" },
+    { text: "100% Satisfaction Guarantee" }
   ]}
 />
-
-<FinancingPlansSection
-  title="Related Services"
-  variant="services"
-  items={[
-    { title: "24/7 AC Repairs", href: "/emergency/24-7-ac-repairs", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Quality-HVAC-Service.webp" },
-    { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" },
-    { title: "Commercial HVAC", href: "/commercial", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" }
-  ]}
-/>
-
-
-
-<ServiceAreaSection
-  title="Service Areas for Emergency HVAC Services in {city}"
-  description="We proudly serve homes and businesses across all {city} boroughs, providing 24/7 emergency HVAC services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-/>
-
-

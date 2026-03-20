@@ -1,29 +1,47 @@
 ---
 title: "24/7 AC Repairs"
-description: "Round-the-clock emergency AC repair services when you need them most. 24/7 emergency cooling solutions in {city}."
+description: "Emergency AC repair services available 24/7 in {city}. Fast response times for urgent AC issues."
 ---
 
 import HeroPage from "@/components/sections/HeroPage.astro"
-import PlaceholderContentSection from "@/components/sections/PlaceholderContentSection.astro"
-import PromoTilesSection from "@/components/sections/PromoTilesSection.astro"
-import FAQSection from "@/components/sections/FAQSection.astro"
-import FinancingPlansSection from "@/components/sections/FinancingPlansSection.astro"
-import ServiceAreaSection from "@/components/sections/ServiceAreaSection.astro"
+import ServiceDetailSection from "@/components/sections/ServiceDetailSection.astro"
 import CouponsSection from "@/components/sections/CouponsSection.astro"
+import OurProcessSection from "@/components/sections/OurProcessSection.astro"
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection.astro"
 
 <HeroPage
   title="24/7 AC Repairs"
-  subtitle="Emergency AC repairs around the clock — we're here when you need us most."
-  buttonText="SCHEDULE SERVICE"
+  subtitle="Emergency AC repair services available around the clock."
+  buttonText="CALL NOW"
   buttonHref="/contact"
   backgroundImage="https://aonecoolingsolution.in/wp-content/uploads/2025/02/split-ac-service-Sfastservices.jpg"
   image="/images/technician.png"
   imageAlt="Emergency AC repair technician"
 />
 
-<PlaceholderContentSection
-  title="TO BE DETERMINED"
-  subtitle="BASED ON THE CLIENT DISCOVERY CONVERSATION"
+<ServiceDetailSection
+  description="<p>When your AC breaks down in the middle of a hot summer night, you need immediate help. Our 24/7 emergency AC repair service ensures you're never left without cooling when you need it most.</p><p>Our certified technicians are on call around the clock, ready to respond quickly to your AC emergency. We arrive with fully stocked service vehicles to diagnose and repair your AC system fast, restoring comfort to your home.</p>"
+  includedServices={[
+    "24/7 emergency response",
+    "Fast diagnosis and repair",
+    "Fully stocked service vehicles",
+    "All AC brands and models serviced",
+    "Refrigerant leak repair",
+    "Emergency compressor replacement"
+  ]}
+  notes="Emergency service available 24 hours a day, 7 days a week. Fast response times guaranteed. All emergency repairs come with our satisfaction guarantee."
+  ctaText="Our emergency AC repair technicians are standing by 24/7 to restore comfort to your home. Call now for immediate assistance."
+  otherServices={[
+    { title: "AC Repair", href: "/air-conditioning/ac-repair" },
+    { title: "AC Installation", href: "/air-conditioning/ac-installation-replacement" },
+    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs" },
+    { title: "Maintenance Plans", href: "/maintenance-plan" }
+  ]}
+  serviceImage="/images/hvac-technician-refilling-freon.jpg"
+  contactTitle="Need Help Now?"
+  contactDescription="AC emergency? Call us now for immediate 24/7 emergency AC repair service."
+  contactButtonText="Call Now"
+  contactButtonHref="/contact"
 />
 
 <CouponsSection
@@ -35,70 +53,51 @@ import CouponsSection from "@/components/sections/CouponsSection.astro"
   ]}
 />
 
-<PromoTilesSection
-  tiles={[
+<OurProcessSection
+  badge="OUR PROCESS"
+  title="How We Handle Emergency AC Repairs"
+  description="Our fast emergency response process gets your AC running again quickly."
+  steps={[
     {
-      type: "maintenance",
-      title: "{business}\nMAINTENANCE PLAN",
-      priceLabel: ["STARTING AS LOW AS", "$14.33", "PER MONTH"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+      step: "01",
+      title: "Call Anytime",
+      description: "Contact us 24/7 for immediate emergency AC repair service. We answer every call.",
+      icon: "/images/headphones-with-mic.png"
     },
     {
-      type: "financing",
-      headline: ["NO INTEREST", "NO PAYMENTS", "UNTIL 2026"],
-      subtext: "*WITH APPROVED FINANCING",
-      buttonText: "LEARN MORE",
-      buttonHref: "/financing",
-      bgImage: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80"
+      step: "02",
+      title: "Fast Response",
+      description: "Our technicians arrive quickly with fully stocked vehicles ready to repair your AC.",
+      icon: "/images/technician.png"
     },
     {
-      type: "emergency",
-      discount: "$95",
-      subheadline: ["FURNACE", "TUNE-UP"],
-      buttonText: "BOOK NOW",
-      bgImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&q=80"
+      step: "03",
+      title: "Quick Repair",
+      description: "We diagnose and repair your AC system fast to restore comfort to your home.",
+      icon: "/images/heating.png"
+    },
+    {
+      step: "04",
+      title: "System Testing",
+      description: "We test your AC thoroughly to ensure it's working properly before we leave.",
+      icon: "/images/air-conditioning.png"
     }
   ]}
 />
 
-<FAQSection
-  title="Frequently Asked Questions about 24/7 AC Repairs in {city}"
-  faqs={[
-    {
-      question: "Do you charge extra for after-hours AC repairs?",
-      answer: "We offer competitive rates for emergency services. While after-hours calls may have a service fee, we always provide upfront pricing before starting any work so there are no surprises."
-    },
-    {
-      question: "How quickly can a technician arrive for an emergency AC repair?",
-      answer: "We prioritize emergency calls and typically have a technician at your door within 1-2 hours, depending on your location in the {city} area. Our dispatch team works around the clock to get you help fast."
-    },
-    {
-      question: "What qualifies as an AC emergency?",
-      answer: "An AC emergency includes a complete system failure during extreme heat, strange burning smells from your unit, water leaking from the system causing property damage, or any situation where lack of cooling poses a health risk to vulnerable household members."
-    }
+<WhyChooseUsSection
+  eyebrow="WHY CHOOSE US"
+  title="Why Choose Us for Emergency AC Repairs"
+  description="We're committed to providing fast, reliable emergency AC repair service with certified technicians available 24/7."
+  badgeText="Trusted by"
+  badgeSubtext="9800+ happy customers"
+  image="/images/hvac.jpg"
+  services={[
+    { text: "24/7 Emergency Service Available" },
+    { text: "Fast Response Times" },
+    { text: "Certified HVAC Technicians" },
+    { text: "Fully Stocked Service Vehicles" },
+    { text: "Upfront Emergency Pricing" },
+    { text: "100% Satisfaction Guarantee" }
   ]}
 />
-
-<FinancingPlansSection
-  title="Related Services"
-  variant="services"
-  items={[
-    { title: "24/7 Emergency Repairs", href: "/emergency/24-7-emergency-repairs", image: "https://plus.unsplash.com/premium_photo-1661963270682-4b4857b6cda2?q=80&w=1470&auto=format&fit=crop" },
-    { title: "AC Repair", href: "/air-conditioning/ac-repair", image: "https://www.classicheatandair.com/wp-content/uploads/2025/03/iStock-2058341644-1.jpg" },
-    { title: "Commercial HVAC", href: "/commercial", image: "https://johnh967.sg-host.com/wp-content/uploads/2024/11/Reliable-Emergency-Services.webp" }
-  ]}
-/>
-
-
-
-<ServiceAreaSection
-  title="Service Areas for Emergency HVAC Services in {city}"
-  description="We proudly serve homes and businesses across all {city} boroughs, providing 24/7 emergency HVAC services wherever you need us."
-  areas={["Manhattan", "Queens", "Brooklyn", "The Bronx", "Staten Island"]}
-
-  buttonText="SERVICE AREAS"
-  buttonHref="/service-areas"
-/>
-
-
